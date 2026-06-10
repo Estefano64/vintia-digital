@@ -6,6 +6,7 @@ import Proyectos from "./components/Proyectos";
 import Clientes from "./components/Clientes";
 import Contactanos from "./components/Contactanos";
 import Footer from "./components/Footer";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 export default function Home() {
   return (
@@ -41,6 +42,9 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Botón flotante de WhatsApp (aparece tras pasar el hero) */}
+      <FloatingWhatsApp />
     </div>
   );
 }
