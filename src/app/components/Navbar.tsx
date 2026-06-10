@@ -7,7 +7,6 @@ const NAV_LINKS = [
   { label: "Conócenos", href: "#conocenos" },
   { label: "Servicios", href: "#servicios" },
   { label: "Proyectos", href: "#proyectos" },
-  { label: "Testimonios", href: "#testimonios" },
   { label: "Clientes", href: "#clientes" },
   { label: "Contáctanos", href: "#contactanos" },
 ];
@@ -93,7 +92,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative px-3.5 py-2 text-[13px] font-medium tracking-wide text-white/50 uppercase transition-all duration-300 hover:text-[#01FDFE] group font-[family-name:var(--font-montserrat)]"
+                className="relative px-3.5 py-2 text-[13px] font-medium tracking-wide text-white/70 uppercase transition-all duration-300 hover:text-[#01FDFE] group font-[family-name:var(--font-montserrat)]"
               >
                 {link.label}
                 <span
@@ -176,7 +175,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block rounded-lg px-4 py-3 text-sm font-medium text-white/50 transition-colors hover:bg-white/5 hover:text-[#01FDFE] font-[family-name:var(--font-montserrat)]"
+              className="block rounded-lg px-4 py-3 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-[#01FDFE] font-[family-name:var(--font-montserrat)]"
             >
               {link.label}
             </a>

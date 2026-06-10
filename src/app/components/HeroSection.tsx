@@ -9,7 +9,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative flex h-[calc(100vh-64px)] items-center overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #041020 0%, #0a0e1a 50%, #041020 100%)" }}
+      style={{ background: "linear-gradient(160deg, #041020 0%, #0e0a26 55%, #041020 100%)" }}
     >
       {/* Hologram background */}
       <Hologram />
@@ -92,11 +92,11 @@ export default function HeroSection() {
               />
             </span>
             <br />
-            <span className="text-white/40">en Arequipa.</span>
+            <span className="text-white/70">en Arequipa.</span>
           </h1>
 
           {/* Description */}
-          <p className="mt-5 max-w-lg text-sm leading-7 text-white/45 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mt-5 max-w-lg text-sm leading-7 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
             Hacemos que tu negocio destaque en el ecosistema digital con diseño
             estratégico y resultados reales. Con la gestión de{" "}
             <span className="font-semibold" style={{ color: "#01FDFE" }}>
@@ -146,22 +146,7 @@ export default function HeroSection() {
             {/* Secondary CTA */}
             <a
               href="#proyectos"
-              className="group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
-              style={{
-                color: "rgba(255,255,255,0.6)",
-                border: "1px solid rgba(1, 253, 254, 0.15)",
-                background: "rgba(1, 253, 254, 0.04)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.4)";
-                e.currentTarget.style.color = "#01FDFE";
-                e.currentTarget.style.background = "rgba(1, 253, 254, 0.08)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.15)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-                e.currentTarget.style.background = "rgba(1, 253, 254, 0.04)";
-              }}
+              className="group inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white/75 border-[rgba(1,253,254,0.15)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.4)] hover:bg-[rgba(1,253,254,0.08)]"
             >
               <span>Ver Portafolio</span>
               <svg

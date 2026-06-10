@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
-const YOUTUBE_ID = "KKmDs0BJwQM";
+const YOUTUBE_ID = "1zvHK6QSU6o";
 
 export default function Conocenos() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function Conocenos() {
       <section
         id="conocenos"
         className="relative py-16 sm:py-20 overflow-hidden"
-        style={{ background: "#041020" }}
+        style={{ background: "linear-gradient(180deg, #041020 0%, #0a0d28 100%)" }}
       >
         {/* Ambient glow */}
         <div
@@ -72,7 +73,7 @@ export default function Conocenos() {
           />
 
           {/* Subtitle */}
-          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/40 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
             Descubre quiénes somos, nuestra pasión por la innovación digital y
             cómo ayudamos a negocios en Arequipa a alcanzar su máximo potencial.
           </p>
@@ -89,10 +90,12 @@ export default function Conocenos() {
             >
               {/* Thumbnail */}
               <div className="relative aspect-video w-full overflow-hidden rounded-xl">
-                <img
+                <Image
                   src={`https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`}
                   alt="Video de presentación Vintia Digital"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 672px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Dark overlay */}
@@ -170,7 +173,7 @@ export default function Conocenos() {
             {/* Close button */}
             <button
               onClick={closeModal}
-              className="absolute -top-12 right-0 flex items-center gap-2 text-white/40 transition-colors hover:text-white"
+              className="absolute -top-12 right-0 flex items-center gap-2 text-white/60 transition-colors hover:text-white"
             >
               <span className="text-xs font-medium tracking-wider uppercase font-[family-name:var(--font-montserrat)]">
                 Cerrar

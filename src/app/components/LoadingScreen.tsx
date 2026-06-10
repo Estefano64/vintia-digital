@@ -8,8 +8,14 @@ export default function LoadingScreen() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => setFadeOut(true), 2200);
-    const removeTimer = setTimeout(() => setIsLoading(false), 2800);
+    // Solo en la primera visita de la sesión; en recargas no bloquea la página.
+    if (sessionStorage.getItem("vintia-loaded")) {
+      setIsLoading(false);
+      return;
+    }
+    sessionStorage.setItem("vintia-loaded", "1");
+    const fadeTimer = setTimeout(() => setFadeOut(true), 1600);
+    const removeTimer = setTimeout(() => setIsLoading(false), 2200);
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);

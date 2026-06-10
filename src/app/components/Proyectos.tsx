@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 interface Project {
   title: string;
   category: string;
-  url: string;
+  /** URL del sitio en vivo (se muestra en un iframe). Omitir en proyectos privados. */
+  url?: string;
+  /** Capturas de pantalla para proyectos privados (ej. ERP). Se muestran en una galería en lugar del iframe. */
+  images?: string[];
   description: string;
   stats: { label: string; value: string }[];
   techs: string[];
@@ -13,30 +17,30 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Andes Ultra Trail",
-    category: "Desarrollo Web",
-    url: "https://andesultra.com/",
-    description:
-      "Plataforma web completa para el evento de ultra trail más importante de los Andes. Incluye sistema de inscripción online, seguimiento GPS en tiempo real de corredores, galería multimedia y blog de noticias.",
-    stats: [
-      { label: "Incremento tráfico", value: "+320%" },
-      { label: "Inscripciones online", value: "2.5K+" },
-      { label: "Tiempo de carga", value: "1.2s" },
-    ],
-    techs: ["Next.js", "React", "Tailwind CSS", "Node.js"],
-  },
-  {
     title: "HSEC Perú",
-    category: "Sitio Corporativo",
+    category: "Software a Medida",
     url: "https://hsec-peru.com/",
     description:
-      "Portal corporativo para consultora líder en seguridad, salud ocupacional y medio ambiente. Diseño profesional con sistema de cotizaciones online, catálogo de servicios y blog especializado en normativas HSEC.",
+      "Desarrollo de plugin personalizado de WordPress para automatizar procesos de certificación empresarial en seguridad, salud ocupacional y medio ambiente. Incluye gestión de requisitos, validación UAT y reducción significativa del tiempo operativo del cliente.",
+    stats: [
+      { label: "Tiempo ahorrado", value: "65%" },
+      { label: "Certificaciones gestionadas", value: "500+" },
+      { label: "Satisfacción cliente", value: "5/5" },
+    ],
+    techs: ["WordPress", "PHP", "JavaScript", "MySQL"],
+  },
+  {
+    title: "AquaMater AQP",
+    category: "Sitio Corporativo",
+    url: "https://www.aquamateraqp.com/",
+    description:
+      "Sitio web para Aquamater, centro especializado en maternidad y bienestar familiar en Arequipa: psicoprofilaxis acuática, matronatación, hidroterapia pediátrica y programas de bienestar para mamá. Presenta sus servicios e instalaciones con un diseño cálido y canales de contacto directo para captar nuevas familias.",
     stats: [
       { label: "Leads generados", value: "+280%" },
       { label: "Consultas online", value: "1.8K+" },
       { label: "Posicionamiento", value: "Top 5" },
     ],
-    techs: ["WordPress", "PHP", "MySQL", "SEO"],
+    techs: ["Next.js", "React", "Tailwind CSS", "SEO"],
   },
   {
     title: "TecnoNómadas",
@@ -52,71 +56,73 @@ const projects: Project[] = [
     techs: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
   },
   {
-    title: "Apple Store",
-    category: "E-Commerce",
-    url: "https://www.apple.com/",
+    title: "HPK Inversiones",
+    category: "Sitio Corporativo",
+    url: "https://hpkinv.com/",
     description:
-      "Referencia en diseño de experiencia de usuario para tienda online premium. Interfaz minimalista con animaciones fluidas, configurador de productos interactivo y proceso de compra optimizado.",
+      "Plataforma web corporativa para empresa de inversiones. Interfaz moderna y profesional con presentación de servicios, animaciones fluidas y una experiencia de usuario optimizada que transmite confianza y solidez de marca.",
     stats: [
       { label: "Tasa conversión", value: "6.2%" },
       { label: "UX Score", value: "98/100" },
       { label: "Velocidad", value: "0.8s" },
     ],
-    techs: ["React", "Swift", "Node.js", "CDN Global"],
+    techs: ["Next.js", "React", "Node.js", "Tailwind CSS"],
   },
   {
-    title: "Dashboard Analytics",
-    category: "Plataforma",
-    url: "https://hsec-peru.com/",
-    description:
-      "Panel de control en tiempo real con visualización de datos avanzada, reportes automatizados, KPIs personalizables y alertas inteligentes basadas en machine learning.",
-    stats: [
-      { label: "Datos procesados", value: "10M+/día" },
-      { label: "Tiempo ahorro", value: "60%" },
-      { label: "Usuarios activos", value: "500+" },
-    ],
-    techs: ["React", "D3.js", "Python", "AWS"],
-  },
-  {
-    title: "Landing Campaña",
-    category: "Marketing Digital",
-    url: "https://www.tecnonomadas.net/",
-    description:
-      "Landing page de alta conversión para campaña publicitaria con A/B testing, formularios optimizados, integración con email marketing y tracking avanzado de conversiones.",
-    stats: [
-      { label: "Conversión", value: "12.5%" },
-      { label: "CTR anuncios", value: "8.3%" },
-      { label: "ROI campaña", value: "5.2x" },
-    ],
-    techs: ["HTML/CSS", "JavaScript", "Google Ads", "Mailchimp"],
-  },
-  {
-    title: "Plataforma Educativa",
-    category: "EdTech",
-    url: "https://www.apple.com/",
-    description:
-      "LMS completo con sistema de videoconferencias, evaluaciones automatizadas, certificaciones digitales, gamificación y seguimiento del progreso del estudiante.",
-    stats: [
-      { label: "Estudiantes", value: "3K+" },
-      { label: "Cursos activos", value: "45" },
-      { label: "Tasa completado", value: "78%" },
-    ],
-    techs: ["Next.js", "PostgreSQL", "WebRTC", "Redis"],
-  },
-  {
-    title: "Sistema de Gestión",
+    title: "ERP Empresarial",
     category: "Software a Medida",
-    url: "https://andesultra.com/",
-    description:
-      "ERP personalizado con módulos de facturación, inventario, RRHH y contabilidad. Integración con SUNAT, reportes fiscales automatizados y acceso multi-sede.",
-    stats: [
-      { label: "Procesos auto.", value: "85%" },
-      { label: "Sedes conectadas", value: "12" },
-      { label: "Ahorro costos", value: "-40%" },
+    images: [
+      "/proyectos/erp/captura-1.png",
+      "/proyectos/erp/captura-2.png",
+      "/proyectos/erp/captura-3.png",
+      "/proyectos/erp/captura-4.png",
+      "/proyectos/erp/captura-5.png",
     ],
-    techs: ["Angular", ".NET", "SQL Server", "Azure"],
+    description:
+      "Sistema ERP a medida para la gestión integral de la empresa: stock de materiales, aprobaciones, operaciones, mantenimiento, logística, programación semanal de personal y reportes en tiempo real. Por confidencialidad mostramos capturas de demostración del entorno, no el sistema en producción.",
+    stats: [
+      { label: "Módulos integrados", value: "8" },
+      { label: "Procesos auto.", value: "90%" },
+      { label: "Tiempo de gestión", value: "-50%" },
+    ],
+    techs: ["React", "Node.js", "PostgreSQL", "Docker"],
   },
 ];
+
+/* ───────────── Live Preview (iframe escalado al ancho real de la tarjeta) ───────────── */
+function LivePreview({ url, title }: { url: string; title: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new ResizeObserver(([entry]) => {
+      setScale(entry.contentRect.width / 1280);
+    });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="absolute inset-0 overflow-hidden">
+      {scale > 0 && (
+        <div
+          className="w-[1280px] h-[960px] origin-top-left pointer-events-none"
+          style={{ transform: `scale(${scale})` }}
+        >
+          <iframe
+            src={url}
+            title={title}
+            className="w-full h-full border-0"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ───────────── Project Card ───────────── */
 function ProjectCard({
@@ -160,7 +166,7 @@ function ProjectCard({
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
-        transitionDelay: `${(index % 4) * 100}ms`,
+        transitionDelay: `${(index % 3) * 100}ms`,
       }}
     >
       {/* Glow border on hover */}
@@ -177,20 +183,21 @@ function ProjectCard({
         className="relative z-[1] rounded-xl overflow-hidden"
         style={{ background: "rgba(4, 16, 32, 0.95)" }}
       >
-        {/* Iframe Preview */}
+        {/* Preview: imagen (proyecto privado) o iframe en vivo */}
         <div className="relative overflow-hidden aspect-[4/3]">
-          <div
-            className="w-[1280px] h-[960px] origin-top-left pointer-events-none"
-            style={{ transform: "scale(0.234375)" }}
-          >
-            <iframe
-              src={project.url}
-              title={project.title}
-              className="w-full h-full border-0"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin"
+          {project.images?.length ? (
+            <Image
+              src={project.images[0]}
+              alt={`Vista previa de ${project.title}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              className="object-cover object-top"
             />
-          </div>
+          ) : (
+            /* El iframe solo se monta cuando la tarjeta entra al viewport:
+               evita cargar todos los sitios externos al abrir la página. */
+            inView && <LivePreview url={project.url!} title={project.title} />
+          )}
 
           {/* Hover overlay */}
           <div
@@ -256,12 +263,148 @@ function ProjectCard({
                 background: "linear-gradient(90deg, #01FDFE, #5B2FB8)",
               }}
             />
-            <span className="text-[11px] text-white/30 group-hover:text-white/50 transition-colors duration-300 font-[family-name:var(--font-open-sans)]">
-              {project.url.replace("https://", "").replace(/\/$/, "")}
+            <span className="text-[11px] text-white/45 group-hover:text-white/65 transition-colors duration-300 font-[family-name:var(--font-open-sans)]">
+              {project.url
+                ? project.url.replace("https://", "").replace(/\/$/, "")
+                : "Demo privado"}
             </span>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ───────────── Project Gallery (proyectos privados) ───────────── */
+function ProjectGallery({
+  images,
+  title,
+}: {
+  images: string[];
+  title: string;
+}) {
+  const [idx, setIdx] = useState(0);
+  const go = (dir: number) =>
+    setIdx((i) => (i + dir + images.length) % images.length);
+
+  return (
+    <div
+      className="relative rounded-xl overflow-hidden mb-5"
+      style={{ border: "1px solid rgba(1, 253, 254, 0.1)" }}
+    >
+      {/* Etiqueta "Demostración privada" */}
+      <div
+        className="flex items-center gap-2 px-4 py-2.5"
+        style={{
+          background: "rgba(4, 16, 32, 0.9)",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
+        }}
+      >
+        <svg
+          className="h-3.5 w-3.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#01FDFE"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+          />
+        </svg>
+        <span className="text-[11px] tracking-wider uppercase text-white/55 font-[family-name:var(--font-montserrat)]">
+          Capturas de demostración — entorno privado
+        </span>
+      </div>
+
+      {/* Imagen principal */}
+      <div
+        className="relative w-full flex items-center justify-center"
+        style={{ background: "rgba(2, 8, 16, 0.6)", minHeight: "300px" }}
+      >
+        <img
+          src={images[idx]}
+          alt={`${title} — captura ${idx + 1}`}
+          className="max-h-[420px] w-full object-contain"
+        />
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={() => go(-1)}
+              aria-label="Anterior"
+              className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+              style={{
+                background: "rgba(4, 16, 32, 0.7)",
+                border: "1px solid rgba(1, 253, 254, 0.3)",
+              }}
+            >
+              <svg
+                className="h-4 w-4 text-white/80"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={() => go(1)}
+              aria-label="Siguiente"
+              className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+              style={{
+                background: "rgba(4, 16, 32, 0.7)",
+                border: "1px solid rgba(1, 253, 254, 0.3)",
+              }}
+            >
+              <svg
+                className="h-4 w-4 text-white/80"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Miniaturas / indicadores */}
+      {images.length > 1 && (
+        <div
+          className="flex items-center justify-center gap-2 px-4 py-3"
+          style={{
+            background: "rgba(4, 16, 32, 0.9)",
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+          }}
+        >
+          {images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setIdx(i)}
+              aria-label={`Ver captura ${i + 1}`}
+              className="h-12 w-16 rounded-md overflow-hidden transition-all duration-200 cursor-pointer"
+              style={{
+                border:
+                  i === idx
+                    ? "1.5px solid #01FDFE"
+                    : "1px solid rgba(255,255,255,0.1)",
+                opacity: i === idx ? 1 : 0.5,
+              }}
+            >
+              <img
+                src={src}
+                alt={`Miniatura ${i + 1}`}
+                className="h-full w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -318,19 +461,7 @@ function ProjectModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 h-9 w-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer"
-          style={{
-            background: "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.1)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(253,103,235,0.2)";
-            e.currentTarget.style.borderColor = "rgba(253,103,235,0.5)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-          }}
+          className="absolute top-4 right-4 z-20 h-9 w-9 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-110 cursor-pointer bg-[rgba(255,255,255,0.05)] border-[rgba(255,255,255,0.1)] hover:bg-[rgba(253,103,235,0.2)] hover:border-[rgba(253,103,235,0.5)]"
         >
           <svg
             className="h-4 w-4 text-white/60"
@@ -370,7 +501,10 @@ function ProjectModal({
             </h3>
           </div>
 
-          {/* Live preview iframe */}
+          {/* Preview: galería de capturas (privado) o iframe en vivo */}
+          {project.images?.length ? (
+            <ProjectGallery images={project.images} title={project.title} />
+          ) : (
           <div
             className="relative rounded-xl overflow-hidden mb-5"
             style={{
@@ -391,7 +525,7 @@ function ProjectModal({
                 <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#28c840" }} />
               </div>
               <div
-                className="flex-1 flex items-center gap-2 rounded-md px-3 py-1 text-[11px] text-white/40 font-[family-name:var(--font-open-sans)]"
+                className="flex-1 flex items-center gap-2 rounded-md px-3 py-1 text-[11px] text-white/60 font-[family-name:var(--font-open-sans)]"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <svg
@@ -443,6 +577,7 @@ function ProjectModal({
               />
             </div>
           </div>
+          )}
 
           {/* Description + Stats row */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
@@ -454,7 +589,7 @@ function ProjectModal({
               >
                 Descripción del Proyecto
               </h4>
-              <p className="text-[13px] leading-6 text-white/50 font-[family-name:var(--font-open-sans)]">
+              <p className="text-[13px] leading-6 text-white/70 font-[family-name:var(--font-open-sans)]">
                 {project.description}
               </p>
 
@@ -494,7 +629,7 @@ function ProjectModal({
                       border: "1px solid rgba(1, 253, 254, 0.08)",
                     }}
                   >
-                    <span className="text-[11px] text-white/40 font-[family-name:var(--font-open-sans)]">
+                    <span className="text-[11px] text-white/60 font-[family-name:var(--font-open-sans)]">
                       {stat.label}
                     </span>
                     <span
@@ -516,6 +651,7 @@ function ProjectModal({
 
           {/* CTA */}
           <div className="mt-5 flex flex-col sm:flex-row gap-3 items-center justify-center">
+            {project.url && (
             <a
               href={project.url}
               target="_blank"
@@ -546,24 +682,12 @@ function ProjectModal({
                 }}
               />
             </a>
+            )}
 
             <a
               href="#contactanos"
               onClick={onClose}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
-              style={{
-                color: "rgba(255,255,255,0.5)",
-                border: "1px solid rgba(1, 253, 254, 0.15)",
-                background: "rgba(1, 253, 254, 0.04)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.4)";
-                e.currentTarget.style.color = "#01FDFE";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.15)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.5)";
-              }}
+              className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[12px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white/70 border-[rgba(1,253,254,0.15)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.4)]"
             >
               Quiero algo similar
             </a>
@@ -576,26 +700,29 @@ function ProjectModal({
 
 /* ───────────── Main Section ───────────── */
 export default function Proyectos() {
-  const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const closeModal = useCallback(() => setSelectedProject(null), []);
 
   return (
     <>
-      <section id="proyectos" className="relative py-20 overflow-hidden">
+      <section
+        id="proyectos"
+        className="relative py-20 overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #041020 0%, #120a2e 50%, #041020 100%)" }}
+      >
         {/* Background ambient glows */}
         <div
-          className="absolute top-1/4 right-0 w-[400px] h-[400px] opacity-10 pointer-events-none"
+          className="absolute top-1/4 right-0 w-[400px] h-[400px] opacity-15 pointer-events-none"
           style={{
             background: "radial-gradient(circle, #5B2FB8 0%, transparent 70%)",
             filter: "blur(100px)",
           }}
         />
         <div
-          className="absolute bottom-1/4 left-0 w-[300px] h-[300px] opacity-8 pointer-events-none"
+          className="absolute bottom-1/4 left-0 w-[300px] h-[300px] opacity-10 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, #01FDFE 0%, transparent 70%)",
+            background: "radial-gradient(circle, #FD67EB 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -626,73 +753,27 @@ export default function Proyectos() {
 
             <div
               className="mx-auto mt-4 mb-6 h-[2px] w-12"
-              style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
+              style={{ background: "linear-gradient(90deg, #5B2FB8, #FD67EB)" }}
             />
 
-            <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/40 sm:text-base font-[family-name:var(--font-open-sans)]">
+            <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
               Cada proyecto refleja nuestra pasión por el diseño estratégico y los
               resultados medibles.
             </p>
           </div>
 
           {/* Projects grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map((project, i) => (
               <ProjectCard
                 key={i}
                 project={project}
                 index={i}
-                visible={i < 4 || showAll}
+                visible
                 onClick={() => setSelectedProject(project)}
               />
             ))}
           </div>
-
-          {/* "Ver más" button */}
-          {!showAll && (
-            <div className="mt-12 flex justify-center">
-              <button
-                onClick={() => setShowAll(true)}
-                className="group relative inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] overflow-hidden cursor-pointer"
-                style={{
-                  border: "1px solid rgba(1, 253, 254, 0.2)",
-                  background: "rgba(1, 253, 254, 0.04)",
-                  color: "rgba(255,255,255,0.7)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.5)";
-                  e.currentTarget.style.color = "#01FDFE";
-                  e.currentTarget.style.background = "rgba(1, 253, 254, 0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.2)";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.7)";
-                  e.currentTarget.style.background = "rgba(1, 253, 254, 0.04)";
-                }}
-              >
-                <div
-                  className="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500"
-                  style={{
-                    background: "linear-gradient(135deg, #01FDFE, #5B2FB8)",
-                  }}
-                />
-                <span className="relative z-10">Ver más proyectos</span>
-                <svg
-                  className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-            </div>
-          )}
         </div>
       </section>
 

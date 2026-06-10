@@ -1,13 +1,11 @@
 "use client";
 
 const logos = [
-  "/logos/cliente-img0017-hover.png",
-  "/logos/cliente-img002-hover.png",
-  "/logos/cliente-img003-hover.png",
-  "/logos/cliente-img004-hover.png",
-  "/logos/cliente-img006-hover.png",
-  "/logos/cliente-img007-hover.png",
-  "/logos/cliente-img008-hover.png",
+  "/logos/logo (1).webp",
+  "/logos/logo (2).webp",
+  "/logos/logo (3).webp",
+  "/logos/logo (4).webp",
+  "/logos/logo (5).webp",
 ];
 
 export default function Clientes() {
@@ -83,35 +81,11 @@ export default function Clientes() {
                 key={i}
                 className="marquee-item group"
               >
-                <div
-                  className="relative flex items-center justify-center rounded-xl px-8 py-6 transition-all duration-500 group-hover:scale-105"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    boxShadow: "0 0 15px rgba(1, 253, 254, 0.05), inset 0 1px 0 rgba(255,255,255,0.05)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(1, 253, 254, 0.25)";
-                    e.currentTarget.style.background = "rgba(1, 253, 254, 0.06)";
-                    e.currentTarget.style.boxShadow = "0 0 35px rgba(1, 253, 254, 0.12), inset 0 1px 0 rgba(1, 253, 254, 0.1)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                    e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                    e.currentTarget.style.boxShadow = "0 0 15px rgba(1, 253, 254, 0.05), inset 0 1px 0 rgba(255,255,255,0.05)";
-                  }}
-                >
+                <div className="client-card relative flex items-center justify-center rounded-xl px-8 py-6 group-hover:scale-105">
                   <img
                     src={logo}
-                    alt="Cliente"
-                    className="h-10 sm:h-12 w-auto object-contain transition-all duration-500 opacity-70 brightness-75 group-hover:opacity-100 group-hover:brightness-100 group-hover:scale-110"
-                    style={{ filter: "saturate(0.3) brightness(0.75)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.filter = "saturate(1) brightness(1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.filter = "saturate(0.3) brightness(0.75)";
-                    }}
+                    alt={`Logo de cliente ${(i % logos.length) + 1} de Vintia Digital`}
+                    className="client-logo h-10 sm:h-12 w-auto object-contain"
                     draggable={false}
                   />
                 </div>

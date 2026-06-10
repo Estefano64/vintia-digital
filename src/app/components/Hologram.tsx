@@ -92,8 +92,11 @@ export default function Hologram() {
     const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
     scene.add(linesMesh);
 
-    // Animation loop
+    // Animation loop — solo corre mientras el hero está en pantalla
+    let isVisible = true;
+
     const animate = () => {
+      if (!isVisible) return;
       animationId = requestAnimationFrame(animate);
 
       let delta = clock.getDelta();
@@ -167,9 +170,21 @@ export default function Hologram() {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("resize", onResize);
 
+    // Pausa el render cuando el hero sale del viewport (scroll hacia abajo)
+    const visObserver = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible;
+      isVisible = entry.isIntersecting;
+      if (isVisible && !wasVisible) {
+        clock.getDelta();
+        animate();
+      }
+    });
+    visObserver.observe(container);
+
     // Cleanup
     return () => {
       cancelAnimationFrame(animationId);
+      visObserver.disconnect();
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
 

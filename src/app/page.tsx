@@ -3,9 +3,9 @@ import Navbar from "./components/Navbar";
 import Conocenos from "./components/Conocenos";
 import Servicios from "./components/Servicios";
 import Proyectos from "./components/Proyectos";
-import Testimonios from "./components/Testimonios";
 import Clientes from "./components/Clientes";
 import Contactanos from "./components/Contactanos";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -29,14 +29,18 @@ export default function Home() {
       {/* Proyectos */}
       <Proyectos />
 
-      {/* Testimonios */}
-      <Testimonios />
+      {/* Testimonios: oculto hasta tener los videos reales de clientes.
+          Para reactivarlo: importar Testimonios y devolver el link
+          "#testimonios" a Navbar.tsx y Footer.tsx */}
 
       {/* Clientes */}
       <Clientes />
 
       {/* Contáctanos */}
       <Contactanos />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

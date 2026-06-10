@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# image compression backups (originals before sharp re-encode)
+/scripts/.image-backup/

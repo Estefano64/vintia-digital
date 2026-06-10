@@ -7,98 +7,90 @@ interface Service {
   id: string;
   title: string;
   short: string;
+  category: string;
+  tagline: string;
   description: string;
   image: string;
+  imageExpanded: string;
 }
 
 const SERVICES: Service[] = [
   {
-    id: "desarrollo-software",
-    title: "Desarrollo de Software",
-    short: "Software",
+    id: "branding-identidad-visual",
+    title: "Branding e Identidad Visual",
+    short: "Branding",
+    category: "Identidad y Estrategia",
+    tagline: "Todo empieza por definir quién eres y cómo te ven.",
     description:
-      "Optimiza la gestión de tu negocio con software a la medida. Desarrollamos soluciones personalizadas para mejorar la eficiencia, automatizar procesos y potenciar tu productividad. Nuestro equipo de expertos diseña herramientas digitales adaptadas a las necesidades de tu empresa, asegurando un alto rendimiento y escalabilidad.",
-    image: "/servicesimg/desarrollo-software.svg",
+      "No solo diseñamos logotipos; construimos la personalidad de tu marca. Desarrollamos un ecosistema visual y comunicativo único que define tus valores, tono de voz y estética. Nuestro objetivo es crear una identidad sólida que te diferencie en el mercado, genere confianza y permanezca en la mente de tus consumidores.",
+    image: "/servicesimg/expandidos/Branding-e-Identidad-Visual-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Branding-e-Identidad-Visual-480-x-670.webp",
   },
   {
-    id: "diseno-web",
-    title: "Diseño Web",
+    id: "marketing-digital-360",
+    title: "Marketing Digital 360°",
+    short: "Marketing 360°",
+    category: "Identidad y Estrategia",
+    tagline: "Todo empieza por definir quién eres y cómo te ven.",
+    description:
+      "Diseñamos estrategias integrales orientadas a resultados reales. Fusionamos creatividad con análisis de datos para gestionar campañas que realmente convierten. Desde la planificación de medios pagados hasta el posicionamiento orgánico, nos aseguramos de que cada acción tenga un propósito claro: hacer crecer tu negocio y maximizar tu retorno de inversión.",
+    image: "/servicesimg/expandidos/Marketing-Digital-360-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Marketing-Digital-360--480-x-670.webp",
+  },
+  {
+    id: "gestion-redes-sociales",
+    title: "Gestión de Redes Sociales",
+    short: "Social Media",
+    category: "Contenido y Social Media",
+    tagline: "Cómo conectas y hablas con tu audiencia.",
+    description:
+      "Más que publicar, construimos comunidades. Nos encargamos de la gestión estratégica de tus perfiles sociales, creando contenido de valor que fomenta la interacción y la lealtad. Desde la planificación del calendario hasta la respuesta a usuarios, nuestro equipo se asegura de que tu marca tenga una voz activa, cercana y relevante en el día a día digital.",
+    image: "/servicesimg/expandidos/Gestión-de-Redes-Sociales-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Gestión-de-Redes-Sociales-480-x-670.webp",
+  },
+  {
+    id: "produccion-audiovisual",
+    title: "Producción Audiovisual",
+    short: "Foto & Video",
+    category: "Contenido y Social Media",
+    tagline: "Cómo conectas y hablas con tu audiencia.",
+    description:
+      "El contenido visual es el rey. Producimos fotografías y videos de alta calidad comercial que capturan la esencia de tu marca y detienen el scroll. Realizamos desde fotografía de producto y corporativa hasta spots publicitarios y contenido para redes (Reels/TikToks), asegurando que cada pieza visual comunique profesionalismo y calidad.",
+    image: "/servicesimg/expandidos/Producción-Audiovisual-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Producción-Audiovisual-480-x-670.webp",
+  },
+  {
+    id: "diseno-desarrollo-web",
+    title: "Diseño y Desarrollo Web",
     short: "Web",
+    category: "Tecnología y Desarrollo",
+    tagline: "La base digital donde vive tu negocio.",
     description:
-      "Creación de sitios web modernos, rápidos y optimizados. Diseñamos y desarrollamos páginas web a la medida de tus necesidades, enfocándonos en la experiencia del usuario, el rendimiento y la seguridad. Ya sea un sitio corporativo, un eCommerce o una plataforma personalizada, garantizamos un desarrollo eficiente y adaptable a todos los dispositivos.",
-    image: "/servicesimg/diseno-web.svg",
-  },
-  {
-    id: "desarrollo-movil",
-    title: "Desarrollo Móvil",
-    short: "Móvil",
-    description:
-      "Lleva tu negocio a la palma de la mano de tus clientes con una app móvil intuitiva, funcional y optimizada. Diseñamos y desarrollamos aplicaciones para iOS y Android, asegurando una experiencia de usuario fluida y atractiva.",
-    image: "/servicesimg/desarrollo-movil.svg",
+      "Creamos sitios web que combinan alto rendimiento, seguridad y estética moderna. Ya sea una web corporativa, una landing page o un eCommerce complejo, desarrollamos plataformas rápidas y adaptables a cualquier dispositivo (responsive). No solo te entregamos una web bonita, sino una herramienta de ventas optimizada para la experiencia del usuario.",
+    image: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-480-x-670.webp",
   },
   {
     id: "diseno-ux-ui",
     title: "Diseño UX/UI",
     short: "UX/UI",
+    category: "Tecnología y Desarrollo",
+    tagline: "La base digital donde vive tu negocio.",
     description:
-      "Cautiva a tus usuarios con un diseño UX/UI que transforma la experiencia digital. Creamos interfaces atractivas, intuitivas y funcionales que mejoran la navegación y optimizan la conversión. Un diseño bien pensado no solo embellece tu sitio o app, sino que también mejora la retención y fidelización de clientes.",
-    image: "/servicesimg/diseno-ux-ui.svg",
+      "Transformamos la navegación en una experiencia intuitiva y memorable. Nos enfocamos en entender el comportamiento de tus usuarios para diseñar interfaces que no solo sean visualmente impactantes, sino también fáciles de usar. Un buen diseño UX/UI reduce la fricción, mejora la retención y guía a tus visitantes hacia la conversión de forma natural.",
+    image: "/servicesimg/expandidos/Diseño-UX-UI-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Diseño-UX-UI-480-x-670.webp",
   },
   {
-    id: "optimizacion-seo",
-    title: "Optimización SEO",
-    short: "SEO",
+    id: "desarrollo-software-medida",
+    title: "Desarrollo de Software a Medida",
+    short: "Software",
+    category: "Tecnología y Desarrollo",
+    tagline: "La base digital donde vive tu negocio.",
     description:
-      "Impulsa tu negocio al siguiente nivel con nuestro servicio de SEO. Aumenta tu visibilidad en Google y otros buscadores, atrae más tráfico orgánico a tu sitio web y convierte a más visitantes en clientes. Con nosotros, obtendrás un mayor retorno de inversión y consolidarás tu presencia online a largo plazo.",
-    image: "/servicesimg/optimizacion-seo.svg",
-  },
-  {
-    id: "marketing-digital",
-    title: "Marketing Digital",
-    short: "Marketing",
-    description:
-      "Creamos y gestionamos estrategias digitales a medida que combinan creatividad, análisis y ejecución. Nuestro enfoque abarca redes sociales, medios pagados, diseño visual y gestión de comunidades, garantizando una presencia coherente, atractiva y orientada a resultados.",
-    image: "/servicesimg/marketing-digital.svg",
-  },
-  {
-    id: "community-manager",
-    title: "Community Manager",
-    short: "Community",
-    description:
-      "Haz que tu marca brille en redes sociales con una gestión profesional y estratégica. Creamos contenido de valor, respondemos a tu comunidad y analizamos métricas para mejorar el rendimiento de tus plataformas. Con una gestión efectiva, transformarás seguidores en clientes leales.",
-    image: "/servicesimg/community-manager.svg",
-  },
-  {
-    id: "branding",
-    title: "Branding",
-    short: "Branding",
-    description:
-      "Dale a tu marca la identidad que merece con una estrategia de branding poderosa. Desde la creación de logotipos hasta la definición de una personalidad única, nos encargamos de construir una imagen sólida y memorable. Desarrollamos la voz, los valores y la estética de tu marca.",
-    image: "/servicesimg/branding.svg",
-  },
-  {
-    id: "email-marketing",
-    title: "E-mail Marketing",
-    short: "Email",
-    description:
-      "Transforma tu lista de correos en una poderosa herramienta de conversión. Diseñamos campañas de email marketing personalizadas que fidelizan clientes y aumentan las ventas. Utilizamos estrategias de automatización, segmentación y contenido atractivo para garantizar que tus mensajes lleguen a la audiencia correcta.",
-    image: "/servicesimg/email-marketing.svg",
-  },
-  {
-    id: "produccion-foto-video",
-    title: "Producción de Fotos y Videos",
-    short: "Foto & Video",
-    description:
-      "Haz que tu marca cobre vida con contenido audiovisual de alto impacto. Producimos fotografías y videos profesionales que reflejan la esencia de tu negocio y captan la atención de tu audiencia. Desde sesiones de producto hasta videos promocionales.",
-    image: "/servicesimg/produccion-foto-video.svg",
-  },
-  {
-    id: "paid-media",
-    title: "Paid Media",
-    short: "Paid Media",
-    description:
-      "Gestionamos tus campañas publicitarias en Meta Ads, Google Ads, TikTok Ads y LinkedIn Ads. Optimizamos cada peso invertido para maximizar tu alcance, generar leads cualificados y aumentar tus ventas con estrategias basadas en datos.",
-    image: "/servicesimg/paid-media.svg",
+      "Lleva la operatividad de tu empresa al siguiente nivel. Desarrollamos soluciones tecnológicas personalizadas para automatizar procesos, integrar sistemas y mejorar la eficiencia interna. Creamos herramientas escalables y seguras que se adaptan exactamente a las necesidades de tu flujo de trabajo, dándote control total sobre tu infraestructura digital.",
+    image: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-480-x-670.webp",
   },
 ];
 
@@ -161,6 +153,30 @@ export default function Servicios() {
     };
   }, [selected, closeModal]);
 
+  /* Preload expanded images on idle so the modal opens instantly */
+  useEffect(() => {
+    const preload = () => {
+      SERVICES.forEach((s) => {
+        const img = new window.Image();
+        img.src = s.imageExpanded;
+      });
+    };
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void) => number;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(preload);
+    } else {
+      const t = setTimeout(preload, 1500);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
+  const preloadExpanded = useCallback((src: string) => {
+    const img = new window.Image();
+    img.src = src;
+  }, []);
+
   /* ─── Drag-scroll carousel ─── */
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -209,7 +225,7 @@ export default function Servicios() {
       <section
         id="servicios"
         className="relative py-16 sm:py-20 overflow-hidden"
-        style={{ background: "#041020" }}
+        style={{ background: "linear-gradient(180deg, #0a0d28 0%, #041020 60%, #041020 100%)" }}
       >
         {/* Ambient glows */}
         <div
@@ -223,9 +239,9 @@ export default function Servicios() {
         <div
           className="absolute top-0 right-0 w-[300px] h-[300px] pointer-events-none"
           style={{
-            background: "radial-gradient(circle, #01FDFE 0%, transparent 70%)",
+            background: "radial-gradient(circle, #FD67EB 0%, transparent 70%)",
             filter: "blur(80px)",
-            opacity: 0.04,
+            opacity: 0.07,
           }}
         />
 
@@ -261,7 +277,7 @@ export default function Servicios() {
             className="mx-auto mt-4 mb-6 h-[2px] w-12"
             style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
           />
-          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/40 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
             Te ofrecemos los servicios esenciales para hacer crecer tu negocio y
             alcanzar tus objetivos.
           </p>
@@ -356,6 +372,8 @@ export default function Servicios() {
                       onClick={() => {
                         if (!dragMoved.current) setSelected(i);
                       }}
+                      onMouseEnter={() => preloadExpanded(service.imageExpanded)}
+                      onTouchStart={() => preloadExpanded(service.imageExpanded)}
                       className="service-card group relative w-full overflow-hidden rounded-xl focus:outline-none"
                     >
                       <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl">
@@ -475,7 +493,7 @@ export default function Servicios() {
               </span>
               <button
                 onClick={closeModal}
-                className="flex items-center gap-1.5 text-white/40 transition-colors hover:text-white font-[family-name:var(--font-montserrat)]"
+                className="flex items-center gap-1.5 text-white/60 transition-colors hover:text-white font-[family-name:var(--font-montserrat)]"
               >
                 <span className="text-[11px] font-semibold tracking-wider uppercase">
                   Volver
@@ -496,10 +514,10 @@ export default function Servicios() {
                 }}
               >
                 <Image
-                  src={SERVICES[selected].image}
+                  src={SERVICES[selected].imageExpanded}
                   alt={SERVICES[selected].title}
                   fill
-                  className="object-contain p-10 animate-[fadeIn_0.4s_ease-out]"
+                  className="object-cover animate-[fadeIn_0.4s_ease-out]"
                 />
                 {/* Glow behind image */}
                 <div
@@ -513,14 +531,23 @@ export default function Servicios() {
 
               {/* Text side */}
               <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4 font-[family-name:var(--font-montserrat)] animate-[slideRight_0.4s_ease-out]">
+                <span
+                  className="mb-2 text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)] animate-[slideRight_0.35s_ease-out]"
+                  style={{ color: "#01FDFE" }}
+                >
+                  {SERVICES[selected].category}
+                </span>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-3 font-[family-name:var(--font-montserrat)] animate-[slideRight_0.4s_ease-out]">
                   {SERVICES[selected].title}
                 </h3>
+                <p className="text-sm italic text-white/60 mb-4 font-[family-name:var(--font-open-sans)] animate-[slideRight_0.45s_ease-out]">
+                  {SERVICES[selected].tagline}
+                </p>
                 <div
                   className="h-[2px] w-10 mb-5 animate-[slideRight_0.5s_ease-out]"
                   style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
                 />
-                <p className="text-sm leading-7 text-white/40 mb-8 font-[family-name:var(--font-open-sans)] animate-[slideRight_0.5s_ease-out]">
+                <p className="text-sm leading-7 text-white/65 mb-8 font-[family-name:var(--font-open-sans)] animate-[slideRight_0.5s_ease-out]">
                   {SERVICES[selected].description}
                 </p>
                 <a
@@ -553,7 +580,7 @@ export default function Servicios() {
                     className={`whitespace-nowrap text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all duration-300 font-[family-name:var(--font-montserrat)] ${
                       i === selected
                         ? "text-[#01FDFE] drop-shadow-[0_0_6px_rgba(1,253,254,0.4)]"
-                        : "text-white/25 hover:text-white/50"
+                        : "text-white/45 hover:text-white/75"
                     }`}
                   >
                     &gt; {s.short}

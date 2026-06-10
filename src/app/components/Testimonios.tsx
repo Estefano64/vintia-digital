@@ -221,7 +221,7 @@ export default function Testimonios() {
               background: "linear-gradient(90deg, #01FDFE, #5B2FB8)",
             }}
           />
-          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/40 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
             Nuestros partners estratégicos comparten su experiencia.
           </p>
 

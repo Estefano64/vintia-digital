@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const servicios = [
   "Desarrollo de Software",
@@ -37,7 +38,19 @@ export default function Contactanos() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hola Vintia Digital! Soy ${form.nombres} de ${form.empresa}. Estoy interesado en: ${form.servicio}. ${form.idea}`;
+    const telefono = form.numero.trim()
+      ? `${form.codPais} ${form.numero.trim()}`
+      : "";
+    const msg = [
+      `¡Hola Vintia Digital! Soy ${form.nombres}.`,
+      form.empresa.trim() && `Empresa: ${form.empresa.trim()}`,
+      `Correo: ${form.correo}`,
+      telefono && `Teléfono: ${telefono}`,
+      `Servicio de interés: ${form.servicio}`,
+      form.idea.trim() && `Mi idea: ${form.idea.trim()}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
     window.open(
       `https://wa.me/51915961315?text=${encodeURIComponent(msg)}`,
       "_blank"
@@ -45,7 +58,7 @@ export default function Contactanos() {
   };
 
   const inputBase =
-    "w-full bg-transparent border-b border-white/15 pb-1.5 pt-2.5 text-[13px] text-white placeholder-white/30 outline-none transition-all duration-300 focus:border-[#01FDFE] font-[family-name:var(--font-open-sans)]";
+    "w-full bg-transparent border-b border-white/20 pb-1.5 pt-2.5 text-[13px] text-white placeholder-white/50 outline-none transition-all duration-300 focus:border-[#01FDFE] font-[family-name:var(--font-open-sans)]";
 
   return (
     <section
@@ -62,9 +75,9 @@ export default function Contactanos() {
         }}
       />
       <div
-        className="absolute bottom-1/4 right-0 w-[300px] h-[300px] opacity-6 pointer-events-none"
+        className="absolute bottom-1/4 right-0 w-[300px] h-[300px] opacity-10 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, #01FDFE 0%, transparent 70%)",
+          background: "radial-gradient(circle, #FD67EB 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
@@ -106,9 +119,12 @@ export default function Contactanos() {
                 border: "1px solid rgba(1, 253, 254, 0.08)",
               }}
             >
-              <img
+              <Image
                 src="/contactanos.webp"
                 alt="Vintia Digital - Contáctanos"
+                width={1200}
+                height={1217}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-auto object-cover"
               />
 
@@ -155,23 +171,7 @@ export default function Contactanos() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="flex items-center justify-center h-11 w-11 rounded-lg transition-all duration-300 hover:scale-110"
-                  style={{
-                    background: "linear-gradient(135deg, #5B2FB8, #013795)",
-                    boxShadow: "0 4px 15px rgba(91, 47, 184, 0.4)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, #01FDFE, #5B2FB8)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 20px rgba(1, 253, 254, 0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, #5B2FB8, #013795)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 15px rgba(91, 47, 184, 0.4)";
-                  }}
+                  className="social-btn flex items-center justify-center h-11 w-11 rounded-lg hover:scale-110 bg-[linear-gradient(135deg,#5B2FB8,#013795)] hover:bg-[linear-gradient(135deg,#01FDFE,#5B2FB8)]"
                 >
                   <svg
                     className="h-5 w-5 text-white"
@@ -205,7 +205,7 @@ export default function Contactanos() {
                   >
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/40 font-medium tracking-wider uppercase font-[family-name:var(--font-montserrat)]">
+                  <div className="text-xs text-white/60 font-medium tracking-wider uppercase font-[family-name:var(--font-montserrat)]">
                     {stat.label}
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function Contactanos() {
             </div>
 
             {/* Description */}
-            <p className="text-[13px] leading-6 text-white/45 mb-5 font-[family-name:var(--font-open-sans)]">
+            <p className="text-[13px] leading-6 text-white/65 mb-5 font-[family-name:var(--font-open-sans)]">
               ¿Buscas llevar tu presencia en línea al siguiente nivel? En{" "}
               <span className="font-semibold" style={{ color: "#01FDFE" }}>
                 Vintia Digital
@@ -228,45 +228,71 @@ export default function Contactanos() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Row 1: Nombres + Empresa */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="nombres" className="sr-only">
+                    Nombres
+                  </label>
+                  <input
+                    id="nombres"
+                    type="text"
+                    name="nombres"
+                    placeholder="Nombres"
+                    value={form.nombres}
+                    onChange={handleChange}
+                    required
+                    autoComplete="name"
+                    className={inputBase}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="empresa" className="sr-only">
+                    Empresa
+                  </label>
+                  <input
+                    id="empresa"
+                    type="text"
+                    name="empresa"
+                    placeholder="Empresa"
+                    value={form.empresa}
+                    onChange={handleChange}
+                    autoComplete="organization"
+                    className={inputBase}
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Correo */}
+              <div>
+                <label htmlFor="correo" className="sr-only">
+                  Correo electrónico
+                </label>
                 <input
-                  type="text"
-                  name="nombres"
-                  placeholder="Nombres"
-                  value={form.nombres}
+                  id="correo"
+                  type="email"
+                  name="correo"
+                  placeholder="Correo"
+                  value={form.correo}
                   onChange={handleChange}
                   required
-                  className={inputBase}
-                />
-                <input
-                  type="text"
-                  name="empresa"
-                  placeholder="Empresa"
-                  value={form.empresa}
-                  onChange={handleChange}
+                  autoComplete="email"
                   className={inputBase}
                 />
               </div>
 
-              {/* Row 2: Correo */}
-              <input
-                type="email"
-                name="correo"
-                placeholder="Correo"
-                value={form.correo}
-                onChange={handleChange}
-                required
-                className={inputBase}
-              />
-
               {/* Row 3: Cod. país + Número */}
               <div className="grid grid-cols-[130px_1fr] gap-4">
-                <select
-                  name="codPais"
-                  value={form.codPais}
-                  onChange={handleChange}
-                  className={`${inputBase} cursor-pointer`}
-                  style={{ appearance: "none" }}
-                >
+                <div>
+                  <label htmlFor="codPais" className="sr-only">
+                    Código de país
+                  </label>
+                  <select
+                    id="codPais"
+                    name="codPais"
+                    value={form.codPais}
+                    onChange={handleChange}
+                    className={`${inputBase} cursor-pointer`}
+                    style={{ appearance: "none" }}
+                  >
                   <option value="+51">+51 Perú</option>
                   <option value="+1">+1 USA</option>
                   <option value="+52">+52 México</option>
@@ -275,20 +301,33 @@ export default function Contactanos() {
                   <option value="+57">+57 Colombia</option>
                   <option value="+593">+593 Ecuador</option>
                   <option value="+591">+591 Bolivia</option>
-                  <option value="+34">+34 España</option>
-                </select>
-                <input
-                  type="tel"
-                  name="numero"
-                  placeholder="Número"
-                  value={form.numero}
-                  onChange={handleChange}
-                  className={inputBase}
-                />
+                    <option value="+34">+34 España</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="numero" className="sr-only">
+                    Número de teléfono
+                  </label>
+                  <input
+                    id="numero"
+                    type="tel"
+                    name="numero"
+                    placeholder="Número"
+                    value={form.numero}
+                    onChange={handleChange}
+                    required
+                    autoComplete="tel"
+                    className={inputBase}
+                  />
+                </div>
               </div>
 
               {/* Row 4: Servicio */}
+              <label htmlFor="servicio" className="sr-only">
+                Servicio de interés
+              </label>
               <select
+                id="servicio"
                 name="servicio"
                 value={form.servicio}
                 onChange={handleChange}
@@ -307,7 +346,11 @@ export default function Contactanos() {
               </select>
 
               {/* Row 5: Textarea */}
+              <label htmlFor="idea" className="sr-only">
+                Cuéntanos tu idea
+              </label>
               <textarea
+                id="idea"
                 name="idea"
                 placeholder="Cuéntanos tu idea"
                 value={form.idea}
