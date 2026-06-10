@@ -96,6 +96,30 @@ const SERVICES: Service[] = [
 
 const WHATSAPP_NUMBER = "51915961315";
 
+/* Structured data so crawlers see every service + description,
+   which otherwise only render inside the modal. */
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Servicios de Vintia Digital",
+  itemListElement: SERVICES.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.title,
+      description: s.description,
+      serviceType: s.category,
+      provider: {
+        "@type": "Organization",
+        name: "Vintia Digital",
+        url: "https://vintiadigital.com",
+      },
+      areaServed: "Arequipa, Perú",
+    },
+  })),
+};
+
 function whatsappLink(title: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hola, quiero solicitar más información sobre el servicio de ${title}`
@@ -123,9 +147,31 @@ export default function Servicios() {
   const [selected, setSelected] = useState<number | null>(null);
   const [visible, setVisible] = useState(4);
 
+  /* Track whether we pushed a history entry for the open modal, so the
+     browser back button closes the modal instead of leaving the page. */
+  const pushedHistory = useRef(false);
+
   const closeModal = useCallback(() => {
-    setSelected(null);
+    if (pushedHistory.current) {
+      // popstate handler clears the state
+      window.history.back();
+    } else {
+      setSelected(null);
+    }
   }, []);
+
+  const isOpen = selected !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    window.history.pushState({ vintiaServiceModal: true }, "");
+    pushedHistory.current = true;
+    const onPop = () => {
+      pushedHistory.current = false;
+      setSelected(null);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [isOpen]);
 
   useEffect(() => {
     const update = () => {
@@ -185,30 +231,42 @@ export default function Servicios() {
   const dragMoved = useRef(false);
 
   const onPointerDown = (e: React.PointerEvent) => {
+    dragMoved.current = false;
+    // Touch/pen use native scrolling; custom drag is mouse-only.
+    if (e.pointerType !== "mouse") return;
     const el = scrollRef.current;
     if (!el) return;
     isDragging.current = true;
-    dragMoved.current = false;
     startX.current = e.clientX;
     scrollLeft.current = el.scrollLeft;
-    el.setPointerCapture(e.pointerId);
-    el.style.cursor = "grabbing";
-    el.style.scrollSnapType = "none";
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!isDragging.current || !scrollRef.current) return;
+    const el = scrollRef.current;
     const dx = e.clientX - startX.current;
-    if (Math.abs(dx) > 4) dragMoved.current = true;
-    scrollRef.current.scrollLeft = scrollLeft.current - dx;
+    // Capture the pointer only once a real drag starts, so plain
+    // clicks still reach the cards.
+    if (!dragMoved.current && Math.abs(dx) > 4) {
+      dragMoved.current = true;
+      el.setPointerCapture(e.pointerId);
+      el.style.cursor = "grabbing";
+      el.style.scrollSnapType = "none";
+    }
+    if (dragMoved.current) {
+      el.scrollLeft = scrollLeft.current - dx;
+    }
   };
 
   const onPointerUp = (e: React.PointerEvent) => {
-    if (!scrollRef.current) return;
+    const el = scrollRef.current;
+    if (!isDragging.current || !el) return;
     isDragging.current = false;
-    scrollRef.current.releasePointerCapture(e.pointerId);
-    scrollRef.current.style.cursor = "grab";
-    scrollRef.current.style.scrollSnapType = "x mandatory";
+    if (el.hasPointerCapture(e.pointerId)) {
+      el.releasePointerCapture(e.pointerId);
+    }
+    el.style.cursor = "grab";
+    el.style.scrollSnapType = "x mandatory";
   };
 
   const scrollByCard = (dir: number) => {
@@ -227,6 +285,10 @@ export default function Servicios() {
         className="relative py-16 sm:py-20 overflow-hidden"
         style={{ background: "linear-gradient(180deg, #0a0d28 0%, #041020 60%, #041020 100%)" }}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+        />
         {/* Ambient glows */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
@@ -374,7 +436,12 @@ export default function Servicios() {
                       }}
                       onMouseEnter={() => preloadExpanded(service.imageExpanded)}
                       onTouchStart={() => preloadExpanded(service.imageExpanded)}
-                      className="service-card group relative w-full overflow-hidden rounded-xl focus:outline-none"
+                      className="service-card group relative w-full overflow-hidden rounded-xl cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#01FDFE]/60 transition-transform duration-300 hover:-translate-y-1"
+                      style={{
+                        border: "1px solid rgba(1, 253, 254, 0.18)",
+                        boxShadow:
+                          "0 8px 28px rgba(0, 0, 0, 0.5), 0 0 18px rgba(1, 253, 254, 0.06)",
+                      }}
                     >
                       <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl">
                         <Image
@@ -417,7 +484,9 @@ export default function Servicios() {
                           <h3 className="text-xs sm:text-sm font-bold text-white leading-tight font-[family-name:var(--font-montserrat)] transition-transform duration-300 group-hover:-translate-y-1">
                             {service.title}
                           </h3>
-                          <div className="flex items-center gap-1.5 mt-2 opacity-0 translate-y-3 transition-all duration-400 group-hover:opacity-100 group-hover:translate-y-0">
+                          <p className="sr-only">{service.description}</p>
+                          {/* Always visible on touch (no hover); animated reveal on sm+ */}
+                          <div className="flex items-center gap-1.5 mt-2 opacity-90 sm:opacity-0 sm:translate-y-3 transition-all duration-400 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
                             <span
                               className="h-[1px] w-5 transition-all duration-500 group-hover:w-8"
                               style={{ background: "#01FDFE" }}
@@ -467,7 +536,7 @@ export default function Servicios() {
 
           {/* Modal container */}
           <div
-            className="relative z-10 w-full max-w-5xl animate-[scaleIn_0.3s_ease-out] overflow-hidden rounded-2xl"
+            className="relative z-10 w-full max-w-5xl max-h-[92dvh] overflow-y-auto overscroll-contain animate-[scaleIn_0.3s_ease-out] rounded-2xl"
             style={{
               background: "linear-gradient(160deg, #0c1a30, #081428)",
               border: "1px solid rgba(1, 253, 254, 0.1)",
@@ -483,8 +552,15 @@ export default function Servicios() {
               }}
             />
 
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-5 py-4 sm:px-8">
+            {/* Top bar — sticky so the close button is always reachable */}
+            <div
+              className="sticky top-0 z-20 flex items-center justify-between px-5 py-3 sm:px-8"
+              style={{
+                background: "rgba(10, 24, 44, 0.92)",
+                backdropFilter: "blur(8px)",
+                borderBottom: "1px solid rgba(1, 253, 254, 0.06)",
+              }}
+            >
               <span
                 className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
                 style={{ color: "#01FDFE" }}
@@ -493,12 +569,13 @@ export default function Servicios() {
               </span>
               <button
                 onClick={closeModal}
-                className="flex items-center gap-1.5 text-white/60 transition-colors hover:text-white font-[family-name:var(--font-montserrat)]"
+                aria-label="Cerrar"
+                className="flex items-center gap-1.5 -mr-2 px-2 py-2 text-white/70 transition-colors hover:text-white font-[family-name:var(--font-montserrat)] cursor-pointer"
               >
                 <span className="text-[11px] font-semibold tracking-wider uppercase">
-                  Volver
+                  Cerrar
                 </span>
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
