@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import CountUp from "./CountUp";
+import ParticleNetwork from "./ParticleNetwork";
 
 const servicios = [
   "Desarrollo de Software",
@@ -68,6 +69,9 @@ export default function Contactanos() {
       className="relative py-12 sm:py-14 overflow-hidden"
       style={{ background: "#041020" }}
     >
+      {/* Constellation background (subtle, behind the form) */}
+      <ParticleNetwork density={22000} maxParticles={45} opacity={0.4} />
+
       {/* Ambient glows */}
       <div
         className="absolute top-1/4 left-0 w-[400px] h-[400px] opacity-8 pointer-events-none"

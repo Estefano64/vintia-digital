@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import ParticleNetwork from "./ParticleNetwork";
 
 interface Project {
   title: string;
@@ -712,6 +713,9 @@ export default function Proyectos() {
         className="relative py-20 overflow-hidden"
         style={{ background: "linear-gradient(180deg, #041020 0%, #120a2e 50%, #041020 100%)" }}
       >
+        {/* Constellation background */}
+        <ParticleNetwork />
+
         {/* Background ambient glows */}
         <div
           className="absolute top-1/4 right-0 w-[400px] h-[400px] opacity-15 pointer-events-none"
