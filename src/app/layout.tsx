@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import LoadingScreen from "./components/LoadingScreen";
 
@@ -123,6 +125,12 @@ export default function RootLayout({
         />
         <LoadingScreen />
         {children}
+        {/* Vercel Web Analytics (visitas/páginas en el dashboard de Vercel) */}
+        <Analytics />
+        {/* Google Analytics 4 — se activa al definir NEXT_PUBLIC_GA_ID en Vercel */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
