@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Reveal from "./Reveal";
+import CountUp from "./CountUp";
 
 const servicios = [
   "Desarrollo de Software",
@@ -83,6 +85,7 @@ export default function Contactanos() {
       />
 
       <div className="relative z-[1] mx-auto max-w-5xl px-6 lg:px-8">
+        <Reveal>
         {/* Header */}
         <div className="flex justify-center mb-3">
           <span
@@ -108,11 +111,12 @@ export default function Contactanos() {
           className="mx-auto mt-3 mb-8 h-[2px] w-12"
           style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
         />
+        </Reveal>
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
           {/* Left — Image + socials */}
-          <div className="relative">
+          <Reveal delay={100} className="relative">
             <div
               className="relative rounded-2xl overflow-hidden"
               style={{
@@ -183,15 +187,15 @@ export default function Contactanos() {
                 </a>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           {/* Right — Stats + Form */}
-          <div>
-            {/* Stats */}
+          <Reveal delay={200}>
+            {/* Stats — animated counters */}
             <div className="flex gap-6 mb-4">
               {[
-                { value: "+100", label: "Clientes" },
-                { value: "+250", label: "Proyectos" },
+                { end: 100, label: "Clientes" },
+                { end: 250, label: "Proyectos" },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div
@@ -203,7 +207,7 @@ export default function Contactanos() {
                       WebkitTextFillColor: "transparent",
                     }}
                   >
-                    {stat.value}
+                    <CountUp end={stat.end} prefix="+" />
                   </div>
                   <div className="text-xs text-white/60 font-medium tracking-wider uppercase font-[family-name:var(--font-montserrat)]">
                     {stat.label}
@@ -395,7 +399,7 @@ export default function Contactanos() {
                 />
               </button>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

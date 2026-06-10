@@ -1,5 +1,7 @@
 "use client";
 
+import Reveal from "./Reveal";
+
 const logos = [
   "/logos/logo (1).webp",
   "/logos/logo (2).webp",
@@ -28,6 +30,7 @@ export default function Clientes() {
       />
 
       <div className="relative z-[1] mx-auto max-w-6xl px-6 lg:px-8">
+        <Reveal>
         {/* Header */}
         <div className="flex justify-center mb-3">
           <span
@@ -53,6 +56,7 @@ export default function Clientes() {
           className="mx-auto mt-4 mb-10 h-[2px] w-12"
           style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
         />
+        </Reveal>
       </div>
 
       {/* Marquee ribbon */}

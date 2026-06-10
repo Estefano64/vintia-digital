@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 interface Project {
   title: string;
@@ -729,7 +730,7 @@ export default function Proyectos() {
 
         <div className="relative z-[1] mx-auto max-w-7xl px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-14">
+          <Reveal className="text-center mb-14">
             <div className="flex justify-center mb-3">
               <span
                 className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
@@ -760,7 +761,7 @@ export default function Proyectos() {
               Cada proyecto refleja nuestra pasión por el diseño estratégico y los
               resultados medibles.
             </p>
-          </div>
+          </Reveal>
 
           {/* Projects grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

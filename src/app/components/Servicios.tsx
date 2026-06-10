@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 interface Service {
   id: string;
@@ -315,6 +316,7 @@ export default function Servicios() {
         <Particle delay={2.2} x={90} size={4} />
 
         <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal>
           {/* Header */}
           <div className="flex justify-center mb-3">
             <span
@@ -343,9 +345,10 @@ export default function Servicios() {
             Te ofrecemos los servicios esenciales para hacer crecer tu negocio y
             alcanzar tus objetivos.
           </p>
+          </Reveal>
 
           {/* Master Container */}
-          <div className="relative mt-10">
+          <Reveal delay={150} className="relative mt-10">
             {/* Animated glowing border (behind) */}
             <div
               className="absolute -inset-[1px] rounded-2xl animate-[borderGlow_4s_ease-in-out_infinite] pointer-events-none"
@@ -518,7 +521,7 @@ export default function Servicios() {
               </div>
             </div>
             </div>{/* close inner container */}
-          </div>{/* close master container */}
+          </Reveal>{/* close master container */}
         </div>
       </section>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 const YOUTUBE_ID = "1zvHK6QSU6o";
 
@@ -40,6 +41,7 @@ export default function Conocenos() {
         />
 
         <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+          <Reveal>
           {/* Section label */}
           <div className="flex justify-center mb-3">
             <span
@@ -77,9 +79,10 @@ export default function Conocenos() {
             Descubre quiénes somos, nuestra pasión por la innovación digital y
             cómo ayudamos a negocios en Arequipa a alcanzar su máximo potencial.
           </p>
+          </Reveal>
 
           {/* Video thumbnail */}
-          <div className="mt-10">
+          <Reveal delay={150} className="mt-10">
             <button
               onClick={() => setModalOpen(true)}
               className="group relative mx-auto block w-full max-w-2xl overflow-hidden rounded-xl focus:outline-none"
@@ -149,7 +152,7 @@ export default function Conocenos() {
                 </div>
               </div>
             </button>
-          </div>
+          </Reveal>
         </div>
       </section>
 
