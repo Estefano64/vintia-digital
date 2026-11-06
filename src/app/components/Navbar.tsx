@@ -32,8 +32,8 @@ export default function Navbar() {
       }`}
       style={{
         background: isSticky
-          ? "rgba(4, 16, 32, 0.85)"
-          : "rgba(4, 16, 32, 0.4)",
+          ? "rgba(33, 31, 122, 0.88)"
+          : "rgba(33, 31, 122, 0.55)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
       }}

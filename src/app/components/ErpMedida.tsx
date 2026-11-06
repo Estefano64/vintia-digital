@@ -179,7 +179,7 @@ export default function ErpMedida() {
     <section
       id="erp"
       className="relative py-20 sm:py-28 overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #0b1140 0%, #1a1156 55%, #0a1a4a 100%)" }}
+      style={{ background: "radial-gradient(ellipse at 100% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 0% 100%, #a44ff2 0%, transparent 55%), #2c2a96" }}
     >
       <div
         className="absolute -top-20 right-0 w-[560px] h-[560px] opacity-30 pointer-events-none"

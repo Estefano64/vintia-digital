@@ -81,21 +81,6 @@ const AQUAMATER_ERP: Project = {
   techs: ["Next.js", "React", "Prisma", "PostgreSQL"],
 };
 
-/** Caso destacado: el cliente al que más servicios le hemos entregado. */
-const FEATURED = {
-  logo: "/logos/logo (1).webp",
-  image: "/proyectos/aquamater/web-1.webp",
-  client: "Aquamater",
-  headline: "De la web al ERP: toda su operación, digitalizada.",
-  text: "Empezamos por su sitio web y su publicidad digital. Después construimos el sistema con el que hoy gestionan clientes, horarios, caja e inventario, e instalamos el huellero con el que controlan la asistencia de su personal.",
-  deliverables: [
-    "Sitio web corporativo",
-    "Publicidad digital",
-    "ERP a medida",
-    "Asistencia con huellero",
-  ],
-};
-
 const projects: Project[] = [
   {
     title: "FIMCER Ingeniería Hidráulica",
@@ -247,7 +232,7 @@ function ModuleBoard({ project, compact = false }: { project: Project; compact?:
       className={`absolute inset-0 flex flex-col ${compact ? "p-4" : "p-5 sm:p-7"}`}
       style={{
         background:
-          "radial-gradient(ellipse at 20% 0%, rgba(91,47,184,0.35), transparent 60%), linear-gradient(160deg, #0b1a33 0%, #071226 100%)",
+          "radial-gradient(ellipse at 100% 0%, rgba(1,253,254,0.25), transparent 55%), linear-gradient(140deg, #3524c8 0%, #5a33dc 55%, #8152ff 100%)",
       }}
     >
       <div className={`flex items-center gap-3 ${compact ? "justify-end" : "justify-between"}`}>
@@ -391,7 +376,7 @@ function ProjectCard({
       {/* Card content */}
       <div
         className="relative z-[1] h-full rounded-3xl overflow-hidden"
-        style={{ background: "#0e1240" }}
+        style={{ background: "#3a37a8" }}
       >
         {/* Preview: imagen (proyecto privado) o iframe en vivo */}
         <div className="relative overflow-hidden aspect-[16/10]">
@@ -1019,7 +1004,7 @@ export default function Proyectos() {
       <section
         id="proyectos"
         className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
-        style={{ background: "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b" }}
+        style={{ background: "radial-gradient(ellipse at 0% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96" }}
       >
         {/* Constellation background */}
         <ParticleNetwork />
@@ -1046,7 +1031,7 @@ export default function Proyectos() {
             <Reveal className="lg:col-span-7">
               <div
                 className="flex h-full flex-col justify-center rounded-3xl p-8 sm:p-10"
-                style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
+                style={{ background: "linear-gradient(140deg, #3524c8 0%, #5a33dc 55%, #8152ff 100%)" }}
               >
                 <span
                   className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
@@ -1101,85 +1086,6 @@ export default function Proyectos() {
               </div>
             </Reveal>
           </div>
-
-          {/* Caso destacado */}
-          <Reveal className="mb-3 sm:mb-4">
-            <div
-              className="grid grid-cols-1 overflow-hidden rounded-3xl lg:grid-cols-2"
-              style={{
-                background: "linear-gradient(135deg, rgba(1,55,149,0.35), rgba(91,47,184,0.25))",
-                border: "1px solid rgba(1, 253, 254, 0.14)",
-              }}
-            >
-              <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-                <span
-                  className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-                  style={{ color: "#01FDFE" }}
-                >
-                  Caso destacado
-                </span>
-                <img
-                  src={FEATURED.logo}
-                  alt={`Logo de ${FEATURED.client}`}
-                  className="mt-4 -ml-2 h-16 w-auto self-start object-contain"
-                />
-                <h3 className="mt-5 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl font-[family-name:var(--font-montserrat)]">
-                  {FEATURED.headline}
-                </h3>
-                <p className="mt-4 text-base leading-7 text-white/75 font-[family-name:var(--font-open-sans)]">
-                  {FEATURED.text}
-                </p>
-                <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2">
-                  {FEATURED.deliverables.map((d) => (
-                    <li
-                      key={d}
-                      className="flex items-center gap-2.5 text-[15px] text-white/85 font-[family-name:var(--font-open-sans)]"
-                    >
-                      <svg className="h-4 w-4 shrink-0 text-[#01FDFE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <button
-                    onClick={() => setSelectedProject(AQUAMATER_WEB)}
-                    className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[13px] font-bold tracking-wider text-white uppercase transition-all duration-300 hover:scale-105 cursor-pointer font-[family-name:var(--font-montserrat)]"
-                    style={{ background: "linear-gradient(135deg, #013795, #5B2FB8)" }}
-                  >
-                    Ver el sitio web
-                  </button>
-                  <button
-                    onClick={() => setSelectedProject(AQUAMATER_ERP)}
-                    className="inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 cursor-pointer font-[family-name:var(--font-montserrat)] text-white/80 border-[rgba(1,253,254,0.2)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.45)]"
-                  >
-                    Ver el ERP
-                  </button>
-                </div>
-              </div>
-              <button
-                onClick={() => setSelectedProject(AQUAMATER_WEB)}
-                aria-label="Ver el sitio web de Aquamater"
-                className="group relative min-h-[260px] cursor-pointer overflow-hidden lg:min-h-[460px]"
-              >
-                <Image
-                  src={FEATURED.image}
-                  alt="Sitio web de Aquamater"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 640px"
-                  className="object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-                <div
-                  className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(10,16,48,0.55) 0%, transparent 35%)",
-                  }}
-                />
-              </button>
-            </div>
-          </Reveal>
 
           {/* Projects grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">

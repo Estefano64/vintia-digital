@@ -13,7 +13,7 @@ import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 export default function Home() {
   return (
-    <div style={{ background: "#041020" }}>
+    <div style={{ background: "#2c2a96" }}>
       {/* Hero takes up viewport minus navbar height */}
       <HeroSection />
 

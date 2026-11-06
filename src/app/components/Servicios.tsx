@@ -205,7 +205,7 @@ export default function Servicios() {
       <section
         id="servicios"
         className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
-        style={{ background: "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b" }}
+        style={{ background: "radial-gradient(ellipse at 0% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96" }}
       >
         <script
           type="application/ld+json"
@@ -216,7 +216,7 @@ export default function Servicios() {
           <Reveal className="sm:col-span-2 lg:col-span-3 lg:row-span-1">
             <div
               className="flex h-full flex-col justify-center rounded-3xl p-8 sm:p-10"
-              style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
+              style={{ background: "linear-gradient(140deg, #3524c8 0%, #5a33dc 55%, #8152ff 100%)" }}
             >
               <span
                 className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"

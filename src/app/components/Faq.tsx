@@ -45,7 +45,7 @@ export default function Faq() {
       className="relative px-3 py-16 sm:px-5 sm:py-24"
       style={{
         background:
-          "radial-gradient(ellipse at 100% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 0% 100%, #4a1a8f 0%, transparent 50%), #070b2b",
+          "radial-gradient(ellipse at 100% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 0% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
       }}
     >
       <script
@@ -59,7 +59,7 @@ export default function Faq() {
             <div
               className="rounded-3xl p-8 sm:p-10"
               style={{
-                background: "linear-gradient(140deg, #2b1387 0%, #5B2FB8 60%, #7C4DFF 100%)",
+                background: "linear-gradient(140deg, #3524c8 0%, #5a33dc 60%, #8152ff 100%)",
               }}
             >
               <span

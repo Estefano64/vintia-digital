@@ -25,7 +25,7 @@ export default function HeroSection() {
       className="relative overflow-hidden p-3 sm:p-5 lg:min-h-[calc(100vh-64px)]"
       style={{
         background:
-          "radial-gradient(ellipse at 15% 0%, #1b2a8f 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b",
+          "radial-gradient(ellipse at 15% 0%, #4b63f2 0%, transparent 60%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
       }}
     >
       <div className="mx-auto grid max-w-[1560px] grid-cols-2 gap-3 sm:gap-4 lg:min-h-[calc(100vh-64px-40px)] lg:grid-cols-12 lg:grid-rows-[minmax(280px,1.25fr)_minmax(210px,0.75fr)]">
@@ -33,7 +33,7 @@ export default function HeroSection() {
         <div
           className={`${TILE_BASE} col-span-2 flex items-center lg:col-span-7 lg:row-span-2`}
           style={{
-            background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)",
+            background: "linear-gradient(140deg, #3524c8 0%, #5a33dc 55%, #8152ff 100%)",
           }}
         >
           <Hologram />
@@ -41,7 +41,7 @@ export default function HeroSection() {
             className="absolute inset-0 z-[1]"
             style={{
               background:
-                "linear-gradient(to right, rgba(10,21,96,0.92) 0%, rgba(20,18,110,0.7) 50%, rgba(43,19,135,0.15) 100%)",
+                "linear-gradient(to right, rgba(53,36,200,0.9) 0%, rgba(90,51,220,0.6) 50%, rgba(129,82,255,0.1) 100%)",
             }}
           />
           <div className="relative z-[2] flex flex-col items-start p-7 sm:p-10 lg:p-12">

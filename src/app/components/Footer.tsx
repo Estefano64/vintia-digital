@@ -38,7 +38,7 @@ export default function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: "#030c18" }}
+      style={{ background: "#211f7a" }}
     >
       {/* Glow line on top */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#01FDFE]/40 to-transparent" />
