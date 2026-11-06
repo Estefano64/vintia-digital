@@ -165,6 +165,14 @@ const BENEFITS = [
   },
 ];
 
+/* Bloques de beneficios: alternan cian y violeta */
+const TONES = [
+  { bg: "#01FDFE", text: "#041020", num: "#041020" },
+  { bg: "linear-gradient(135deg, #5B2FB8 0%, #7C4DFF 100%)", text: "#ffffff", num: "#01FDFE" },
+  { bg: "linear-gradient(135deg, #5B2FB8 0%, #7C4DFF 100%)", text: "#ffffff", num: "#01FDFE" },
+  { bg: "#01FDFE", text: "#041020", num: "#041020" },
+];
+
 export default function ErpMedida() {
   return (
     <section
@@ -267,22 +275,19 @@ export default function ErpMedida() {
             <li key={b.title} className="h-full">
               <Reveal delay={i * 100} className="h-full">
                 <div
-                  className="h-full rounded-2xl p-6"
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
+                  className="h-full rounded-3xl p-6 sm:p-7"
+                  style={{ background: TONES[i].bg, color: TONES[i].text }}
                 >
                   <div
                     className="text-sm font-extrabold font-[family-name:var(--font-montserrat)]"
-                    style={{ color: "#01FDFE" }}
+                    style={{ color: TONES[i].num }}
                   >
                     0{i + 1}
                   </div>
-                  <h3 className="mt-2 text-lg font-bold text-white font-[family-name:var(--font-montserrat)]">
+                  <h3 className="mt-2 text-lg font-bold font-[family-name:var(--font-montserrat)]">
                     {b.title}
                   </h3>
-                  <p className="mt-2 text-[15px] leading-7 text-white/70 font-[family-name:var(--font-open-sans)]">
+                  <p className="mt-2 text-[15px] leading-7 opacity-85 font-[family-name:var(--font-open-sans)]">
                     {b.text}
                   </p>
                 </div>

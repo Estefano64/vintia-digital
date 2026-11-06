@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Reveal from "./Reveal";
 
 interface Step {
@@ -13,7 +14,13 @@ interface Phase {
   roman: string;
   name: string;
   tagline: string;
-  color: string;
+  /** Bloque de color sólido que encabeza la fase. */
+  tileBg: string;
+  tileText: string;
+  /** Color de acento en los bloques oscuros de sus etapas. */
+  accent: string;
+  /** Color del tramo en la barra del cronograma (sobre fondo cian). */
+  bar: string;
   steps: Step[];
 }
 
@@ -22,7 +29,10 @@ const PHASES: Phase[] = [
     roman: "I",
     name: "Set up",
     tagline: "Entendemos tu negocio y lo aterrizamos en un plan.",
-    color: "#01FDFE",
+    tileBg: "#01FDFE",
+    tileText: "#041020",
+    accent: "#01FDFE",
+    bar: "#041020",
     steps: [
       {
         n: "01",
@@ -51,7 +61,10 @@ const PHASES: Phase[] = [
     roman: "II",
     name: "Launch",
     tagline: "Construimos, probamos y ponemos en marcha.",
-    color: "#CDBDFF",
+    tileBg: "linear-gradient(135deg, #5B2FB8 0%, #7C4DFF 100%)",
+    tileText: "#ffffff",
+    accent: "#CDBDFF",
+    bar: "#5B2FB8",
     steps: [
       {
         n: "04",
@@ -80,7 +93,10 @@ const PHASES: Phase[] = [
     roman: "III",
     name: "Scale",
     tagline: "Seguimos contigo después del lanzamiento.",
-    color: "#FF8DF2",
+    tileBg: "linear-gradient(135deg, #FD67EB 0%, #B56BFF 100%)",
+    tileText: "#1a0638",
+    accent: "#FF8DF2",
+    bar: "#C22FAE",
     steps: [
       {
         n: "07",
@@ -93,33 +109,27 @@ const PHASES: Phase[] = [
   },
 ];
 
-const ALL_STEPS = PHASES.flatMap((p) => p.steps.map((s) => ({ ...s, color: p.color })));
+const TILE = "h-full rounded-3xl";
 
 export default function Proceso() {
   return (
     <section
       id="proceso"
-      className="relative py-20 sm:py-28 overflow-hidden"
-      style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
+      className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
+      style={{
+        background:
+          "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b",
+      }}
     >
-      {/* Subtle grid pattern — sets this section apart from its neighbours */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.09]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          {/* Left — sticky intro */}
-          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-12">
+        {/* ── Intro (violeta) ── */}
+        <Reveal className="sm:col-span-2 lg:col-span-8">
+          <div
+            className={`${TILE} flex flex-col justify-center p-8 sm:p-12`}
+            style={{
+              background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)",
+            }}
+          >
             <span
               className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
               style={{ color: "#01FDFE" }}
@@ -127,175 +137,166 @@ export default function Proceso() {
               Nuestro proceso
             </span>
             <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
-              De la idea
-              <br />
+              De la idea{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage:
-                    "linear-gradient(135deg, #01FDFE, #9CB8FF, #FD67EB)",
+                  backgroundImage: "linear-gradient(135deg, #01FDFE, #9CB8FF, #FD67EB)",
                 }}
               >
                 al lanzamiento.
               </span>
             </h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
+            <p className="mt-6 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
               Siete etapas en tres fases, con plazos definidos desde el primer
               día. Sabes en todo momento qué estamos haciendo y qué viene
               después.
             </p>
+          </div>
+        </Reveal>
 
-            {/* Cronograma: barra proporcional a la duración de cada etapa */}
-            <div
-              className="mt-8 max-w-md rounded-2xl p-5"
-              style={{
-                background: "rgba(255,255,255,0.09)",
-                border: "1px solid rgba(255,255,255,0.18)",
-              }}
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <span className="text-[11px] font-semibold tracking-[0.18em] text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
-                  Cronograma referencial
+        {/* ── Cronograma (cian) ── */}
+        <Reveal delay={100} className="sm:col-span-2 lg:col-span-4">
+          <div
+            className={`${TILE} flex flex-col justify-between gap-8 p-8`}
+            style={{ background: "#01FDFE", color: "#041020" }}
+          >
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+              Cronograma referencial
+            </span>
+            <div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-6xl font-extrabold leading-none sm:text-7xl font-[family-name:var(--font-montserrat)]">
+                  ≈10
                 </span>
-                <span className="text-sm font-bold text-white font-[family-name:var(--font-montserrat)]">
-                  ≈ 10 semanas
+                <span className="text-xl font-extrabold font-[family-name:var(--font-montserrat)]">
+                  semanas
                 </span>
               </div>
-              <div className="mt-4 flex h-3 w-full gap-[3px]" aria-hidden>
-                {ALL_STEPS.map((s) => (
-                  <div
-                    key={s.n}
-                    className="h-full rounded-full"
-                    style={{
-                      flexGrow: s.days,
-                      flexBasis: 0,
-                      background: s.color,
-                      opacity: s.duration === "Opcional" ? 0.35 : 0.9,
-                    }}
-                  />
-                ))}
+              {/* Barra proporcional a la duración de cada etapa */}
+              <div className="mt-6 flex h-3 w-full gap-[3px]" aria-hidden>
+                {PHASES.flatMap((p) =>
+                  p.steps.map((s) => (
+                    <div
+                      key={s.n}
+                      className="h-full rounded-full"
+                      style={{
+                        flexGrow: s.days,
+                        flexBasis: 0,
+                        background: p.bar,
+                        opacity: s.duration === "Opcional" ? 0.45 : 1,
+                      }}
+                    />
+                  ))
+                )}
               </div>
-              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
                 {PHASES.map((p) => (
                   <span
                     key={p.name}
-                    className="flex items-center gap-2 text-xs text-white/70 font-[family-name:var(--font-open-sans)]"
+                    className="flex items-center gap-1.5 text-xs font-semibold font-[family-name:var(--font-open-sans)]"
                   >
-                    <span className="h-2 w-2 rounded-full" style={{ background: p.color }} />
+                    <span className="h-2 w-2 rounded-full" style={{ background: p.bar }} />
                     {p.roman}. {p.name}
                   </span>
                 ))}
               </div>
-              <p className="mt-4 text-xs leading-5 text-white/50 font-[family-name:var(--font-open-sans)]">
+              <p className="mt-4 text-xs leading-5 opacity-75 font-[family-name:var(--font-open-sans)]">
                 Plazos de un proyecto de software a medida. Se ajustan al
                 alcance de cada proyecto.
               </p>
             </div>
+          </div>
+        </Reveal>
 
-            <a
-              href="#contactanos"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13px] font-bold tracking-wider text-[#041020] uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
-              style={{ background: "#01FDFE", boxShadow: "0 10px 40px rgba(1,253,254,0.3)" }}
-            >
-              Agenda tu descubrimiento
-              <svg
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+        {/* ── Fases: un bloque de color por fase + un bloque oscuro por etapa ── */}
+        {PHASES.map((phase) => (
+          <Fragment key={phase.name}>
+            <Reveal className="lg:col-span-3">
+              <div
+                className={`${TILE} flex min-h-[190px] flex-col justify-between p-6 sm:p-7`}
+                style={{ background: phase.tileBg, color: phase.tileText }}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </Reveal>
+                <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                  Fase {phase.roman}
+                </span>
+                <div>
+                  <h3 className="text-4xl font-extrabold leading-none sm:text-5xl font-[family-name:var(--font-montserrat)]">
+                    {phase.name}
+                  </h3>
+                  <p className="mt-3 text-sm font-semibold leading-5 opacity-85 font-[family-name:var(--font-open-sans)]">
+                    {phase.tagline}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
 
-          {/* Right — fases y etapas */}
-          <div className="flex flex-col gap-12">
-            {PHASES.map((phase) => (
-              <div key={phase.name}>
-                {/* Phase header */}
-                <Reveal>
-                  <div className="mb-6 flex items-center gap-4">
+            {phase.steps.map((step, i) => (
+              <Reveal key={step.n} delay={(i + 1) * 90} className="lg:col-span-3">
+                <div
+                  className={`${TILE} flex flex-col p-6 sm:p-7`}
+                  style={{
+                    background: "rgba(255,255,255,0.07)",
+                    border: "1px solid rgba(255,255,255,0.14)",
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-3">
                     <span
-                      className="shrink-0 rounded-full px-4 py-1.5 text-xs font-extrabold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
+                      className="text-3xl font-extrabold leading-none font-[family-name:var(--font-montserrat)]"
+                      style={{ color: phase.accent }}
+                    >
+                      {step.n}
+                    </span>
+                    <span
+                      className="rounded-full px-3 py-1 text-[11px] font-bold tracking-wider uppercase font-[family-name:var(--font-montserrat)]"
                       style={{
-                        color: phase.color,
-                        background: `${phase.color}14`,
-                        border: `1px solid ${phase.color}55`,
+                        color: phase.accent,
+                        background: `${phase.accent}14`,
+                        border: `1px solid ${phase.accent}44`,
                       }}
                     >
-                      {phase.roman}. {phase.name}
+                      {step.duration}
                     </span>
-                    <span className="hidden text-sm text-white/55 sm:block font-[family-name:var(--font-open-sans)]">
-                      {phase.tagline}
-                    </span>
-                    <span
-                      className="h-px flex-1"
-                      style={{
-                        background: `linear-gradient(90deg, ${phase.color}55, transparent)`,
-                      }}
-                    />
                   </div>
-                </Reveal>
-
-                <ol className="relative flex flex-col gap-5">
-                  {/* Rail */}
-                  <li
-                    aria-hidden
-                    className="absolute left-[27px] top-4 bottom-4 w-px sm:left-[31px]"
-                    style={{ background: phase.color, opacity: 0.25 }}
-                  />
-                  {phase.steps.map((step, i) => (
-                    <li key={step.n}>
-                      <Reveal delay={i * 100} className="group relative flex gap-5 sm:gap-6">
-                        {/* Number badge */}
-                        <div
-                          className="relative z-[1] flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold transition-transform duration-300 group-hover:scale-110 sm:h-16 sm:w-16 sm:text-xl font-[family-name:var(--font-montserrat)]"
-                          style={{
-                            background: "#1d1479",
-                            border: `1px solid ${phase.color}88`,
-                            color: phase.color,
-                            boxShadow: `0 0 28px ${phase.color}30`,
-                          }}
-                        >
-                          {step.n}
-                        </div>
-                        {/* Card */}
-                        <div
-                          className="flex-1 rounded-2xl p-5 sm:p-6"
-                          style={{
-                            background: "rgba(255,255,255,0.09)",
-                            border: "1px solid rgba(255,255,255,0.16)",
-                          }}
-                        >
-                          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                            <h3 className="text-lg font-bold text-white sm:text-xl font-[family-name:var(--font-montserrat)]">
-                              {step.title}
-                            </h3>
-                            <span
-                              className="rounded-full px-3 py-1 text-[11px] font-bold tracking-wider uppercase font-[family-name:var(--font-montserrat)]"
-                              style={{
-                                color: phase.color,
-                                background: `${phase.color}12`,
-                                border: `1px solid ${phase.color}33`,
-                              }}
-                            >
-                              {step.duration}
-                            </span>
-                          </div>
-                          <p className="mt-2.5 text-[15px] leading-7 text-white/70 font-[family-name:var(--font-open-sans)]">
-                            {step.text}
-                          </p>
-                        </div>
-                      </Reveal>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+                  <h4 className="mt-5 text-xl font-bold text-white font-[family-name:var(--font-montserrat)]">
+                    {step.title}
+                  </h4>
+                  <p className="mt-2 text-[15px] leading-7 text-white/75 font-[family-name:var(--font-open-sans)]">
+                    {step.text}
+                  </p>
+                </div>
+              </Reveal>
             ))}
-          </div>
-        </div>
+
+            {/* Tras la última fase, el bloque de cierre completa la fila */}
+            {phase.roman === "III" && (
+              <Reveal delay={180} className="sm:col-span-2 lg:col-span-6">
+                <a
+                  href="#contactanos"
+                  className={`${TILE} group flex min-h-[190px] flex-col justify-between p-6 transition-transform duration-500 hover:-translate-y-1 sm:p-7`}
+                  style={{
+                    background: "linear-gradient(120deg, #01FDFE 0%, #7CA8FF 55%, #8B5CF6 100%)",
+                    color: "#041020",
+                  }}
+                >
+                  <div className="flex items-start justify-between">
+                    <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                      ¿Empezamos?
+                    </span>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#041020] text-white transition-transform duration-300 group-hover:rotate-45">
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+                      </svg>
+                    </span>
+                  </div>
+                  <p className="max-w-md text-3xl font-extrabold leading-tight sm:text-4xl font-[family-name:var(--font-montserrat)]">
+                    Agenda tu descubrimiento
+                  </p>
+                </a>
+              </Reveal>
+            )}
+          </Fragment>
+        ))}
       </div>
     </section>
   );
