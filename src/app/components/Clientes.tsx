@@ -22,6 +22,14 @@ const SECTORS = [
   "Inversiones",
 ];
 
+/* Colores de las tarjetas del carrusel (alternan) */
+const TONES = ["#01FDFE", "linear-gradient(135deg, #FD67EB 0%, #B56BFF 100%)"];
+
+/* Base con cantidad par para que la alternancia de colores no se corte en el empalme;
+   se duplica para que la animación (-50%) sea continua. */
+const BASE = logos.length % 2 === 0 ? logos : [...logos, ...logos];
+const LOOP = [...BASE, ...BASE];
+
 export default function Clientes() {
   return (
     <section
@@ -105,49 +113,40 @@ export default function Clientes() {
             </div>
           </div>
         </Reveal>
+      </div>
 
-        {/* ── Un bloque por cliente ── */}
-        {logos.map((logo, i) => (
-          <Reveal key={logo.src} delay={(i % 4) * 80} className="lg:col-span-3">
-            <div
-              className="flex h-full min-h-[130px] items-center justify-center rounded-3xl p-5 transition-transform duration-500 hover:-translate-y-1 sm:min-h-[150px]"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.14)",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logo.src}
-                alt={`Logo de ${logo.name}`}
-                className="h-16 w-full object-contain sm:h-20"
-                loading="lazy"
-                draggable={false}
-              />
-            </div>
-          </Reveal>
-        ))}
-
-        {/* ── Cierre: completa la cuadrícula ── */}
-        <Reveal delay={240} className="lg:col-span-3">
-          <a
-            href="#contactanos"
-            className="group flex h-full min-h-[130px] flex-col justify-between rounded-3xl p-5 transition-transform duration-500 hover:-translate-y-1 sm:min-h-[150px] sm:p-6"
-            style={{
-              background: "linear-gradient(120deg, #01FDFE 0%, #7CA8FF 55%, #8B5CF6 100%)",
-              color: "#041020",
-            }}
-          >
-            <span className="flex h-9 w-9 items-center justify-center self-end rounded-full bg-[#041020] text-white transition-transform duration-300 group-hover:rotate-45">
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
-              </svg>
-            </span>
-            <p className="text-lg font-extrabold leading-tight sm:text-xl font-[family-name:var(--font-montserrat)]">
-              ¿Tu marca aquí?
-            </p>
-          </a>
-        </Reveal>
+      {/* ── Carrusel de logos: tarjetas que alternan cian y rosa ── */}
+      <div className="relative mt-4 sm:mt-6">
+        <div
+          className="absolute top-0 left-0 bottom-0 z-10 w-12 sm:w-32 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #070b2b, transparent)" }}
+        />
+        <div
+          className="absolute top-0 right-0 bottom-0 z-10 w-12 sm:w-32 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #070b2b, transparent)" }}
+        />
+        <div className="marquee-track">
+          <div className="marquee-content" style={{ animationDuration: "60s" }}>
+            {LOOP.map((logo, i) => (
+              <div key={i} className="marquee-item group">
+                <div
+                  className="flex h-28 w-56 items-center justify-center rounded-3xl px-7 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105 sm:h-32 sm:w-64"
+                  style={{ background: TONES[i % TONES.length] }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={i < logos.length ? `Logo de ${logo.name}` : ""}
+                    aria-hidden={i >= logos.length || undefined}
+                    className="h-14 w-full object-contain sm:h-16"
+                    style={{ filter: "brightness(0)", opacity: 0.82 }}
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
