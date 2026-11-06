@@ -22,11 +22,11 @@ const SITE_URL = "https://vintiadigital.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Vintia Digital — Agencia Digital en Arequipa",
+    default: "Vintia Digital — Agencia Digital y Software a Medida en Arequipa",
     template: "%s | Vintia Digital",
   },
   description:
-    "Agencia digital en Arequipa: desarrollo web, marketing digital, branding, diseño UX/UI y software a medida. Estrategias digitales que generan resultados reales.",
+    "Agencia digital en Arequipa: páginas web, sistemas ERP a medida, control de asistencia con huellero, marketing digital y branding. Mira nuestros proyectos y cotiza el tuyo.",
   keywords: [
     "agencia digital Arequipa",
     "desarrollo web Arequipa",
@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     "diseño web",
     "diseño UX/UI",
     "software a medida",
+    "ERP a medida Arequipa",
+    "sistema ERP personalizado",
+    "control de asistencia con huellero",
+    "sistema de asistencia biométrico",
+    "páginas web Arequipa",
+    "publicidad digital Arequipa",
+    "correos corporativos",
+    "brochure corporativo",
     "SEO",
     "Vintia Digital",
   ],
@@ -51,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Vintia Digital",
     title: "Vintia Digital — Agencia Digital en Arequipa",
     description:
-      "Desarrollo web, marketing digital, branding y software a medida. Estrategias digitales de clase mundial para tu negocio en Arequipa.",
+      "Páginas web, sistemas ERP a medida, control de asistencia con huellero, marketing digital y branding para tu negocio en Arequipa.",
     images: [
       {
         url: "/og-image.png",
@@ -65,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vintia Digital — Agencia Digital en Arequipa",
     description:
-      "Desarrollo web, marketing digital, branding y software a medida en Arequipa.",
+      "Páginas web, ERP a medida, control de asistencia con huellero, marketing digital y branding en Arequipa.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -86,8 +94,18 @@ const jsonLd = {
   "@id": `${SITE_URL}/#organization`,
   name: "Vintia Digital",
   description:
-    "Agencia digital en Arequipa especializada en desarrollo web, marketing digital, branding, diseño UX/UI y software a medida.",
+    "Agencia digital en Arequipa especializada en desarrollo web, sistemas ERP a medida, control de asistencia con huellero, marketing digital, branding y diseño UX/UI.",
   url: SITE_URL,
+  knowsAbout: [
+    "Desarrollo web",
+    "Sistemas ERP a medida",
+    "Software a medida",
+    "Control de asistencia biométrico",
+    "Marketing digital",
+    "Publicidad digital",
+    "Branding",
+    "Diseño UX/UI",
+  ],
   image: `${SITE_URL}/og-image.png`,
   logo: `${SITE_URL}/logo-vintia.png`,
   telephone: "+51915961315",

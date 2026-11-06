@@ -89,7 +89,7 @@ const SERVICES: Service[] = [
     category: "Tecnología y Desarrollo",
     tagline: "La base digital donde vive tu negocio.",
     description:
-      "Lleva la operatividad de tu empresa al siguiente nivel. Desarrollamos soluciones tecnológicas personalizadas para automatizar procesos, integrar sistemas y mejorar la eficiencia interna. Creamos herramientas escalables y seguras que se adaptan exactamente a las necesidades de tu flujo de trabajo, dándote control total sobre tu infraestructura digital.",
+      "Lleva la operatividad de tu empresa al siguiente nivel. Desarrollamos soluciones tecnológicas personalizadas para automatizar procesos, integrar sistemas y mejorar la eficiencia interna. Creamos herramientas escalables y seguras que se adaptan exactamente a las necesidades de tu flujo de trabajo, dándote control total sobre tu infraestructura digital. Desarrollamos sistemas ERP personalizados y módulos como el control de asistencia del personal con huellero.",
     image: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-285-x-252.webp",
     imageExpanded: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-480-x-670.webp",
   },

@@ -5,74 +5,158 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import ParticleNetwork from "./ParticleNetwork";
 
+type Filter = "web" | "software" | "marca";
+
+const FILTERS: { key: Filter | "todos"; label: string }[] = [
+  { key: "todos", label: "Todos" },
+  { key: "web", label: "Sitios web" },
+  { key: "software", label: "ERP y software" },
+  { key: "marca", label: "Marca y publicidad" },
+];
+
 interface Project {
   title: string;
   category: string;
-  /** URL del sitio en vivo (se muestra en un iframe). Omitir en proyectos privados. */
+  filters: Filter[];
+  /** URL del sitio en vivo. Sin `images`, se muestra en un iframe. */
   url?: string;
-  /** Capturas de pantalla para proyectos privados (ej. ERP). Se muestran en una galería en lugar del iframe. */
+  /** Capturas. Si el proyecto no tiene `url`, se etiquetan como demostración privada. */
   images?: string[];
+  /** Sistemas privados sin capturas públicas: se muestra un tablero con sus módulos. */
+  modules?: string[];
+  /** Logo del cliente (versión para fondo oscuro). */
+  logo?: string;
+  /** Todo lo que Vintia entregó a este cliente. */
+  deliverables?: string[];
   description: string;
-  stats: { label: string; value: string }[];
-  techs: string[];
+  stats?: { label: string; value: string }[];
+  techs?: string[];
 }
+
+const AQUAMATER_WEB: Project = {
+  title: "AquaMater AQP",
+  category: "Sitio Corporativo",
+  filters: ["web", "marca"],
+  url: "https://www.aquamateraqp.com/",
+  logo: "/logos/logo (1).webp",
+  deliverables: ["Sitio web corporativo", "Publicidad digital"],
+  description:
+    "Sitio web para Aquamater, centro especializado en maternidad y bienestar familiar en Arequipa: psicoprofilaxis acuática, matronatación, hidroterapia pediátrica y programas de bienestar para mamá. Presenta sus servicios e instalaciones con un diseño cálido y canales de contacto directo para captar nuevas familias. También gestionamos su publicidad digital.",
+  stats: [
+    { label: "Leads generados", value: "+280%" },
+    { label: "Consultas online", value: "1.8K+" },
+    { label: "Posicionamiento", value: "Top 5" },
+  ],
+  techs: ["Next.js", "React", "Tailwind CSS", "SEO"],
+};
+
+const AQUAMATER_ERP: Project = {
+  title: "ERP Aquamater",
+  category: "ERP a Medida",
+  filters: ["software"],
+  logo: "/logos/logo (1).webp",
+  modules: [
+    "Clientes",
+    "Historia clínica",
+    "Servicios",
+    "Horarios y cupos",
+    "Inscripciones",
+    "Sesiones",
+    "Caja y comprobantes",
+    "Inventario",
+    "Campañas",
+    "Personal",
+    "Asistencia con huellero",
+    "Usuarios y permisos",
+  ],
+  deliverables: [
+    "ERP a medida",
+    "Módulo de asistencia del personal",
+    "Instalación del huellero",
+  ],
+  description:
+    "Sistema de gestión a medida para Aquamater, centro materno-infantil y acuático: clientes e historias clínicas, catálogo de servicios, horarios con control de cupos, inscripciones, sesiones, caja con comprobantes e inventario. Incluye el módulo de asistencia del personal: instalamos un huellero en su local y el sistema calcula tardanzas, faltas y salidas anticipadas según el turno de cada empleado. Por confidencialidad no mostramos capturas del sistema.",
+  techs: ["Next.js", "React", "Prisma", "PostgreSQL"],
+};
+
+/** Caso destacado: el cliente al que más servicios le hemos entregado. */
+const FEATURED = {
+  logo: "/logos/logo (1).webp",
+  image: "/proyectos/aquamater/web-1.webp",
+  client: "Aquamater",
+  headline: "De la web al ERP: toda su operación, digitalizada.",
+  text: "Empezamos por su sitio web y su publicidad digital. Después construimos el sistema con el que hoy gestionan clientes, horarios, caja e inventario, e instalamos el huellero con el que controlan la asistencia de su personal.",
+  deliverables: [
+    "Sitio web corporativo",
+    "Publicidad digital",
+    "ERP a medida",
+    "Asistencia con huellero",
+  ],
+};
 
 const projects: Project[] = [
   {
-    title: "HSEC Perú",
-    category: "Software a Medida",
-    url: "https://hsec-peru.com/",
-    description:
-      "Desarrollo de plugin personalizado de WordPress para automatizar procesos de certificación empresarial en seguridad, salud ocupacional y medio ambiente. Incluye gestión de requisitos, validación UAT y reducción significativa del tiempo operativo del cliente.",
-    stats: [
-      { label: "Tiempo ahorrado", value: "65%" },
-      { label: "Certificaciones gestionadas", value: "500+" },
-      { label: "Satisfacción cliente", value: "5/5" },
+    title: "FIMCER Ingeniería Hidráulica",
+    category: "Sitio Web + Catálogo",
+    filters: ["web", "marca"],
+    url: "https://www.fimcer.com/",
+    images: [
+      "/proyectos/fimcer/web-1.webp",
+      "/proyectos/fimcer/web-2.webp",
+      "/proyectos/fimcer/web-3.webp",
     ],
-    techs: ["WordPress", "PHP", "JavaScript", "MySQL"],
+    logo: "/logos/logo-fimcer.webp",
+    deliverables: [
+      "Sitio web con catálogo de productos",
+      "Correos corporativos",
+      "Publicidad digital",
+    ],
+    description:
+      "Sitio web para FIMCER, empresa de ingeniería hidráulica de Arequipa: catálogo navegable por categorías con buscador, fichas de producto con cotización directa por WhatsApp, blog con guías de compra y sección de proyectos. Además habilitamos sus correos corporativos y gestionamos su publicidad digital.",
+    techs: ["Astro", "Tailwind CSS", "SEO"],
   },
   {
-    title: "AquaMater AQP",
-    category: "Sitio Corporativo",
-    url: "https://www.aquamateraqp.com/",
-    description:
-      "Sitio web para Aquamater, centro especializado en maternidad y bienestar familiar en Arequipa: psicoprofilaxis acuática, matronatación, hidroterapia pediátrica y programas de bienestar para mamá. Presenta sus servicios e instalaciones con un diseño cálido y canales de contacto directo para captar nuevas familias.",
-    stats: [
-      { label: "Leads generados", value: "+280%" },
-      { label: "Consultas online", value: "1.8K+" },
-      { label: "Posicionamiento", value: "Top 5" },
+    title: "AJV Multiservicios e Ingeniería",
+    category: "Sitio Web + Brochure",
+    filters: ["web", "marca"],
+    url: "https://www.ajvmultiservicios.com/",
+    images: [
+      "/proyectos/ajv/web-1.webp",
+      "/proyectos/ajv/web-2.webp",
+      "/proyectos/ajv/brochure-1.webp",
+      "/proyectos/ajv/brochure-2.webp",
+      "/proyectos/ajv/brochure-3.webp",
     ],
-    techs: ["Next.js", "React", "Tailwind CSS", "SEO"],
+    logo: "/logos/logo-ajv.webp",
+    deliverables: ["Sitio web corporativo", "Brochure corporativo 2026"],
+    description:
+      "Presencia digital para AJV, empresa metalmecánica del sector industrial y minero: sitio web con sus servicios de ingeniería, fabricación, montaje, reparación y mecanizado, galería de trabajos y cotización por WhatsApp. También diseñamos su brochure corporativo 2026 con la misma identidad visual.",
+    techs: ["Astro", "Tailwind CSS", "Diseño editorial"],
   },
+  AQUAMATER_ERP,
   {
-    title: "TecnoNómadas",
-    category: "Blog Tecnológico",
-    url: "https://www.tecnonomadas.net/",
-    description:
-      "Plataforma de contenido tecnológico con diseño moderno, sistema de categorización avanzado, optimización SEO y newsletter automatizado. Enfoque en experiencia de lectura y velocidad de carga.",
-    stats: [
-      { label: "Visitas/mes", value: "45K+" },
-      { label: "Tiempo en sitio", value: "4.2min" },
-      { label: "Suscriptores", value: "8K+" },
+    title: "ERP Regena Perú",
+    category: "ERP a Medida",
+    filters: ["software"],
+    logo: "/logos/logo-regena.webp",
+    modules: [
+      "Gestión comercial",
+      "Cotizaciones",
+      "Logística",
+      "Importaciones",
+      "Kardex de materiales",
+      "Operaciones",
+      "Órdenes de trabajo",
+      "Facturación",
     ],
-    techs: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-  },
-  {
-    title: "HPK Inversiones",
-    category: "Sitio Corporativo",
-    url: "https://hpkinv.com/",
+    deliverables: ["ERP a medida"],
     description:
-      "Plataforma web corporativa para empresa de inversiones. Interfaz moderna y profesional con presentación de servicios, animaciones fluidas y una experiencia de usuario optimizada que transmite confianza y solidez de marca.",
-    stats: [
-      { label: "Tasa conversión", value: "6.2%" },
-      { label: "UX Score", value: "98/100" },
-      { label: "Velocidad", value: "0.8s" },
-    ],
-    techs: ["Next.js", "React", "Node.js", "Tailwind CSS"],
+      "Sistema ERP a medida para Regena Perú que cubre su proceso completo: gestión comercial y cotizaciones, logística e importaciones, kardex de materiales, operaciones de suministro e instalación, y facturación. Por confidencialidad no mostramos capturas del sistema.",
   },
   {
     title: "ERP Empresarial",
     category: "Software a Medida",
+    filters: ["software"],
     images: [
       "/proyectos/erp/captura-1.png",
       "/proyectos/erp/captura-2.png",
@@ -89,7 +173,110 @@ const projects: Project[] = [
     ],
     techs: ["React", "Node.js", "PostgreSQL", "Docker"],
   },
+  {
+    title: "HPK Inversiones",
+    category: "Sitio Corporativo",
+    filters: ["web"],
+    url: "https://hpkinv.com/",
+    description:
+      "Plataforma web corporativa para empresa de inversiones. Interfaz moderna y profesional con presentación de servicios, animaciones fluidas y una experiencia de usuario optimizada que transmite confianza y solidez de marca.",
+    stats: [
+      { label: "Tasa conversión", value: "6.2%" },
+      { label: "UX Score", value: "98/100" },
+      { label: "Velocidad", value: "0.8s" },
+    ],
+    techs: ["Next.js", "React", "Node.js", "Tailwind CSS"],
+  },
+  {
+    title: "HSEC Perú",
+    category: "Software a Medida",
+    filters: ["software", "web"],
+    url: "https://hsec-peru.com/",
+    description:
+      "Desarrollo de plugin personalizado de WordPress para automatizar procesos de certificación empresarial en seguridad, salud ocupacional y medio ambiente. Incluye gestión de requisitos, validación UAT y reducción significativa del tiempo operativo del cliente.",
+    stats: [
+      { label: "Tiempo ahorrado", value: "65%" },
+      { label: "Certificaciones gestionadas", value: "500+" },
+      { label: "Satisfacción cliente", value: "5/5" },
+    ],
+    techs: ["WordPress", "PHP", "JavaScript", "MySQL"],
+  },
+  {
+    title: "TecnoNómadas",
+    category: "Blog Tecnológico",
+    filters: ["web"],
+    url: "https://www.tecnonomadas.net/",
+    description:
+      "Plataforma de contenido tecnológico con diseño moderno, sistema de categorización avanzado, optimización SEO y newsletter automatizado. Enfoque en experiencia de lectura y velocidad de carga.",
+    stats: [
+      { label: "Visitas/mes", value: "45K+" },
+      { label: "Tiempo en sitio", value: "4.2min" },
+      { label: "Suscriptores", value: "8K+" },
+    ],
+    techs: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
+  },
 ];
+
+/* ───────────── Tablero de módulos (sistemas privados sin capturas) ───────────── */
+function ModuleBoard({ project, compact = false }: { project: Project; compact?: boolean }) {
+  const modules = project.modules ?? [];
+  const shown = compact ? modules.slice(0, 6) : modules;
+  return (
+    <div
+      className={`absolute inset-0 flex flex-col ${compact ? "p-4" : "p-5 sm:p-7"}`}
+      style={{
+        background:
+          "radial-gradient(ellipse at 20% 0%, rgba(91,47,184,0.35), transparent 60%), linear-gradient(160deg, #0b1a33 0%, #071226 100%)",
+      }}
+    >
+      <div className={`flex items-center gap-3 ${compact ? "justify-end" : "justify-between"}`}>
+        {project.logo ? (
+          <img
+            src={project.logo}
+            alt={`Logo de ${project.title.replace("ERP ", "")}`}
+            className={`${compact ? "h-11" : "h-14"} w-auto object-contain`}
+          />
+        ) : (
+          <span />
+        )}
+        {!compact && (
+          <span className="flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
+            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Sistema privado
+          </span>
+        )}
+      </div>
+      <ul
+        className={`mt-auto grid gap-2 ${
+          compact ? "grid-cols-2" : "grid-cols-2 sm:grid-cols-3"
+        }`}
+      >
+        {shown.map((m) => (
+          <li
+            key={m}
+            className={`flex items-center gap-2 rounded-lg ${
+              compact ? "px-2.5 py-1.5 text-[11px]" : "px-3 py-2.5 text-[13px]"
+            } text-white/80 font-[family-name:var(--font-open-sans)]`}
+            style={{
+              background: "rgba(255,255,255,0.045)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#01FDFE]" />
+            <span className="truncate">{m}</span>
+          </li>
+        ))}
+        {compact && modules.length > shown.length && (
+          <li className="col-span-2 text-center text-[11px] text-white/50 font-[family-name:var(--font-open-sans)]">
+            + {modules.length - shown.length} módulos más
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
 
 /* ───────────── Live Preview (iframe escalado al ancho real de la tarjeta) ───────────── */
 function LivePreview({ url, title }: { url: string; title: string }) {
@@ -164,7 +351,7 @@ function ProjectCard({
     <div
       ref={cardRef}
       onClick={onClick}
-      className="group relative rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
+      className="group relative h-full rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
@@ -182,11 +369,11 @@ function ProjectCard({
 
       {/* Card content */}
       <div
-        className="relative z-[1] rounded-xl overflow-hidden"
+        className="relative z-[1] h-full rounded-xl overflow-hidden"
         style={{ background: "rgba(4, 16, 32, 0.95)" }}
       >
         {/* Preview: imagen (proyecto privado) o iframe en vivo */}
-        <div className="relative overflow-hidden aspect-[4/3]">
+        <div className="relative overflow-hidden aspect-[16/10]">
           {project.images?.length ? (
             <Image
               src={project.images[0]}
@@ -198,7 +385,11 @@ function ProjectCard({
           ) : (
             /* El iframe solo se monta cuando la tarjeta entra al viewport:
                evita cargar todos los sitios externos al abrir la página. */
-            inView && <LivePreview url={project.url!} title={project.title} />
+            project.url ? (
+              inView && <LivePreview url={project.url} title={project.title} />
+            ) : (
+              <ModuleBoard project={project} compact />
+            )
           )}
 
           {/* Hover overlay */}
@@ -254,23 +445,42 @@ function ProjectCard({
         </div>
 
         {/* Info */}
-        <div className="p-4">
-          <h3 className="text-sm font-bold text-white group-hover:text-[#01FDFE] transition-colors duration-300 font-[family-name:var(--font-montserrat)]">
-            {project.title}
-          </h3>
-          <div className="mt-2 flex items-center gap-2">
-            <div
-              className="h-[2px] w-0 group-hover:w-8 transition-all duration-500 rounded-full"
-              style={{
-                background: "linear-gradient(90deg, #01FDFE, #5B2FB8)",
-              }}
-            />
-            <span className="text-[11px] text-white/45 group-hover:text-white/65 transition-colors duration-300 font-[family-name:var(--font-open-sans)]">
-              {project.url
-                ? project.url.replace("https://", "").replace(/\/$/, "")
-                : "Demo privado"}
-            </span>
+        <div className="p-5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h3 className="text-base font-bold text-white group-hover:text-[#01FDFE] transition-colors duration-300 font-[family-name:var(--font-montserrat)]">
+                {project.title}
+              </h3>
+              <span className="mt-1 block truncate text-xs text-white/50 group-hover:text-white/70 transition-colors duration-300 font-[family-name:var(--font-open-sans)]">
+                {project.url
+                  ? project.url.replace("https://", "").replace("www.", "").replace(/\/$/, "")
+                  : "Sistema privado"}
+              </span>
+            </div>
+            {project.logo && !project.modules && (
+              <img
+                src={project.logo}
+                alt=""
+                className="h-10 w-auto max-w-[110px] shrink-0 object-contain opacity-90"
+              />
+            )}
           </div>
+          {project.deliverables && (
+            <ul className="mt-4 flex flex-wrap gap-1.5">
+              {project.deliverables.map((d) => (
+                <li
+                  key={d}
+                  className="rounded-full px-2.5 py-1 text-[11px] text-white/75 font-[family-name:var(--font-open-sans)]"
+                  style={{
+                    background: "rgba(1, 253, 254, 0.05)",
+                    border: "1px solid rgba(1, 253, 254, 0.14)",
+                  }}
+                >
+                  {d}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
@@ -281,9 +491,12 @@ function ProjectCard({
 function ProjectGallery({
   images,
   title,
+  isPrivate,
 }: {
   images: string[];
   title: string;
+  /** Muestra la etiqueta "entorno privado" (proyectos sin sitio público). */
+  isPrivate: boolean;
 }) {
   const [idx, setIdx] = useState(0);
   const go = (dir: number) =>
@@ -295,6 +508,7 @@ function ProjectGallery({
       style={{ border: "1px solid rgba(1, 253, 254, 0.1)" }}
     >
       {/* Etiqueta "Demostración privada" */}
+      {isPrivate && (
       <div
         className="flex items-center gap-2 px-4 py-2.5"
         style={{
@@ -319,6 +533,7 @@ function ProjectGallery({
           Capturas de demostración — entorno privado
         </span>
       </div>
+      )}
 
       {/* Imagen principal */}
       <div
@@ -505,7 +720,18 @@ function ProjectModal({
 
           {/* Preview: galería de capturas (privado) o iframe en vivo */}
           {project.images?.length ? (
-            <ProjectGallery images={project.images} title={project.title} />
+            <ProjectGallery
+              images={project.images}
+              title={project.title}
+              isPrivate={!project.url}
+            />
+          ) : !project.url ? (
+            <div
+              className="relative mb-5 min-h-[320px] overflow-hidden rounded-xl sm:min-h-[340px]"
+              style={{ border: "1px solid rgba(1, 253, 254, 0.1)" }}
+            >
+              <ModuleBoard project={project} />
+            </div>
           ) : (
           <div
             className="relative rounded-xl overflow-hidden mb-5"
@@ -597,7 +823,7 @@ function ProjectModal({
 
               {/* Tech tags */}
               <div className="mt-3 flex flex-wrap gap-2">
-                {project.techs.map((tech) => (
+                {project.techs?.map((tech) => (
                   <span
                     key={tech}
                     className="rounded-full px-3 py-1 text-[10px] font-semibold tracking-wider uppercase font-[family-name:var(--font-montserrat)]"
@@ -613,15 +839,44 @@ function ProjectModal({
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="lg:col-span-2">
-              <h4
-                className="text-[11px] font-bold tracking-[0.15em] uppercase mb-2 font-[family-name:var(--font-montserrat)]"
-                style={{ color: "#01FDFE" }}
-              >
-                Resultados Clave
-              </h4>
-              <div className="grid gap-2">
+            {/* Entregables + resultados */}
+            <div className="lg:col-span-2 flex flex-col gap-4">
+              {project.deliverables?.length ? (
+                <div>
+                  <h4
+                    className="text-[11px] font-bold tracking-[0.15em] uppercase mb-2 font-[family-name:var(--font-montserrat)]"
+                    style={{ color: "#01FDFE" }}
+                  >
+                    Lo que entregamos
+                  </h4>
+                  <ul className="grid gap-2">
+                    {project.deliverables.map((d) => (
+                      <li
+                        key={d}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[13px] text-white/80 font-[family-name:var(--font-open-sans)]"
+                        style={{
+                          background: "rgba(1, 253, 254, 0.03)",
+                          border: "1px solid rgba(1, 253, 254, 0.08)",
+                        }}
+                      >
+                        <svg className="h-4 w-4 shrink-0 text-[#01FDFE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {project.stats?.length ? (
+                <div>
+                  <h4
+                    className="text-[11px] font-bold tracking-[0.15em] uppercase mb-2 font-[family-name:var(--font-montserrat)]"
+                    style={{ color: "#01FDFE" }}
+                  >
+                    Resultados Clave
+                  </h4>
+                  <div className="grid gap-2">
                 {project.stats.map((stat, i) => (
                   <div
                     key={i}
@@ -648,6 +903,8 @@ function ProjectModal({
                   </div>
                 ))}
               </div>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -703,6 +960,9 @@ function ProjectModal({
 /* ───────────── Main Section ───────────── */
 export default function Proyectos() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [filter, setFilter] = useState<Filter | "todos">("todos");
+  const shownProjects =
+    filter === "todos" ? projects : projects.filter((p) => p.filters.includes(filter));
 
   const closeModal = useCallback(() => setSelectedProject(null), []);
 
@@ -762,16 +1022,117 @@ export default function Proyectos() {
             />
 
             <p className="mx-auto max-w-2xl text-center text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-              Cada proyecto refleja nuestra pasión por el diseño estratégico y los
-              resultados medibles.
+              Sitios web, sistemas ERP, marcas y campañas que hoy trabajan para
+              nuestros clientes.
             </p>
           </Reveal>
 
+          {/* Caso destacado */}
+          <Reveal className="mb-14">
+            <div
+              className="grid grid-cols-1 overflow-hidden rounded-3xl lg:grid-cols-2"
+              style={{
+                background: "linear-gradient(135deg, rgba(1,55,149,0.35), rgba(91,47,184,0.25))",
+                border: "1px solid rgba(1, 253, 254, 0.14)",
+              }}
+            >
+              <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+                <span
+                  className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                  style={{ color: "#01FDFE" }}
+                >
+                  Caso destacado
+                </span>
+                <img
+                  src={FEATURED.logo}
+                  alt={`Logo de ${FEATURED.client}`}
+                  className="mt-4 -ml-2 h-16 w-auto self-start object-contain"
+                />
+                <h3 className="mt-5 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl font-[family-name:var(--font-montserrat)]">
+                  {FEATURED.headline}
+                </h3>
+                <p className="mt-4 text-base leading-7 text-white/75 font-[family-name:var(--font-open-sans)]">
+                  {FEATURED.text}
+                </p>
+                <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2">
+                  {FEATURED.deliverables.map((d) => (
+                    <li
+                      key={d}
+                      className="flex items-center gap-2.5 text-[15px] text-white/85 font-[family-name:var(--font-open-sans)]"
+                    >
+                      <svg className="h-4 w-4 shrink-0 text-[#01FDFE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <button
+                    onClick={() => setSelectedProject(AQUAMATER_WEB)}
+                    className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[13px] font-bold tracking-wider text-white uppercase transition-all duration-300 hover:scale-105 cursor-pointer font-[family-name:var(--font-montserrat)]"
+                    style={{ background: "linear-gradient(135deg, #013795, #5B2FB8)" }}
+                  >
+                    Ver el sitio web
+                  </button>
+                  <button
+                    onClick={() => setSelectedProject(AQUAMATER_ERP)}
+                    className="inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 cursor-pointer font-[family-name:var(--font-montserrat)] text-white/80 border-[rgba(1,253,254,0.2)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.45)]"
+                  >
+                    Ver el ERP
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedProject(AQUAMATER_WEB)}
+                aria-label="Ver el sitio web de Aquamater"
+                className="group relative min-h-[260px] cursor-pointer overflow-hidden lg:min-h-[460px]"
+              >
+                <Image
+                  src={FEATURED.image}
+                  alt="Sitio web de Aquamater"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 640px"
+                  className="object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                <div
+                  className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(10,16,48,0.55) 0%, transparent 35%)",
+                  }}
+                />
+              </button>
+            </div>
+          </Reveal>
+
+          {/* Filtros */}
+          <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filtrar proyectos">
+            {FILTERS.map((f) => {
+              const active = filter === f.key;
+              return (
+                <button
+                  key={f.key}
+                  onClick={() => setFilter(f.key)}
+                  aria-pressed={active}
+                  className="rounded-full px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 cursor-pointer font-[family-name:var(--font-montserrat)]"
+                  style={{
+                    color: active ? "#041020" : "rgba(255,255,255,0.75)",
+                    background: active ? "#01FDFE" : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${active ? "#01FDFE" : "rgba(255,255,255,0.1)"}`,
+                  }}
+                >
+                  {f.label}
+                </button>
+              );
+            })}
+          </div>
+
           {/* Projects grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {projects.map((project, i) => (
+            {shownProjects.map((project, i) => (
               <ProjectCard
-                key={i}
+                key={project.title}
                 project={project}
                 index={i}
                 visible

@@ -3,11 +3,14 @@
 import Reveal from "./Reveal";
 
 const logos = [
-  "/logos/logo (1).webp",
-  "/logos/logo (2).webp",
-  "/logos/logo (3).webp",
-  "/logos/logo (4).webp",
-  "/logos/logo (5).webp",
+  { src: "/logos/logo (1).webp", name: "Aquamater" },
+  { src: "/logos/logo-fimcer.webp", name: "FIMCER Ingeniería Hidráulica" },
+  { src: "/logos/logo (3).webp", name: "HP&K" },
+  { src: "/logos/logo-ajv.webp", name: "AJV Multiservicios e Ingeniería" },
+  { src: "/logos/logo (2).webp", name: "Body Love Centro Estético" },
+  { src: "/logos/logo-regena.webp", name: "Regena Perú" },
+  { src: "/logos/logo (4).webp", name: "Magnia Engineering & Construction Group" },
+  { src: "/logos/logo (5).webp", name: "Vintia Digital" },
 ];
 
 export default function Clientes() {
@@ -85,11 +88,11 @@ export default function Clientes() {
                 key={i}
                 className="marquee-item group"
               >
-                <div className="client-card relative flex items-center justify-center rounded-xl px-8 py-6 group-hover:scale-105">
+                <div className="client-card relative flex items-center justify-center rounded-xl px-7 py-4 group-hover:scale-105">
                   <img
-                    src={logo}
-                    alt={`Logo de cliente ${(i % logos.length) + 1} de Vintia Digital`}
-                    className="client-logo h-10 sm:h-12 w-auto object-contain"
+                    src={logo.src}
+                    alt={`Logo de ${logo.name}`}
+                    className="client-logo h-14 sm:h-16 w-auto object-contain"
                     draggable={false}
                   />
                 </div>

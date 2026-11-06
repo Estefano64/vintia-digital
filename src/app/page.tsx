@@ -3,7 +3,9 @@ import Navbar from "./components/Navbar";
 import Conocenos from "./components/Conocenos";
 import Servicios from "./components/Servicios";
 import Proyectos from "./components/Proyectos";
+import ErpMedida from "./components/ErpMedida";
 import Proceso from "./components/Proceso";
+import Faq from "./components/Faq";
 import Clientes from "./components/Clientes";
 import Contactanos from "./components/Contactanos";
 import Footer from "./components/Footer";
@@ -28,6 +30,9 @@ export default function Home() {
       {/* Servicios */}
       <Servicios />
 
+      {/* ERP a medida + módulo de asistencia */}
+      <ErpMedida />
+
       {/* Cómo trabajamos */}
       <Proceso />
 
@@ -40,6 +45,9 @@ export default function Home() {
 
       {/* Clientes */}
       <Clientes />
+
+      {/* Preguntas frecuentes */}
+      <Faq />
 
       {/* Contáctanos */}
       <Contactanos />
