@@ -37,7 +37,7 @@ export default function Clientes() {
       className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
       style={{
         background:
-          "radial-gradient(ellipse at 100% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 0% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
+          "transparent",
       }}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-12">
@@ -119,11 +119,11 @@ export default function Clientes() {
       <div className="relative mt-4 sm:mt-6">
         <div
           className="absolute top-0 left-0 bottom-0 z-10 w-12 sm:w-32 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #2c2a96, transparent)" }}
+          style={{ background: "linear-gradient(to right, #07070f, transparent)" }}
         />
         <div
           className="absolute top-0 right-0 bottom-0 z-10 w-12 sm:w-32 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #2c2a96, transparent)" }}
+          style={{ background: "linear-gradient(to left, #07070f, transparent)" }}
         />
         <div className="marquee-track">
           <div className="marquee-content" style={{ animationDuration: "60s" }}>

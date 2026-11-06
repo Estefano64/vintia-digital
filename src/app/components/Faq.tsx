@@ -45,7 +45,7 @@ export default function Faq() {
       className="relative px-3 py-16 sm:px-5 sm:py-24"
       style={{
         background:
-          "radial-gradient(ellipse at 100% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 0% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
+          "transparent",
       }}
     >
       <script

@@ -118,7 +118,7 @@ export default function Proceso() {
       className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
       style={{
         background:
-          "radial-gradient(ellipse at 0% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
+          "transparent",
       }}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-12">

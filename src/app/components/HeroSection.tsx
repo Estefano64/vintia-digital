@@ -25,7 +25,7 @@ export default function HeroSection() {
       className="relative overflow-hidden p-3 sm:p-5 lg:min-h-[calc(100vh-64px)]"
       style={{
         background:
-          "radial-gradient(ellipse at 15% 0%, #4b63f2 0%, transparent 60%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96",
+          "transparent",
       }}
     >
       <div className="mx-auto grid max-w-[1560px] grid-cols-2 gap-3 sm:gap-4 lg:min-h-[calc(100vh-64px-40px)] lg:grid-cols-12 lg:grid-rows-[minmax(280px,1.25fr)_minmax(210px,0.75fr)]">

@@ -1,5 +1,6 @@
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
+import TechBackground from "./components/TechBackground";
 import Conocenos from "./components/Conocenos";
 import Servicios from "./components/Servicios";
 import Proyectos from "./components/Proyectos";
@@ -13,7 +14,10 @@ import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 export default function Home() {
   return (
-    <div style={{ background: "#2c2a96" }}>
+    <div className="relative isolate">
+      {/* Fondo fijo: negro con cuadrícula, luces animadas y spotlight del cursor */}
+      <TechBackground />
+
       {/* Hero takes up viewport minus navbar height */}
       <HeroSection />
 

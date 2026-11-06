@@ -376,7 +376,7 @@ function ProjectCard({
       {/* Card content */}
       <div
         className="relative z-[1] h-full rounded-3xl overflow-hidden"
-        style={{ background: "#3a37a8" }}
+        style={{ background: "#12122b" }}
       >
         {/* Preview: imagen (proyecto privado) o iframe en vivo */}
         <div className="relative overflow-hidden aspect-[16/10]">
@@ -1004,7 +1004,7 @@ export default function Proyectos() {
       <section
         id="proyectos"
         className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
-        style={{ background: "radial-gradient(ellipse at 0% 0%, #4b63f2 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #a44ff2 0%, transparent 55%), #2c2a96" }}
+        style={{ background: "transparent" }}
       >
         {/* Constellation background */}
         <ParticleNetwork />
