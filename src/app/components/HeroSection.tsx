@@ -8,7 +8,7 @@ import CountUp from "./CountUp";
 const Hologram = dynamic(() => import("./Hologram"), { ssr: false });
 
 const TILE_BASE =
-  "group relative overflow-hidden rounded-3xl animate-[fade-in-up_0.7s_ease-out_backwards]";
+  "group relative overflow-hidden rounded-3xl animate-[block-in_0.9s_cubic-bezier(0.34,1.4,0.5,1)_backwards]";
 const TILE = `${TILE_BASE} transition-transform duration-500 hover:-translate-y-1`;
 
 function Arrow({ className = "" }: { className?: string }) {

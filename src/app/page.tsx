@@ -27,24 +27,24 @@ export default function Home() {
       {/* Conócenos */}
       <Conocenos />
 
-      {/* Servicios */}
-      <Servicios />
-
-      {/* ERP a medida + módulo de asistencia */}
-      <ErpMedida />
-
-      {/* Cómo trabajamos */}
-      <Proceso />
-
-      {/* Proyectos */}
-      <Proyectos />
-
       {/* Testimonios: oculto hasta tener los videos reales de clientes.
           Para reactivarlo: importar Testimonios y devolver el link
           "#testimonios" a Navbar.tsx y Footer.tsx */}
 
+      {/* Servicios */}
+      <Servicios />
+
       {/* Clientes */}
       <Clientes />
+
+      {/* Proyectos */}
+      <Proyectos />
+
+      {/* Cómo trabajamos */}
+      <Proceso />
+
+      {/* ERP a medida + módulo de asistencia */}
+      <ErpMedida />
 
       {/* Preguntas frecuentes */}
       <Faq />

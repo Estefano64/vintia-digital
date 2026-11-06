@@ -127,26 +127,14 @@ function whatsappLink(title: string) {
   )}`;
 }
 
-/* ─── Floating particle for decoration ─── */
-function Particle({ delay, x, size }: { delay: number; x: number; size: number }) {
-  return (
-    <div
-      className="absolute rounded-full pointer-events-none animate-[float_6s_ease-in-out_infinite]"
-      style={{
-        width: size,
-        height: size,
-        left: `${x}%`,
-        bottom: "-10px",
-        background: "radial-gradient(circle, rgba(1,253,254,0.4), transparent)",
-        animationDelay: `${delay}s`,
-      }}
-    />
-  );
-}
+/* Color de la etiqueta de cada bloque: alterna cian y rosa */
+const TAGS = [
+  { bg: "#01FDFE", color: "#041020" },
+  { bg: "linear-gradient(135deg, #FD67EB 0%, #B56BFF 100%)", color: "#1a0638" },
+];
 
 export default function Servicios() {
   const [selected, setSelected] = useState<number | null>(null);
-  const [visible, setVisible] = useState(4);
 
   /* Track whether we pushed a history entry for the open modal, so the
      browser back button closes the modal instead of leaving the page. */
@@ -173,18 +161,6 @@ export default function Servicios() {
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, [isOpen]);
-
-  useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 640) setVisible(1);
-      else if (window.innerWidth < 768) setVisible(2);
-      else if (window.innerWidth < 1024) setVisible(3);
-      else setVisible(4);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
 
   /* Lock body scroll & ESC key when modal open */
   useEffect(() => {
@@ -224,304 +200,148 @@ export default function Servicios() {
     img.src = src;
   }, []);
 
-  /* ─── Drag-scroll carousel ─── */
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-  const dragMoved = useRef(false);
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragMoved.current = false;
-    // Touch/pen use native scrolling; custom drag is mouse-only.
-    if (e.pointerType !== "mouse") return;
-    const el = scrollRef.current;
-    if (!el) return;
-    isDragging.current = true;
-    startX.current = e.clientX;
-    scrollLeft.current = el.scrollLeft;
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current || !scrollRef.current) return;
-    const el = scrollRef.current;
-    const dx = e.clientX - startX.current;
-    // Capture the pointer only once a real drag starts, so plain
-    // clicks still reach the cards.
-    if (!dragMoved.current && Math.abs(dx) > 4) {
-      dragMoved.current = true;
-      el.setPointerCapture(e.pointerId);
-      el.style.cursor = "grabbing";
-      el.style.scrollSnapType = "none";
-    }
-    if (dragMoved.current) {
-      el.scrollLeft = scrollLeft.current - dx;
-    }
-  };
-
-  const onPointerUp = (e: React.PointerEvent) => {
-    const el = scrollRef.current;
-    if (!isDragging.current || !el) return;
-    isDragging.current = false;
-    if (el.hasPointerCapture(e.pointerId)) {
-      el.releasePointerCapture(e.pointerId);
-    }
-    el.style.cursor = "grab";
-    el.style.scrollSnapType = "x mandatory";
-  };
-
-  const scrollByCard = (dir: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardW = el.firstElementChild?.firstElementChild
-      ? (el.firstElementChild.firstElementChild as HTMLElement).offsetWidth
-      : 260;
-    el.scrollBy({ left: dir * cardW, behavior: "smooth" });
-  };
-
   return (
     <>
       <section
         id="servicios"
-        className="relative py-16 sm:py-20 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #0a0d28 0%, #041020 60%, #041020 100%)" }}
+        className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
+        style={{ background: "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b" }}
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
         />
-        {/* Ambient glows */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse, #5B2FB8 0%, transparent 70%)",
-            filter: "blur(100px)",
-            opacity: 0.07,
-          }}
-        />
-        <div
-          className="absolute top-0 right-0 w-[300px] h-[300px] pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, #FD67EB 0%, transparent 70%)",
-            filter: "blur(80px)",
-            opacity: 0.07,
-          }}
-        />
-
-        {/* Floating particles */}
-        <Particle delay={0} x={15} size={4} />
-        <Particle delay={1.5} x={35} size={3} />
-        <Particle delay={3} x={55} size={5} />
-        <Particle delay={0.8} x={75} size={3} />
-        <Particle delay={2.2} x={90} size={4} />
-
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <Reveal>
-          {/* Header */}
-          <div className="flex justify-center mb-3">
-            <span
-              className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-              style={{ color: "#01FDFE" }}
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:auto-rows-[250px]">
+          {/* ── Título (violeta) ── */}
+          <Reveal className="sm:col-span-2 lg:col-span-3 lg:row-span-1">
+            <div
+              className="flex h-full flex-col justify-center rounded-3xl p-8 sm:p-10"
+              style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
             >
-              Lo que hacemos
-            </span>
-          </div>
-          <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
-            <span className="text-white">CONOCE NUESTROS </span>
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
-              }}
-            >
-              SERVICIOS
-            </span>
-          </h2>
-          <div
-            className="mx-auto mt-4 mb-6 h-[2px] w-12"
-            style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
-          />
-          <p className="mx-auto max-w-2xl text-center text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-            Te ofrecemos los servicios esenciales para hacer crecer tu negocio y
-            alcanzar tus objetivos.
-          </p>
+              <span
+                className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                style={{ color: "#01FDFE" }}
+              >
+                Lo que hacemos
+              </span>
+              <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
+                Nuestros{" "}
+                <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #01FDFE, #9CB8FF, #FD67EB)" }}>
+                  servicios
+                </span>
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 sm:text-lg font-[family-name:var(--font-open-sans)]">
+                Los servicios esenciales para hacer crecer tu negocio y alcanzar
+                tus objetivos.
+              </p>
+            </div>
           </Reveal>
 
-          {/* Master Container */}
-          <Reveal delay={150} className="relative mt-10">
-            {/* Animated glowing border (behind) */}
+          {/* ── Cifra (cian) ── */}
+          <Reveal delay={100} className="sm:col-span-2 lg:col-span-1">
             <div
-              className="absolute -inset-[1px] rounded-2xl animate-[borderGlow_4s_ease-in-out_infinite] pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB, #013795, #01FDFE)",
-                backgroundSize: "300% 300%",
-                opacity: 0.5,
-              }}
-            />
-            {/* Blurred glow shadow copy */}
-            <div
-              className="absolute -inset-[1px] rounded-2xl animate-[borderGlow_4s_ease-in-out_infinite] pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB, #013795, #01FDFE)",
-                backgroundSize: "300% 300%",
-                opacity: 0.25,
-                filter: "blur(12px)",
-              }}
-            />
-
-            {/* Inner container */}
-            <div
-              className="relative rounded-2xl overflow-hidden"
-              style={{ background: "rgba(10, 22, 40, 0.9)" }}
+              className="flex h-full min-h-[170px] flex-col justify-between rounded-3xl p-6 sm:p-7"
+              style={{ background: "#01FDFE", color: "#041020" }}
             >
-
-            {/* Carousel */}
-            <div className="relative py-6">
-              {/* Prev */}
-              <button
-                onClick={() => scrollByCard(-1)}
-                className="absolute left-1.5 sm:left-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:border-[#01FDFE]/40 hover:shadow-[0_0_15px_rgba(1,253,254,0.15)]"
-                style={{
-                  background: "rgba(4, 16, 32, 0.8)",
-                  border: "1px solid rgba(1, 253, 254, 0.15)",
-                }}
-                aria-label="Anterior"
-              >
-                <svg className="h-4 w-4 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              {/* Next */}
-              <button
-                onClick={() => scrollByCard(1)}
-                className="absolute right-1.5 sm:right-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:border-[#01FDFE]/40 hover:shadow-[0_0_15px_rgba(1,253,254,0.15)]"
-                style={{
-                  background: "rgba(4, 16, 32, 0.8)",
-                  border: "1px solid rgba(1, 253, 254, 0.15)",
-                }}
-                aria-label="Siguiente"
-              >
-                <svg className="h-4 w-4 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-
-              {/* Drag-scrollable cards */}
-              <div
-                ref={scrollRef}
-                className="carousel-scroll flex gap-3 sm:gap-4 overflow-x-auto px-10 sm:px-14 pb-2 select-none"
-                style={{
-                  cursor: "grab",
-                  scrollSnapType: "x mandatory",
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                }}
-                onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={onPointerUp}
-                onPointerLeave={onPointerUp}
-              >
-                {SERVICES.map((service, i) => (
-                  <div
-                    key={service.id}
-                    className="flex-shrink-0"
-                    style={{
-                      width: `calc((100% - ${(visible - 1) * (visible > 2 ? 16 : 12)}px) / ${visible})`,
-                      scrollSnapAlign: "start",
-                    }}
-                  >
-                    <button
-                      onClick={() => {
-                        if (!dragMoved.current) setSelected(i);
-                      }}
-                      onMouseEnter={() => preloadExpanded(service.imageExpanded)}
-                      onTouchStart={() => preloadExpanded(service.imageExpanded)}
-                      className="service-card group relative w-full overflow-hidden rounded-xl cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#01FDFE]/60 transition-transform duration-300 hover:-translate-y-1"
-                      style={{
-                        border: "1px solid rgba(1, 253, 254, 0.18)",
-                        boxShadow:
-                          "0 8px 28px rgba(0, 0, 0, 0.5), 0 0 18px rgba(1, 253, 254, 0.06)",
-                      }}
-                    >
-                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl">
-                        <Image
-                          src={service.image}
-                          alt={service.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none"
-                          draggable={false}
-                        />
-
-                        {/* Animated border glow on hover */}
-                        <div
-                          className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
-                          style={{
-                            boxShadow:
-                              "inset 0 0 30px rgba(1,253,254,0.1), 0 0 40px rgba(91,47,184,0.15), 0 0 80px rgba(1,253,254,0.05)",
-                          }}
-                        />
-
-                        {/* Hover color sweep */}
-                        <div
-                          className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, rgba(1,253,254,0.08) 0%, rgba(91,47,184,0.15) 50%, rgba(253,103,235,0.08) 100%)",
-                          }}
-                        />
-
-                        {/* Bottom gradient */}
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background:
-                              "linear-gradient(to top, rgba(4,16,32,0.95) 0%, rgba(4,16,32,0.4) 35%, transparent 100%)",
-                          }}
-                        />
-
-                        {/* Content */}
-                        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                          <h3 className="text-xs sm:text-sm font-bold text-white leading-tight font-[family-name:var(--font-montserrat)] transition-transform duration-300 group-hover:-translate-y-1">
-                            {service.title}
-                          </h3>
-                          <p className="sr-only">{service.description}</p>
-                          {/* Always visible on touch (no hover); animated reveal on sm+ */}
-                          <div className="flex items-center gap-1.5 mt-2 opacity-90 sm:opacity-0 sm:translate-y-3 transition-all duration-400 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
-                            <span
-                              className="h-[1px] w-5 transition-all duration-500 group-hover:w-8"
-                              style={{ background: "#01FDFE" }}
-                            />
-                            <span
-                              className="text-[10px] font-semibold tracking-wider uppercase font-[family-name:var(--font-montserrat)]"
-                              style={{ color: "#01FDFE" }}
-                            >
-                              Explorar
-                            </span>
-                            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="#01FDFE" strokeWidth={2}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        </div>
-
-                        {/* Top accent corner */}
-                        <div
-                          className="absolute top-0 right-0 w-12 h-12 opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
-                          style={{
-                            background:
-                              "linear-gradient(225deg, rgba(1,253,254,0.2) 0%, transparent 70%)",
-                          }}
-                        />
-                      </div>
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                Servicios
+              </span>
+              <span className="text-7xl font-extrabold leading-none font-[family-name:var(--font-montserrat)]">
+                {SERVICES.length}
+              </span>
             </div>
-            </div>{/* close inner container */}
-          </Reveal>{/* close master container */}
+          </Reveal>
+
+          {/* ── Un bloque por servicio (el primero, grande) ── */}
+          {SERVICES.map((service, i) => (
+            <Reveal
+              key={service.id}
+              delay={(i % 3) * 90}
+              className={i === 0 ? "sm:col-span-2 lg:row-span-2" : ""}
+            >
+              <button
+                onClick={() => setSelected(i)}
+                onMouseEnter={() => preloadExpanded(service.imageExpanded)}
+                onTouchStart={() => preloadExpanded(service.imageExpanded)}
+                className={`group relative block h-full w-full overflow-hidden rounded-3xl text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#01FDFE] ${
+                  i === 0 ? "min-h-[320px]" : "min-h-[240px]"
+                }`}
+              >
+                <Image
+                  src={service.imageExpanded}
+                  alt={service.title}
+                  fill
+                  sizes={i === 0 ? "(max-width: 1024px) 100vw, 640px" : "(max-width: 640px) 100vw, 320px"}
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  draggable={false}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(7,11,43,0.95) 0%, rgba(7,11,43,0.45) 45%, rgba(7,11,43,0.05) 100%)",
+                  }}
+                />
+                <span
+                  className="absolute top-4 left-4 rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase font-[family-name:var(--font-montserrat)]"
+                  style={{ background: TAGS[i % 2].bg, color: TAGS[i % 2].color }}
+                >
+                  {service.short}
+                </span>
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 sm:p-6">
+                  <div>
+                    <h3
+                      className={`font-extrabold leading-tight text-white font-[family-name:var(--font-montserrat)] ${
+                        i === 0 ? "text-2xl sm:text-3xl" : "text-lg"
+                      }`}
+                    >
+                      {service.title}
+                    </h3>
+                    {i === 0 && (
+                      <p className="mt-1 text-sm text-white/75 font-[family-name:var(--font-open-sans)]">
+                        {service.tagline}
+                      </p>
+                    )}
+                    <p className="sr-only">{service.description}</p>
+                  </div>
+                  <span
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45"
+                    style={{ background: TAGS[i % 2].bg, color: TAGS[i % 2].color }}
+                  >
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+              </svg>
+                  </span>
+                </div>
+              </button>
+            </Reveal>
+          ))}
+
+          {/* ── Cierre (degradado) ── */}
+          <Reveal delay={180} className="sm:col-span-2">
+            <a
+              href="#contactanos"
+              className="group flex h-full min-h-[200px] flex-col justify-between rounded-3xl p-7 transition-transform duration-500 hover:-translate-y-1"
+              style={{
+                background: "linear-gradient(120deg, #01FDFE 0%, #7CA8FF 55%, #8B5CF6 100%)",
+                color: "#041020",
+              }}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                  ¿No sabes por dónde empezar?
+                </span>
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#041020] text-white transition-transform duration-300 group-hover:rotate-45">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+              </svg>
+                </span>
+              </div>
+              <p className="max-w-md text-3xl font-extrabold leading-tight font-[family-name:var(--font-montserrat)]">
+                Pide tu auditoría gratuita
+              </p>
+            </a>
+          </Reveal>
         </div>
       </section>
 

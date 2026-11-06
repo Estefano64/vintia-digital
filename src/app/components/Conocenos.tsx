@@ -28,130 +28,105 @@ export default function Conocenos() {
     <>
       <section
         id="conocenos"
-        className="relative py-16 sm:py-20 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #041020 0%, #0a0d28 100%)" }}
+        className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
+        style={{ background: "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b" }}
       >
-        {/* Ambient glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] opacity-10 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse, #5B2FB8 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8">
-          <Reveal>
-          {/* Section label */}
-          <div className="flex justify-center mb-3 lg:justify-start">
-            <span
-              className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-              style={{ color: "#01FDFE" }}
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-12">
+          {/* ── Quiénes somos (violeta) ── */}
+          <Reveal className="col-span-2 lg:col-span-5">
+            <div
+              className="flex h-full flex-col justify-center rounded-3xl p-8 sm:p-10"
+              style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
             >
-              Quiénes somos
-            </span>
-          </div>
-
-          {/* Title */}
-          <h2
-            className="text-center lg:text-left text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]"
-          >
-            <span className="text-white">CONÓCE</span>
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
-              }}
-            >
-              NOS
-            </span>
-          </h2>
-
-          {/* Divider */}
-          <div className="mx-auto lg:mx-0 mt-4 mb-6 h-[2px] w-12"
-            style={{
-              background: "linear-gradient(90deg, #01FDFE, #5B2FB8)",
-            }}
-          />
-
-          {/* Subtitle */}
-          <p className="mx-auto lg:mx-0 max-w-2xl text-center lg:text-left text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-            Descubre quiénes somos, nuestra pasión por la innovación digital y
-            cómo ayudamos a negocios en Arequipa a alcanzar su máximo potencial.
-          </p>
+              <span
+                className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                style={{ color: "#01FDFE" }}
+              >
+                Quiénes somos
+              </span>
+              <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
+                Conóce
+                <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #01FDFE, #9CB8FF, #FD67EB)" }}>
+                  nos
+                </span>
+              </h2>
+              <p className="mt-6 text-base leading-7 text-white/80 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
+                Descubre quiénes somos, nuestra pasión por la innovación digital y
+                cómo ayudamos a negocios en Arequipa a alcanzar su máximo potencial.
+              </p>
+            </div>
           </Reveal>
 
-          {/* Video thumbnail */}
-          <Reveal delay={150}>
+          {/* ── Video (bloque grande) ── */}
+          <Reveal delay={100} className="col-span-2 lg:col-span-7 lg:row-span-2">
             <button
               onClick={() => setModalOpen(true)}
-              className="group relative mx-auto block w-full overflow-hidden rounded-xl focus:outline-none"
-              style={{
-                border: "1px solid rgba(1, 253, 254, 0.1)",
-              }}
+              className="group relative block h-full min-h-[240px] w-full overflow-hidden rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#01FDFE]"
               aria-label="Reproducir video de presentación"
             >
-              {/* Thumbnail */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-xl">
-                <Image
-                  src={`https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`}
-                  alt="Video de presentación Vintia Digital"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 680px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-
-                {/* Dark overlay */}
-                <div
-                  className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-60"
-                  style={{
-                    background: "rgba(4, 16, 32, 0.5)",
-                  }}
-                />
-
-                {/* Play button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className="flex h-14 w-14 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      background: "rgba(4, 16, 32, 0.6)",
-                      border: "2px solid rgba(1, 253, 254, 0.4)",
-                      boxShadow: "0 0 30px rgba(1, 253, 254, 0.15), inset 0 0 20px rgba(1, 253, 254, 0.05)",
-                    }}
-                  >
-                    <svg
-                      className="h-6 w-6 translate-x-0.5"
-                      viewBox="0 0 24 24"
-                      fill="#01FDFE"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Glow border on hover */}
-                <div
-                  className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                  style={{
-                    boxShadow: "inset 0 0 40px rgba(1, 253, 254, 0.08), 0 0 60px rgba(91, 47, 184, 0.1)",
-                  }}
-                />
-
-                {/* Bottom label */}
-                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3"
-                  style={{
-                    background: "linear-gradient(to top, rgba(4,16,32,0.9), transparent)",
-                  }}
+              <Image
+                src={`https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`}
+                alt="Video de presentación Vintia Digital"
+                fill
+                sizes="(max-width: 1024px) 100vw, 760px"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-70"
+                style={{ background: "linear-gradient(to top, rgba(7,11,43,0.85), rgba(7,11,43,0.15))" }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span
+                  className="flex h-20 w-20 items-center justify-center rounded-full bg-[#01FDFE] text-[#041020] transition-transform duration-300 group-hover:scale-110"
+                  style={{ boxShadow: "0 10px 50px rgba(1,253,254,0.45)" }}
                 >
-                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="#01FDFE" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                  <svg className="h-8 w-8 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
                   </svg>
-                  <span className="text-[11px] font-medium tracking-wider text-white/50 uppercase font-[family-name:var(--font-montserrat)]">
-                    Ver presentación
-                  </span>
-                </div>
+                </span>
               </div>
+              <span className="absolute bottom-5 left-6 text-xs font-bold tracking-[0.2em] text-white uppercase font-[family-name:var(--font-montserrat)]">
+                Ver presentación
+              </span>
             </button>
+          </Reveal>
+
+          {/* ── Desde Arequipa (cian) ── */}
+          <Reveal delay={150} className="col-span-2 sm:col-span-1 lg:col-span-2">
+            <div
+              className="flex h-full min-h-[170px] flex-col justify-between rounded-3xl p-6"
+              style={{ background: "#01FDFE", color: "#041020" }}
+            >
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                Desde
+              </span>
+              <p className="text-2xl font-extrabold leading-tight font-[family-name:var(--font-montserrat)]">
+                Arequipa, Perú
+              </p>
+            </div>
+          </Reveal>
+
+          {/* ── Qué hacemos (rosa) ── */}
+          <Reveal delay={200} className="col-span-2 sm:col-span-1 lg:col-span-3">
+            <a
+              href="#servicios"
+              className="group flex h-full min-h-[170px] flex-col justify-between rounded-3xl p-6 transition-transform duration-500 hover:-translate-y-1"
+              style={{ background: "linear-gradient(135deg, #FD67EB 0%, #B56BFF 100%)", color: "#1a0638" }}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                  Hacemos
+                </span>
+                <span className="transition-transform duration-300 group-hover:rotate-45">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+              </svg>
+                </span>
+              </div>
+              <p className="text-2xl font-extrabold leading-tight font-[family-name:var(--font-montserrat)]">
+                Web, ERP, marca y publicidad
+              </p>
+            </a>
           </Reveal>
         </div>
       </section>

@@ -3,10 +3,10 @@ import Image from "next/image";
 const NAV_LINKS = [
   { label: "Conócenos", href: "#conocenos" },
   { label: "Servicios", href: "#servicios" },
-  { label: "ERP", href: "#erp" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Proyectos", href: "#proyectos" },
   { label: "Clientes", href: "#clientes" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "ERP", href: "#erp" },
   { label: "Contáctanos", href: "#contactanos" },
 ];
 

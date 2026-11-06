@@ -83,6 +83,18 @@ h1, h2, h3, h4, h5, h6 {
   100% { width: 100%; }
 }
 
+/* Bloques del hero: se arman al cargar */
+@keyframes block-in {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.88);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -423,9 +435,10 @@ select option {
 /* ─── Scroll reveal (used by components/Reveal.tsx) ─── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(var(--rv-x, 0px), var(--rv-y, 60px), 0) scale(0.9)
+    rotate(var(--rv-r, 0deg));
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.34, 1.4, 0.5, 1);
   will-change: opacity, transform;
 }
 .reveal.reveal-visible {

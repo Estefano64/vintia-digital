@@ -372,7 +372,7 @@ function ProjectCard({
     <div
       ref={cardRef}
       onClick={onClick}
-      className="group relative h-full rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
+      className="group relative h-full rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer"
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
@@ -381,7 +381,7 @@ function ProjectCard({
     >
       {/* Glow border on hover */}
       <div
-        className="absolute -inset-[1px] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+        className="absolute -inset-[1px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
         style={{
           background: "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
           filter: "blur(1px)",
@@ -390,8 +390,8 @@ function ProjectCard({
 
       {/* Card content */}
       <div
-        className="relative z-[1] h-full rounded-xl overflow-hidden"
-        style={{ background: "rgba(4, 16, 32, 0.95)" }}
+        className="relative z-[1] h-full rounded-3xl overflow-hidden"
+        style={{ background: "#0e1240" }}
       >
         {/* Preview: imagen (proyecto privado) o iframe en vivo */}
         <div className="relative overflow-hidden aspect-[16/10]">
@@ -1018,8 +1018,8 @@ export default function Proyectos() {
     <>
       <section
         id="proyectos"
-        className="relative py-20 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #041020 0%, #120a2e 50%, #041020 100%)" }}
+        className="relative overflow-hidden px-3 py-16 sm:px-5 sm:py-24"
+        style={{ background: "radial-gradient(ellipse at 0% 0%, #1b2a8f 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b" }}
       >
         {/* Constellation background */}
         <ParticleNetwork />
@@ -1040,43 +1040,70 @@ export default function Proyectos() {
           }}
         />
 
-        <div className="relative z-[1] mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative z-[1] mx-auto max-w-7xl">
           {/* Header */}
-          <Reveal className="text-center mb-14">
-            <div className="flex justify-center mb-3">
-              <span
-                className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-                style={{ color: "#01FDFE" }}
+          <div className="mb-3 grid grid-cols-1 gap-3 sm:mb-4 sm:gap-4 lg:grid-cols-12">
+            <Reveal className="lg:col-span-7">
+              <div
+                className="flex h-full flex-col justify-center rounded-3xl p-8 sm:p-10"
+                style={{ background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)" }}
               >
-                Portafolio
-              </span>
-            </div>
-
-            <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
-              <span className="text-white">NUESTROS </span>
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
-                }}
+                <span
+                  className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                  style={{ color: "#01FDFE" }}
+                >
+                  Portafolio
+                </span>
+                <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
+                  Nuestros{" "}
+                  <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #01FDFE, #9CB8FF, #FD67EB)" }}>
+                    proyectos
+                  </span>
+                </h2>
+                <p className="mt-4 max-w-xl text-base leading-7 text-white/80 sm:text-lg font-[family-name:var(--font-open-sans)]">
+                  Sitios web, sistemas ERP, marcas y campañas que hoy trabajan para
+                  nuestros clientes.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={100} className="lg:col-span-5">
+              <div
+                className="flex h-full flex-col justify-between gap-6 rounded-3xl p-6 sm:p-8"
+                style={{ background: "#01FDFE", color: "#041020" }}
               >
-                PROYECTOS
-              </span>
-            </h2>
-
-            <div
-              className="mx-auto mt-4 mb-6 h-[2px] w-12"
-              style={{ background: "linear-gradient(90deg, #5B2FB8, #FD67EB)" }}
-            />
-
-            <p className="mx-auto max-w-2xl text-center text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-              Sitios web, sistemas ERP, marcas y campañas que hoy trabajan para
-              nuestros clientes.
-            </p>
-          </Reveal>
+                <div className="flex items-end justify-between gap-4">
+                  <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+                    Filtrar por tipo
+                  </span>
+                  <span className="text-6xl font-extrabold leading-none font-[family-name:var(--font-montserrat)]">
+                    {shownProjects.length}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar proyectos">
+                  {FILTERS.map((f) => {
+                    const active = filter === f.key;
+                    return (
+                      <button
+                        key={f.key}
+                        onClick={() => setFilter(f.key)}
+                        aria-pressed={active}
+                        className="rounded-full px-4 py-2 text-[13px] font-bold transition-all duration-300 cursor-pointer font-[family-name:var(--font-montserrat)]"
+                        style={{
+                          color: active ? "#ffffff" : "#041020",
+                          background: active ? "#041020" : "rgba(4,16,32,0.1)",
+                        }}
+                      >
+                        {f.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </Reveal>
+          </div>
 
           {/* Caso destacado */}
-          <Reveal className="mb-14">
+          <Reveal className="mb-3 sm:mb-4">
             <div
               className="grid grid-cols-1 overflow-hidden rounded-3xl lg:grid-cols-2"
               style={{
@@ -1154,30 +1181,8 @@ export default function Proyectos() {
             </div>
           </Reveal>
 
-          {/* Filtros */}
-          <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filtrar proyectos">
-            {FILTERS.map((f) => {
-              const active = filter === f.key;
-              return (
-                <button
-                  key={f.key}
-                  onClick={() => setFilter(f.key)}
-                  aria-pressed={active}
-                  className="rounded-full px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 cursor-pointer font-[family-name:var(--font-montserrat)]"
-                  style={{
-                    color: active ? "#041020" : "rgba(255,255,255,0.75)",
-                    background: active ? "#01FDFE" : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${active ? "#01FDFE" : "rgba(255,255,255,0.1)"}`,
-                  }}
-                >
-                  {f.label}
-                </button>
-              );
-            })}
-          </div>
-
           {/* Projects grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {shownProjects.map((project, i) => (
               <ProjectCard
                 key={project.title}
