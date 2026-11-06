@@ -1,207 +1,312 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Typewriter from "./Typewriter";
 import CountUp from "./CountUp";
 
-const STATS = [
-  { end: 100, prefix: "+", label: "Clientes" },
-  { end: 250, prefix: "+", label: "Proyectos" },
-  { end: 7, prefix: "", label: "Servicios" },
+const Hologram = dynamic(() => import("./Hologram"), { ssr: false });
+
+const SERVICES = [
+  "Páginas web",
+  "ERP a medida",
+  "Branding",
+  "Marketing 360°",
+  "Redes sociales",
+  "Audiovisual",
+  "UX/UI",
 ];
 
-const Hologram = dynamic(() => import("./Hologram"), { ssr: false });
+const CLIENT_LOGOS = [
+  { src: "/logos/logo (1).webp", name: "Aquamater" },
+  { src: "/logos/logo-fimcer.webp", name: "FIMCER" },
+  { src: "/logos/logo-ajv.webp", name: "AJV" },
+  { src: "/logos/logo-regena.webp", name: "Regena Perú" },
+];
+
+const TILE_BASE =
+  "group relative overflow-hidden rounded-3xl animate-[fade-in-up_0.7s_ease-out_backwards]";
+const TILE = `${TILE_BASE} transition-transform duration-500 hover:-translate-y-1`;
+
+function Arrow({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+    </svg>
+  );
+}
 
 export default function HeroSection() {
   return (
     <section
-      className="relative flex min-h-[calc(100vh-64px)] items-center overflow-hidden py-16"
-      style={{ background: "linear-gradient(160deg, #041020 0%, #0e0a26 55%, #041020 100%)" }}
+      className="relative overflow-hidden p-3 sm:p-5 lg:min-h-[calc(100vh-64px)]"
+      style={{
+        background:
+          "radial-gradient(ellipse at 15% 0%, #1b2a8f 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b",
+      }}
     >
-      {/* Hologram background */}
-      <Hologram />
-
-      {/* Ambient glow spots */}
-      <div
-        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] opacity-15 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, #5B2FB8 0%, transparent 70%)",
-          filter: "blur(80px)",
-        }}
-      />
-      <div
-        className="absolute bottom-1/3 left-1/3 w-[300px] h-[300px] opacity-10 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, #01FDFE 0%, transparent 70%)",
-          filter: "blur(60px)",
-        }}
-      />
-
-      {/* Gradient overlays */}
-      <div
-        className="absolute inset-0 z-[1]"
-        style={{
-          background:
-            "linear-gradient(to right, #041020 0%, rgba(4,16,32,0.8) 40%, rgba(4,16,32,0.3) 70%, transparent 100%)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 right-0 z-[1] h-32"
-        style={{
-          background: "linear-gradient(to top, #041020 0%, transparent 100%)",
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative z-[2] mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-3xl">
-          {/* Badge */}
-          <div
-            className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-            style={{
-              background: "rgba(1, 253, 254, 0.06)",
-              border: "1px solid rgba(1, 253, 254, 0.15)",
-            }}
-          >
-            <span
-              className="h-1.5 w-1.5 rounded-full animate-pulse"
-              style={{ background: "#01FDFE" }}
-            />
-            <span
-              className="text-xs font-semibold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
-              style={{ color: "#01FDFE" }}
-            >
-              Agencia Digital en Arequipa
-            </span>
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-[4.5rem] font-[family-name:var(--font-montserrat)]">
-            Estrategias Digitales
-            <br />
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(135deg, #01FDFE 0%, #5B2FB8 50%, #FD67EB 100%)",
-              }}
-            >
-              <Typewriter
-                words={[
-                  "DE CLASE MUNDIAL",
-                  "QUE GENERAN RESULTADOS",
-                  "PARA TU CRECIMIENTO",
-                  "CON VISIÓN DE FUTURO",
-                ]}
-                typingSpeed={70}
-                deletingSpeed={35}
-                pauseTime={2500}
-              />
-            </span>
-            <br />
-            <span className="text-white/70">en Arequipa.</span>
-          </h1>
-
-          {/* Description */}
-          <p className="mt-6 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-            Hacemos que tu negocio destaque en el ecosistema digital con diseño
-            estratégico y resultados reales. Con la gestión de{" "}
-            <span className="font-semibold" style={{ color: "#01FDFE" }}>
-              Vintia Digital
-            </span>{" "}
-            lo conseguimos.
-          </p>
-
-          {/* CTAs */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            {/* Primary CTA */}
-            <a
-              href="#contactanos"
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[13px] font-bold tracking-wider text-white uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] overflow-hidden"
-              style={{
-                background: "linear-gradient(135deg, #013795, #5B2FB8)",
-              }}
-            >
-              <span className="relative z-10">Auditoría Gratuita</span>
-              <svg
-                className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-              <div
-                className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{
-                  background: "linear-gradient(135deg, #5B2FB8, #FD67EB)",
-                }}
-              />
-              <div
-                className="absolute -inset-2 rounded-full opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-40"
-                style={{
-                  background: "linear-gradient(135deg, #01FDFE, #5B2FB8)",
-                }}
-              />
-            </a>
-
-            {/* Secondary CTA */}
-            <a
-              href="#proyectos"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white/75 border-[rgba(1,253,254,0.15)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.4)] hover:bg-[rgba(1,253,254,0.08)]"
-            >
-              <span>Ver Portafolio</span>
-              <svg
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </a>
-          </div>
-
-          {/* Stats */}
-          <dl className="mt-10 grid w-full max-w-md grid-cols-3 gap-4 border-t border-white/10 pt-6">
-            {STATS.map((s) => (
-              <div key={s.label} className="flex flex-col items-center lg:items-start">
-                <dd
-                  className="order-1 text-3xl font-extrabold sm:text-4xl font-[family-name:var(--font-montserrat)] bg-clip-text text-transparent"
-                  style={{ backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8)" }}
-                >
-                  <CountUp end={s.end} prefix={s.prefix} />
-                </dd>
-                <dt className="order-2 mt-1 text-[11px] font-semibold tracking-[0.18em] text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
-                  {s.label}
-                </dt>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 left-1/2 z-[2] -translate-x-1/2 flex flex-col items-center gap-1.5">
-        <span className="text-[9px] font-medium tracking-[0.25em] text-white/25 uppercase font-[family-name:var(--font-montserrat)]">
-          Scroll
-        </span>
+      <div className="mx-auto grid max-w-[1560px] grid-cols-2 gap-3 sm:gap-4 lg:min-h-[calc(100vh-64px-40px)] lg:grid-cols-12 lg:grid-rows-[minmax(250px,1.2fr)_minmax(190px,0.85fr)_minmax(190px,0.85fr)]">
+        {/* ── A · Mensaje principal ── */}
         <div
-          className="h-6 w-[1px] animate-pulse"
+          className={`${TILE_BASE} col-span-2 flex items-center lg:col-span-7 lg:row-span-2`}
           style={{
-            background: "linear-gradient(to bottom, #01FDFE, transparent)",
+            background: "linear-gradient(140deg, #0a1560 0%, #2b1387 55%, #5B2FB8 100%)",
           }}
-        />
+        >
+          <Hologram />
+          <div
+            className="absolute inset-0 z-[1]"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(10,21,96,0.92) 0%, rgba(20,18,110,0.7) 50%, rgba(43,19,135,0.15) 100%)",
+            }}
+          />
+          <div className="relative z-[2] flex flex-col items-start p-7 sm:p-10 lg:p-12">
+            <div
+              className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+              style={{
+                background: "rgba(1, 253, 254, 0.1)",
+                border: "1px solid rgba(1, 253, 254, 0.3)",
+              }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "#01FDFE" }} />
+              <span
+                className="text-xs font-semibold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
+                style={{ color: "#01FDFE" }}
+              >
+                Agencia Digital en Arequipa
+              </span>
+            </div>
+
+            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl xl:text-6xl font-[family-name:var(--font-montserrat)]">
+              Estrategias Digitales
+              <br />
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #01FDFE 0%, #9CB8FF 45%, #FD67EB 100%)",
+                }}
+              >
+                <Typewriter
+                  words={[
+                    "DE CLASE MUNDIAL",
+                    "QUE GENERAN RESULTADOS",
+                    "PARA TU CRECIMIENTO",
+                    "CON VISIÓN DE FUTURO",
+                  ]}
+                  typingSpeed={70}
+                  deletingSpeed={35}
+                  pauseTime={2500}
+                />
+              </span>
+              <br />
+              <span className="text-white/80">en Arequipa.</span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
+              Páginas web, sistemas ERP a medida, marca y publicidad digital.
+              Hacemos que tu negocio destaque y venda más con la gestión de{" "}
+              <span className="font-semibold" style={{ color: "#01FDFE" }}>
+                Vintia Digital
+              </span>
+              .
+            </p>
+
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <a
+                href="#contactanos"
+                className="group/cta inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
+                style={{
+                  background: "#01FDFE",
+                  color: "#041020",
+                  boxShadow: "0 10px 40px rgba(1,253,254,0.35)",
+                }}
+              >
+                Auditoría Gratuita
+                <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a
+                href="#proyectos"
+                className="inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white border-white/30 bg-white/10 hover:bg-white/20"
+              >
+                Ver Portafolio
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* ── B · ERP a medida (captura real) ── */}
+        <a
+          href="#erp"
+          className={`${TILE} col-span-2 min-h-[220px] lg:col-span-5`}
+          style={{ animationDelay: "100ms" }}
+        >
+          <Image
+            src="/proyectos/erp-regena/stock.webp"
+            alt="Captura de un sistema ERP desarrollado por Vintia Digital"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 640px"
+            className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(7,11,43,0.95) 0%, rgba(7,11,43,0.55) 45%, rgba(7,11,43,0.05) 100%)",
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+            <div>
+              <span
+                className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
+                style={{ color: "#01FDFE" }}
+              >
+                ERP a medida
+              </span>
+              <p className="mt-1 text-xl font-extrabold leading-tight text-white sm:text-2xl font-[family-name:var(--font-montserrat)]">
+                Tu empresa en un solo sistema
+              </p>
+            </div>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#01FDFE] text-[#041020] transition-transform duration-300 group-hover:rotate-45">
+              <Arrow className="h-4 w-4" />
+            </span>
+          </div>
+        </a>
+
+        {/* ── C · Proyectos ── */}
+        <div
+          className={`${TILE} flex min-h-[150px] flex-col justify-between p-5 sm:p-6 lg:col-span-2`}
+          style={{ background: "#01FDFE", color: "#041020", animationDelay: "200ms" }}
+        >
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+            Proyectos
+          </span>
+          <span className="text-5xl font-extrabold leading-none sm:text-6xl font-[family-name:var(--font-montserrat)]">
+            <CountUp end={250} prefix="+" />
+          </span>
+        </div>
+
+        {/* ── D · Clientes ── */}
+        <a
+          href="#clientes"
+          className={`${TILE} flex min-h-[150px] flex-col justify-between p-5 sm:p-6 lg:col-span-3`}
+          style={{
+            background: "linear-gradient(135deg, #FD67EB 0%, #B56BFF 100%)",
+            color: "#1a0638",
+            animationDelay: "300ms",
+          }}
+        >
+          <div className="flex items-start justify-between">
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]">
+              Clientes
+            </span>
+            <Arrow className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+          </div>
+          <div>
+            <span className="text-5xl font-extrabold leading-none sm:text-6xl font-[family-name:var(--font-montserrat)]">
+              <CountUp end={100} prefix="+" />
+            </span>
+            <p className="mt-2 hidden text-sm font-semibold sm:block font-[family-name:var(--font-open-sans)]">
+              confían en nosotros
+            </p>
+          </div>
+        </a>
+
+        {/* ── E · Páginas web (captura real) ── */}
+        <a
+          href="#proyectos"
+          className={`${TILE} hidden min-h-[190px] lg:col-span-4 lg:block`}
+          style={{ animationDelay: "400ms" }}
+        >
+          <Image
+            src="/proyectos/aquamater/web-1.webp"
+            alt="Sitio web de Aquamater, desarrollado por Vintia Digital"
+            fill
+            sizes="520px"
+            className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(7,11,43,0.92) 0%, rgba(7,11,43,0.35) 55%, transparent 100%)",
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+            <div>
+              <span
+                className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
+                style={{ color: "#01FDFE" }}
+              >
+                Páginas web
+              </span>
+              <p className="mt-1 text-xl font-extrabold leading-tight text-white font-[family-name:var(--font-montserrat)]">
+                Sitios que traen clientes
+              </p>
+            </div>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#041020] transition-transform duration-300 group-hover:rotate-45">
+              <Arrow className="h-4 w-4" />
+            </span>
+          </div>
+        </a>
+
+        {/* ── F · Servicios ── */}
+        <a
+          href="#servicios"
+          className={`${TILE} hidden min-h-[190px] flex-col justify-between bg-white p-6 text-[#0a1238] lg:col-span-4 lg:flex`}
+          style={{ animationDelay: "500ms" }}
+        >
+          <div className="flex items-start justify-between">
+            <span className="text-[11px] font-bold tracking-[0.2em] text-[#5B2FB8] uppercase font-[family-name:var(--font-montserrat)]">
+              Servicios
+            </span>
+            <Arrow className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+          </div>
+          <div>
+            <p className="text-xl font-extrabold leading-tight font-[family-name:var(--font-montserrat)]">
+              Un solo equipo para todo lo digital
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {SERVICES.map((s) => (
+                <li
+                  key={s}
+                  className="rounded-full bg-[#eef0ff] px-2.5 py-1 text-xs font-semibold text-[#2b1387] font-[family-name:var(--font-open-sans)]"
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </a>
+
+        {/* ── G · Clientes (logos) ── */}
+        <a
+          href="#clientes"
+          className={`${TILE} col-span-2 flex min-h-[130px] flex-col justify-between p-6 lg:col-span-4 lg:min-h-[190px]`}
+          style={{
+            background: "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.14)",
+            animationDelay: "600ms",
+          }}
+        >
+          <span className="text-[11px] font-bold tracking-[0.2em] text-white/70 uppercase font-[family-name:var(--font-montserrat)]">
+            Trabajamos con
+          </span>
+          <div className="mt-4 grid grid-cols-4 items-center gap-3 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-2">
+            {CLIENT_LOGOS.map((l) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={l.src}
+                src={l.src}
+                alt={`Logo de ${l.name}`}
+                className="h-10 w-full object-contain sm:h-12"
+              />
+            ))}
+          </div>
+        </a>
       </div>
     </section>
   );

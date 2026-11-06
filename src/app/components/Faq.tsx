@@ -43,7 +43,7 @@ export default function Faq() {
     <section
       id="preguntas"
       className="relative py-20 sm:py-28"
-      style={{ background: "#041020" }}
+      style={{ background: "#F3F5FF" }}
     >
       <script
         type="application/ld+json"
@@ -53,28 +53,28 @@ export default function Faq() {
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <span
             className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-            style={{ color: "#01FDFE" }}
+            style={{ color: "#5B2FB8" }}
           >
             Preguntas frecuentes
           </span>
-          <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl font-[family-name:var(--font-montserrat)]">
+          <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-[#0a1238] sm:text-5xl font-[family-name:var(--font-montserrat)]">
             Lo que nos
             <br />
             <span
               className="bg-clip-text text-transparent"
               style={{
-                backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
+                backgroundImage: "linear-gradient(135deg, #013795, #5B2FB8, #D23CC0)",
               }}
             >
               suelen preguntar.
             </span>
           </h2>
-          <p className="mt-6 max-w-sm text-base leading-7 text-white/70 font-[family-name:var(--font-open-sans)]">
+          <p className="mt-6 max-w-sm text-base leading-7 text-[#0a1238]/70 font-[family-name:var(--font-open-sans)]">
             ¿Tienes otra duda? Escríbenos y te respondemos.
           </p>
           <a
             href="#contactanos"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-[#01FDFE] transition-opacity hover:opacity-80 font-[family-name:var(--font-montserrat)]"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-[#5B2FB8] transition-opacity hover:opacity-80 font-[family-name:var(--font-montserrat)]"
           >
             Hablar con Vintia
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -89,24 +89,25 @@ export default function Faq() {
               <details
                 className="group rounded-2xl"
                 style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "#ffffff",
+                  border: "1px solid rgba(10,18,56,0.08)",
+                  boxShadow: "0 6px 24px rgba(10,18,56,0.05)",
                 }}
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">
-                  <h3 className="text-base font-bold text-white sm:text-lg font-[family-name:var(--font-montserrat)]">
+                  <h3 className="text-base font-bold text-[#0a1238] sm:text-lg font-[family-name:var(--font-montserrat)]">
                     {f.q}
                   </h3>
                   <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#01FDFE] transition-transform duration-300 group-open:rotate-45"
-                    style={{ border: "1px solid rgba(1, 253, 254, 0.3)" }}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#5B2FB8] transition-transform duration-300 group-open:rotate-45"
+                    style={{ border: "1px solid rgba(91, 47, 184, 0.35)" }}
                   >
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
                     </svg>
                   </span>
                 </summary>
-                <p className="px-5 pb-5 text-[15px] leading-7 text-white/70 sm:px-6 sm:pb-6 font-[family-name:var(--font-open-sans)]">
+                <p className="px-5 pb-5 text-[15px] leading-7 text-[#0a1238]/70 sm:px-6 sm:pb-6 font-[family-name:var(--font-open-sans)]">
                   {f.a}
                 </p>
               </details>

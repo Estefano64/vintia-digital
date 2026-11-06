@@ -22,7 +22,7 @@ const PHASES: Phase[] = [
     roman: "I",
     name: "Set up",
     tagline: "Entendemos tu negocio y lo aterrizamos en un plan.",
-    color: "#01FDFE",
+    color: "#0B86A8",
     steps: [
       {
         n: "01",
@@ -51,7 +51,7 @@ const PHASES: Phase[] = [
     roman: "II",
     name: "Launch",
     tagline: "Construimos, probamos y ponemos en marcha.",
-    color: "#9B6BF2",
+    color: "#5B2FB8",
     steps: [
       {
         n: "04",
@@ -80,7 +80,7 @@ const PHASES: Phase[] = [
     roman: "III",
     name: "Scale",
     tagline: "Seguimos contigo después del lanzamiento.",
-    color: "#FD67EB",
+    color: "#C22FAE",
     steps: [
       {
         n: "07",
@@ -100,14 +100,14 @@ export default function Proceso() {
     <section
       id="proceso"
       className="relative py-20 sm:py-28 overflow-hidden"
-      style={{ background: "#071630" }}
+      style={{ background: "#F3F5FF" }}
     >
       {/* Subtle grid pattern — sets this section apart from its neighbours */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.07]"
+        className="absolute inset-0 pointer-events-none opacity-[0.09]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(1,253,254,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(1,253,254,0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(91,47,184,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(91,47,184,0.7) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage:
             "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
@@ -122,24 +122,24 @@ export default function Proceso() {
           <Reveal className="lg:sticky lg:top-28 lg:self-start">
             <span
               className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-              style={{ color: "#01FDFE" }}
+              style={{ color: "#5B2FB8" }}
             >
               Nuestro proceso
             </span>
-            <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
+            <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-[#0a1238] sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
               De la idea
               <br />
               <span
                 className="bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
-                    "linear-gradient(135deg, #01FDFE, #5B2FB8, #FD67EB)",
+                    "linear-gradient(135deg, #013795, #5B2FB8, #D23CC0)",
                 }}
               >
                 al lanzamiento.
               </span>
             </h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
+            <p className="mt-6 max-w-md text-base leading-7 text-[#0a1238]/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
               Siete etapas en tres fases, con plazos definidos desde el primer
               día. Sabes en todo momento qué estamos haciendo y qué viene
               después.
@@ -149,15 +149,16 @@ export default function Proceso() {
             <div
               className="mt-8 max-w-md rounded-2xl p-5"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "#ffffff",
+                border: "1px solid rgba(10,18,56,0.08)",
+                boxShadow: "0 10px 40px rgba(10,18,56,0.07)",
               }}
             >
               <div className="flex items-baseline justify-between gap-4">
-                <span className="text-[11px] font-semibold tracking-[0.18em] text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
+                <span className="text-[11px] font-semibold tracking-[0.18em] text-[#0a1238]/55 uppercase font-[family-name:var(--font-montserrat)]">
                   Cronograma referencial
                 </span>
-                <span className="text-sm font-bold text-white font-[family-name:var(--font-montserrat)]">
+                <span className="text-sm font-bold text-[#0a1238] font-[family-name:var(--font-montserrat)]">
                   ≈ 10 semanas
                 </span>
               </div>
@@ -179,14 +180,14 @@ export default function Proceso() {
                 {PHASES.map((p) => (
                   <span
                     key={p.name}
-                    className="flex items-center gap-2 text-xs text-white/70 font-[family-name:var(--font-open-sans)]"
+                    className="flex items-center gap-2 text-xs text-[#0a1238]/70 font-[family-name:var(--font-open-sans)]"
                   >
                     <span className="h-2 w-2 rounded-full" style={{ background: p.color }} />
                     {p.roman}. {p.name}
                   </span>
                 ))}
               </div>
-              <p className="mt-4 text-xs leading-5 text-white/50 font-[family-name:var(--font-open-sans)]">
+              <p className="mt-4 text-xs leading-5 text-[#0a1238]/50 font-[family-name:var(--font-open-sans)]">
                 Plazos de un proyecto de software a medida. Se ajustan al
                 alcance de cada proyecto.
               </p>
@@ -227,7 +228,7 @@ export default function Proceso() {
                     >
                       {phase.roman}. {phase.name}
                     </span>
-                    <span className="hidden text-sm text-white/55 sm:block font-[family-name:var(--font-open-sans)]">
+                    <span className="hidden text-sm text-[#0a1238]/55 sm:block font-[family-name:var(--font-open-sans)]">
                       {phase.tagline}
                     </span>
                     <span
@@ -253,10 +254,10 @@ export default function Proceso() {
                         <div
                           className="relative z-[1] flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-lg font-extrabold transition-transform duration-300 group-hover:scale-110 sm:h-16 sm:w-16 sm:text-xl font-[family-name:var(--font-montserrat)]"
                           style={{
-                            background: "#071630",
-                            border: `1px solid ${phase.color}55`,
+                            background: "#ffffff",
+                            border: `1px solid ${phase.color}66`,
                             color: phase.color,
-                            boxShadow: `0 0 30px ${phase.color}22`,
+                            boxShadow: `0 8px 24px ${phase.color}26`,
                           }}
                         >
                           {step.n}
@@ -265,12 +266,13 @@ export default function Proceso() {
                         <div
                           className="flex-1 rounded-2xl p-5 sm:p-6"
                           style={{
-                            background: "rgba(255,255,255,0.025)",
-                            border: "1px solid rgba(255,255,255,0.06)",
+                            background: "#ffffff",
+                            border: "1px solid rgba(10,18,56,0.08)",
+                            boxShadow: "0 8px 30px rgba(10,18,56,0.06)",
                           }}
                         >
                           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                            <h3 className="text-lg font-bold text-white sm:text-xl font-[family-name:var(--font-montserrat)]">
+                            <h3 className="text-lg font-bold text-[#0a1238] sm:text-xl font-[family-name:var(--font-montserrat)]">
                               {step.title}
                             </h3>
                             <span
@@ -284,7 +286,7 @@ export default function Proceso() {
                               {step.duration}
                             </span>
                           </div>
-                          <p className="mt-2.5 text-[15px] leading-7 text-white/70 font-[family-name:var(--font-open-sans)]">
+                          <p className="mt-2.5 text-[15px] leading-7 text-[#0a1238]/70 font-[family-name:var(--font-open-sans)]">
                             {step.text}
                           </p>
                         </div>

@@ -55,6 +55,11 @@ const AQUAMATER_ERP: Project = {
   category: "ERP a Medida",
   filters: ["software"],
   logo: "/logos/logo (1).webp",
+  images: [
+    "/proyectos/erp-aquamater/horarios.webp",
+    "/proyectos/erp-aquamater/programas.webp",
+    "/proyectos/erp-aquamater/inventario.webp",
+  ],
   modules: [
     "Clientes",
     "Historia clínica",
@@ -69,13 +74,9 @@ const AQUAMATER_ERP: Project = {
     "Asistencia con huellero",
     "Usuarios y permisos",
   ],
-  deliverables: [
-    "ERP a medida",
-    "Módulo de asistencia del personal",
-    "Instalación del huellero",
-  ],
+  deliverables: ["ERP a medida", "Asistencia del personal con huellero"],
   description:
-    "Sistema de gestión a medida para Aquamater, centro materno-infantil y acuático: clientes e historias clínicas, catálogo de servicios, horarios con control de cupos, inscripciones, sesiones, caja con comprobantes e inventario. Incluye el módulo de asistencia del personal: instalamos un huellero en su local y el sistema calcula tardanzas, faltas y salidas anticipadas según el turno de cada empleado. Por confidencialidad no mostramos capturas del sistema.",
+    "Sistema de gestión a medida para Aquamater, centro materno-infantil y acuático: clientes e historias clínicas, catálogo de servicios, horarios con control de cupos, inscripciones, sesiones, caja con comprobantes e inventario. También controla la asistencia del personal con un huellero. Las capturas son del entorno de pruebas.",
   techs: ["Next.js", "React", "Prisma", "PostgreSQL"],
 };
 
@@ -139,6 +140,11 @@ const projects: Project[] = [
     category: "ERP a Medida",
     filters: ["software"],
     logo: "/logos/logo-regena.webp",
+    images: [
+      "/proyectos/erp-regena/stock.webp",
+      "/proyectos/erp-regena/cotizaciones.webp",
+      "/proyectos/erp-regena/ordenes-trabajo.webp",
+    ],
     modules: [
       "Gestión comercial",
       "Cotizaciones",
@@ -151,7 +157,7 @@ const projects: Project[] = [
     ],
     deliverables: ["ERP a medida"],
     description:
-      "Sistema ERP a medida para Regena Perú que cubre su proceso completo: gestión comercial y cotizaciones, logística e importaciones, kardex de materiales, operaciones de suministro e instalación, y facturación. Por confidencialidad no mostramos capturas del sistema.",
+      "Sistema ERP a medida para Regena Perú que cubre su proceso completo: gestión comercial y cotizaciones, logística e importaciones, kardex de materiales, operaciones de suministro e instalación, y facturación. Las capturas son del entorno de pruebas, con clientes y montos ocultos por confidencialidad.",
   },
   {
     title: "ERP Empresarial",
@@ -200,20 +206,6 @@ const projects: Project[] = [
       { label: "Satisfacción cliente", value: "5/5" },
     ],
     techs: ["WordPress", "PHP", "JavaScript", "MySQL"],
-  },
-  {
-    title: "TecnoNómadas",
-    category: "Blog Tecnológico",
-    filters: ["web"],
-    url: "https://www.tecnonomadas.net/",
-    description:
-      "Plataforma de contenido tecnológico con diseño moderno, sistema de categorización avanzado, optimización SEO y newsletter automatizado. Enfoque en experiencia de lectura y velocidad de carga.",
-    stats: [
-      { label: "Visitas/mes", value: "45K+" },
-      { label: "Tiempo en sitio", value: "4.2min" },
-      { label: "Suscriptores", value: "8K+" },
-    ],
-    techs: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
   },
 ];
 
@@ -457,7 +449,7 @@ function ProjectCard({
                   : "Sistema privado"}
               </span>
             </div>
-            {project.logo && !project.modules && (
+            {project.logo && (project.images || project.url) && (
               <img
                 src={project.logo}
                 alt=""
@@ -820,6 +812,31 @@ function ProjectModal({
               <p className="text-[13px] leading-6 text-white/70 font-[family-name:var(--font-open-sans)]">
                 {project.description}
               </p>
+
+              {project.modules && (
+                <div className="mt-4">
+                  <h4
+                    className="text-[11px] font-bold tracking-[0.15em] uppercase mb-2 font-[family-name:var(--font-montserrat)]"
+                    style={{ color: "#01FDFE" }}
+                  >
+                    Módulos
+                  </h4>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {project.modules.map((m) => (
+                      <li
+                        key={m}
+                        className="rounded-full px-2.5 py-1 text-[11px] text-white/75 font-[family-name:var(--font-open-sans)]"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                        }}
+                      >
+                        {m}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Tech tags */}
               <div className="mt-3 flex flex-wrap gap-2">
