@@ -45,22 +45,6 @@ export default function HeroSection() {
             }}
           />
           <div className="relative z-[2] flex flex-col items-start p-7 sm:p-10 lg:p-12">
-            <div
-              className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-              style={{
-                background: "rgba(1, 253, 254, 0.1)",
-                border: "1px solid rgba(1, 253, 254, 0.3)",
-              }}
-            >
-              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "#01FDFE" }} />
-              <span
-                className="text-xs font-semibold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
-                style={{ color: "#01FDFE" }}
-              >
-                Agencia Digital en Arequipa
-              </span>
-            </div>
-
             <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl xl:text-6xl font-[family-name:var(--font-montserrat)]">
               Estrategias Digitales
               <br />
@@ -82,8 +66,6 @@ export default function HeroSection() {
                   pauseTime={2500}
                 />
               </span>
-              <br />
-              <span className="text-white/80">en Arequipa.</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">

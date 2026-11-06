@@ -38,6 +38,7 @@ const AQUAMATER_WEB: Project = {
   category: "Sitio Corporativo",
   filters: ["web", "marca"],
   url: "https://www.aquamateraqp.com/",
+  images: ["/proyectos/aquamater/web-1.webp"],
   logo: "/logos/logo (1).webp",
   deliverables: ["Sitio web corporativo", "Publicidad digital"],
   description:
@@ -99,7 +100,7 @@ const projects: Project[] = [
   {
     title: "FIMCER Ingeniería Hidráulica",
     category: "Sitio Web + Catálogo",
-    filters: ["web", "marca"],
+    filters: ["web"],
     url: "https://www.fimcer.com/",
     images: [
       "/proyectos/fimcer/web-1.webp",
@@ -107,33 +108,59 @@ const projects: Project[] = [
       "/proyectos/fimcer/web-3.webp",
     ],
     logo: "/logos/logo-fimcer.webp",
-    deliverables: [
-      "Sitio web con catálogo de productos",
-      "Correos corporativos",
-      "Publicidad digital",
-    ],
+    deliverables: ["Sitio web con catálogo de productos"],
     description:
-      "Sitio web para FIMCER, empresa de ingeniería hidráulica de Arequipa: catálogo navegable por categorías con buscador, fichas de producto con cotización directa por WhatsApp, blog con guías de compra y sección de proyectos. Además habilitamos sus correos corporativos y gestionamos su publicidad digital.",
+      "Sitio web para FIMCER, empresa de ingeniería hidráulica de Arequipa: catálogo navegable por categorías con buscador, fichas de producto con cotización directa por WhatsApp, blog con guías de compra y sección de proyectos.",
     techs: ["Astro", "Tailwind CSS", "SEO"],
   },
   {
+    title: "Correos corporativos FIMCER",
+    category: "Correos Corporativos",
+    filters: ["marca"],
+    logo: "/logos/logo-fimcer.webp",
+    modules: ["Cuentas de correo corporativo", "Configuración de cuentas"],
+    deliverables: ["Correos corporativos"],
+    description:
+      "Habilitamos los correos corporativos de FIMCER Ingeniería Hidráulica y configuramos sus cuentas para el equipo.",
+  },
+  {
+    title: "Publicidad digital FIMCER",
+    category: "Publicidad Digital",
+    filters: ["marca"],
+    logo: "/logos/logo-fimcer.webp",
+    modules: ["Campañas de publicidad digital", "Productos y servicios hidráulicos"],
+    deliverables: ["Publicidad digital"],
+    description:
+      "Gestionamos la publicidad digital de FIMCER para dar a conocer sus productos y servicios de ingeniería hidráulica en Arequipa.",
+  },
+  {
     title: "AJV Multiservicios e Ingeniería",
-    category: "Sitio Web + Brochure",
-    filters: ["web", "marca"],
+    category: "Sitio Corporativo",
+    filters: ["web"],
     url: "https://www.ajvmultiservicios.com/",
+    images: ["/proyectos/ajv/web-1.webp", "/proyectos/ajv/web-2.webp"],
+    logo: "/logos/logo-ajv.webp",
+    deliverables: ["Sitio web corporativo"],
+    description:
+      "Sitio web para AJV, empresa metalmecánica del sector industrial y minero: sus servicios de ingeniería, fabricación, montaje, reparación y mecanizado, galería de trabajos y cotización por WhatsApp.",
+    techs: ["Astro", "Tailwind CSS", "SEO"],
+  },
+  {
+    title: "Brochure AJV 2026",
+    category: "Brochure Corporativo",
+    filters: ["marca"],
     images: [
-      "/proyectos/ajv/web-1.webp",
-      "/proyectos/ajv/web-2.webp",
       "/proyectos/ajv/brochure-1.webp",
       "/proyectos/ajv/brochure-2.webp",
       "/proyectos/ajv/brochure-3.webp",
     ],
     logo: "/logos/logo-ajv.webp",
-    deliverables: ["Sitio web corporativo", "Brochure corporativo 2026"],
+    deliverables: ["Brochure corporativo 2026"],
     description:
-      "Presencia digital para AJV, empresa metalmecánica del sector industrial y minero: sitio web con sus servicios de ingeniería, fabricación, montaje, reparación y mecanizado, galería de trabajos y cotización por WhatsApp. También diseñamos su brochure corporativo 2026 con la misma identidad visual.",
-    techs: ["Astro", "Tailwind CSS", "Diseño editorial"],
+      "Brochure corporativo 2026 para AJV Multiservicios e Ingeniería: presentación de la empresa, misión, visión y valores, clientes, servicios y cifras clave, con la misma identidad visual de su sitio web.",
+    techs: ["Diseño editorial"],
   },
+  AQUAMATER_WEB,
   AQUAMATER_ERP,
   {
     title: "ERP Regena Perú",
@@ -160,9 +187,11 @@ const projects: Project[] = [
       "Sistema ERP a medida para Regena Perú que cubre su proceso completo: gestión comercial y cotizaciones, logística e importaciones, kardex de materiales, operaciones de suministro e instalación, y facturación. Las capturas son del entorno de pruebas, con clientes y montos ocultos por confidencialidad.",
   },
   {
-    title: "ERP Empresarial",
-    category: "Software a Medida",
+    title: "ERP HPK Inversiones",
+    category: "ERP a Medida",
     filters: ["software"],
+    logo: "/logos/logo (3).webp",
+    deliverables: ["ERP a medida"],
     images: [
       "/proyectos/erp/captura-1.png",
       "/proyectos/erp/captura-2.png",
@@ -171,7 +200,7 @@ const projects: Project[] = [
       "/proyectos/erp/captura-5.png",
     ],
     description:
-      "Sistema ERP a medida para la gestión integral de la empresa: stock de materiales, aprobaciones, operaciones, mantenimiento, logística, programación semanal de personal y reportes en tiempo real. Por confidencialidad mostramos capturas de demostración del entorno, no el sistema en producción.",
+      "Sistema ERP a medida para HPK Inversiones: gestión integral de stock de materiales, aprobaciones, operaciones, mantenimiento, logística, programación semanal de personal y reportes en tiempo real. Por confidencialidad mostramos capturas de demostración del entorno, no el sistema en producción.",
     stats: [
       { label: "Módulos integrados", value: "8" },
       { label: "Procesos auto.", value: "90%" },
@@ -231,7 +260,7 @@ function ModuleBoard({ project, compact = false }: { project: Project; compact?:
         ) : (
           <span />
         )}
-        {!compact && (
+        {!compact && project.filters.includes("software") && (
           <span className="flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
             <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -446,7 +475,9 @@ function ProjectCard({
               <span className="mt-1 block truncate text-xs text-white/50 group-hover:text-white/70 transition-colors duration-300 font-[family-name:var(--font-open-sans)]">
                 {project.url
                   ? project.url.replace("https://", "").replace("www.", "").replace(/\/$/, "")
-                  : "Sistema privado"}
+                  : project.filters.includes("software")
+                    ? "Sistema privado"
+                    : project.category}
               </span>
             </div>
             {project.logo && (project.images || project.url) && (
@@ -715,7 +746,7 @@ function ProjectModal({
             <ProjectGallery
               images={project.images}
               title={project.title}
-              isPrivate={!project.url}
+              isPrivate={!project.url && project.filters.includes("software")}
             />
           ) : !project.url ? (
             <div
@@ -819,7 +850,7 @@ function ProjectModal({
                     className="text-[11px] font-bold tracking-[0.15em] uppercase mb-2 font-[family-name:var(--font-montserrat)]"
                     style={{ color: "#01FDFE" }}
                   >
-                    Módulos
+                    {project.filters.includes("software") ? "Módulos" : "Incluye"}
                   </h4>
                   <ul className="flex flex-wrap gap-1.5">
                     {project.modules.map((m) => (
