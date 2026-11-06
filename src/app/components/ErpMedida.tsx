@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import AsistenciaDemo from "./AsistenciaDemo";
 
 const WHATSAPP = `https://wa.me/51915961315?text=${encodeURIComponent(
   "¡Hola Vintia Digital! Quiero cotizar un ERP a medida para mi empresa."
@@ -269,8 +270,32 @@ export default function ErpMedida() {
           </Reveal>
         </div>
 
-        {/* Beneficios */}
-        <ul className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+        {/* Demo del huellero (media pantalla) + beneficios en bloques */}
+        <div className="mt-16 grid grid-cols-1 gap-4 lg:mt-20 lg:grid-cols-2">
+          <Reveal className="h-full">
+            <div
+              className="flex h-full flex-col justify-center rounded-3xl p-5 sm:p-7"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <span
+                  className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                  style={{ color: "#01FDFE" }}
+                >
+                  Asistencia con huellero
+                </span>
+                <span className="text-sm text-white/65 font-[family-name:var(--font-open-sans)]">
+                  Tu personal marca con su huella
+                </span>
+              </div>
+              <AsistenciaDemo />
+            </div>
+          </Reveal>
+
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {BENEFITS.map((b, i) => (
             <li key={b.title} className="h-full">
               <Reveal delay={i * 100} className="h-full">
@@ -295,6 +320,7 @@ export default function ErpMedida() {
             </li>
           ))}
         </ul>
+        </div>
       </div>
     </section>
   );
