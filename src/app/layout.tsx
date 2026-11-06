@@ -109,6 +109,7 @@ const jsonLd = {
   image: `${SITE_URL}/og-image.png`,
   logo: `${SITE_URL}/logo-vintia.png`,
   telephone: "+51915961315",
+  email: "admin@vintiadigital.com",
   priceRange: "$$",
   areaServed: {
     "@type": "City",

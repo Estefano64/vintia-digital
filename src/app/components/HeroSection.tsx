@@ -7,23 +7,6 @@ import CountUp from "./CountUp";
 
 const Hologram = dynamic(() => import("./Hologram"), { ssr: false });
 
-const SERVICES = [
-  "Páginas web",
-  "ERP a medida",
-  "Branding",
-  "Marketing 360°",
-  "Redes sociales",
-  "Audiovisual",
-  "UX/UI",
-];
-
-const CLIENT_LOGOS = [
-  { src: "/logos/logo (1).webp", name: "Aquamater" },
-  { src: "/logos/logo-fimcer.webp", name: "FIMCER" },
-  { src: "/logos/logo-ajv.webp", name: "AJV" },
-  { src: "/logos/logo-regena.webp", name: "Regena Perú" },
-];
-
 const TILE_BASE =
   "group relative overflow-hidden rounded-3xl animate-[fade-in-up_0.7s_ease-out_backwards]";
 const TILE = `${TILE_BASE} transition-transform duration-500 hover:-translate-y-1`;
@@ -45,7 +28,7 @@ export default function HeroSection() {
           "radial-gradient(ellipse at 15% 0%, #1b2a8f 0%, transparent 55%), radial-gradient(ellipse at 100% 100%, #4a1a8f 0%, transparent 50%), #070b2b",
       }}
     >
-      <div className="mx-auto grid max-w-[1560px] grid-cols-2 gap-3 sm:gap-4 lg:min-h-[calc(100vh-64px-40px)] lg:grid-cols-12 lg:grid-rows-[minmax(250px,1.2fr)_minmax(190px,0.85fr)_minmax(190px,0.85fr)]">
+      <div className="mx-auto grid max-w-[1560px] grid-cols-2 gap-3 sm:gap-4 lg:min-h-[calc(100vh-64px-40px)] lg:grid-cols-12 lg:grid-rows-[minmax(280px,1.25fr)_minmax(210px,0.75fr)]">
         {/* ── A · Mensaje principal ── */}
         <div
           className={`${TILE_BASE} col-span-2 flex items-center lg:col-span-7 lg:row-span-2`}
@@ -212,99 +195,6 @@ export default function HeroSection() {
             <p className="mt-2 hidden text-sm font-semibold sm:block font-[family-name:var(--font-open-sans)]">
               confían en nosotros
             </p>
-          </div>
-        </a>
-
-        {/* ── E · Páginas web (captura real) ── */}
-        <a
-          href="#proyectos"
-          className={`${TILE} hidden min-h-[190px] lg:col-span-4 lg:block`}
-          style={{ animationDelay: "400ms" }}
-        >
-          <Image
-            src="/proyectos/aquamater/web-1.webp"
-            alt="Sitio web de Aquamater, desarrollado por Vintia Digital"
-            fill
-            sizes="520px"
-            className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(7,11,43,0.92) 0%, rgba(7,11,43,0.35) 55%, transparent 100%)",
-            }}
-          />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
-            <div>
-              <span
-                className="text-[11px] font-bold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
-                style={{ color: "#01FDFE" }}
-              >
-                Páginas web
-              </span>
-              <p className="mt-1 text-xl font-extrabold leading-tight text-white font-[family-name:var(--font-montserrat)]">
-                Sitios que traen clientes
-              </p>
-            </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#041020] transition-transform duration-300 group-hover:rotate-45">
-              <Arrow className="h-4 w-4" />
-            </span>
-          </div>
-        </a>
-
-        {/* ── F · Servicios ── */}
-        <a
-          href="#servicios"
-          className={`${TILE} hidden min-h-[190px] flex-col justify-between bg-white p-6 text-[#0a1238] lg:col-span-4 lg:flex`}
-          style={{ animationDelay: "500ms" }}
-        >
-          <div className="flex items-start justify-between">
-            <span className="text-[11px] font-bold tracking-[0.2em] text-[#5B2FB8] uppercase font-[family-name:var(--font-montserrat)]">
-              Servicios
-            </span>
-            <Arrow className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
-          </div>
-          <div>
-            <p className="text-xl font-extrabold leading-tight font-[family-name:var(--font-montserrat)]">
-              Un solo equipo para todo lo digital
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-1.5">
-              {SERVICES.map((s) => (
-                <li
-                  key={s}
-                  className="rounded-full bg-[#eef0ff] px-2.5 py-1 text-xs font-semibold text-[#2b1387] font-[family-name:var(--font-open-sans)]"
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </a>
-
-        {/* ── G · Clientes (logos) ── */}
-        <a
-          href="#clientes"
-          className={`${TILE} col-span-2 flex min-h-[130px] flex-col justify-between p-6 lg:col-span-4 lg:min-h-[190px]`}
-          style={{
-            background: "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.14)",
-            animationDelay: "600ms",
-          }}
-        >
-          <span className="text-[11px] font-bold tracking-[0.2em] text-white/70 uppercase font-[family-name:var(--font-montserrat)]">
-            Trabajamos con
-          </span>
-          <div className="mt-4 grid grid-cols-4 items-center gap-3 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-2">
-            {CLIENT_LOGOS.map((l) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={l.src}
-                src={l.src}
-                alt={`Logo de ${l.name}`}
-                className="h-10 w-full object-contain sm:h-12"
-              />
-            ))}
           </div>
         </a>
       </div>

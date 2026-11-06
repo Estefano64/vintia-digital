@@ -43,7 +43,7 @@ export default function Faq() {
     <section
       id="preguntas"
       className="relative py-20 sm:py-28"
-      style={{ background: "#F3F5FF" }}
+      style={{ background: "linear-gradient(135deg, #01FDFE 0%, #7CD3FF 45%, #A68CFF 100%)" }}
     >
       <script
         type="application/ld+json"
@@ -53,28 +53,23 @@ export default function Faq() {
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <span
             className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
-            style={{ color: "#5B2FB8" }}
+            style={{ color: "#2b1387" }}
           >
             Preguntas frecuentes
           </span>
           <h2 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-[#0a1238] sm:text-5xl font-[family-name:var(--font-montserrat)]">
             Lo que nos
             <br />
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #013795, #5B2FB8, #D23CC0)",
-              }}
-            >
+            <span className="text-[#3a17a8]">
               suelen preguntar.
             </span>
           </h2>
-          <p className="mt-6 max-w-sm text-base leading-7 text-[#0a1238]/70 font-[family-name:var(--font-open-sans)]">
+          <p className="mt-6 max-w-sm text-base leading-7 text-[#0a1238]/80 font-[family-name:var(--font-open-sans)]">
             ¿Tienes otra duda? Escríbenos y te respondemos.
           </p>
           <a
             href="#contactanos"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-[#5B2FB8] transition-opacity hover:opacity-80 font-[family-name:var(--font-montserrat)]"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-[#2b1387] transition-opacity hover:opacity-80 font-[family-name:var(--font-montserrat)]"
           >
             Hablar con Vintia
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -90,8 +85,8 @@ export default function Faq() {
                 className="group rounded-2xl"
                 style={{
                   background: "#ffffff",
-                  border: "1px solid rgba(10,18,56,0.08)",
-                  boxShadow: "0 6px 24px rgba(10,18,56,0.05)",
+                  border: "1px solid rgba(255,255,255,0.6)",
+                  boxShadow: "0 10px 30px rgba(20,18,110,0.12)",
                 }}
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">

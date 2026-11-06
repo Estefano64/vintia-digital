@@ -101,10 +101,10 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:vintiadigital@gmail.com"
+              href="mailto:admin@vintiadigital.com"
               className="text-[11px] text-white/35 transition-colors duration-300 hover:text-[#01FDFE] font-[family-name:var(--font-open-sans)]"
             >
-              vintiadigital@gmail.com
+              admin@vintiadigital.com
             </a>
             <p className="text-[11px] text-white/35 font-[family-name:var(--font-open-sans)]">
               Arequipa, Perú
