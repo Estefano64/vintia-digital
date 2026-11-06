@@ -40,12 +40,12 @@ export default function Conocenos() {
           }}
         />
 
-        <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8">
           <Reveal>
           {/* Section label */}
-          <div className="flex justify-center mb-3">
+          <div className="flex justify-center mb-3 lg:justify-start">
             <span
-              className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+              className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
               style={{ color: "#01FDFE" }}
             >
               Quiénes somos
@@ -54,7 +54,7 @@ export default function Conocenos() {
 
           {/* Title */}
           <h2
-            className="text-center text-3xl font-extrabold tracking-tight uppercase sm:text-4xl lg:text-5xl font-[family-name:var(--font-montserrat)]"
+            className="text-center lg:text-left text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]"
           >
             <span className="text-white">CONÓCE</span>
             <span
@@ -68,24 +68,24 @@ export default function Conocenos() {
           </h2>
 
           {/* Divider */}
-          <div className="mx-auto mt-4 mb-6 h-[2px] w-12"
+          <div className="mx-auto lg:mx-0 mt-4 mb-6 h-[2px] w-12"
             style={{
               background: "linear-gradient(90deg, #01FDFE, #5B2FB8)",
             }}
           />
 
           {/* Subtitle */}
-          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mx-auto lg:mx-0 max-w-2xl text-center lg:text-left text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
             Descubre quiénes somos, nuestra pasión por la innovación digital y
             cómo ayudamos a negocios en Arequipa a alcanzar su máximo potencial.
           </p>
           </Reveal>
 
           {/* Video thumbnail */}
-          <Reveal delay={150} className="mt-10">
+          <Reveal delay={150}>
             <button
               onClick={() => setModalOpen(true)}
-              className="group relative mx-auto block w-full max-w-2xl overflow-hidden rounded-xl focus:outline-none"
+              className="group relative mx-auto block w-full overflow-hidden rounded-xl focus:outline-none"
               style={{
                 border: "1px solid rgba(1, 253, 254, 0.1)",
               }}
@@ -97,7 +97,7 @@ export default function Conocenos() {
                   src={`https://img.youtube.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`}
                   alt="Video de presentación Vintia Digital"
                   fill
-                  sizes="(max-width: 768px) 100vw, 672px"
+                  sizes="(max-width: 1024px) 100vw, 680px"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 

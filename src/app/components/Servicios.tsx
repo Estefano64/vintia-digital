@@ -320,13 +320,13 @@ export default function Servicios() {
           {/* Header */}
           <div className="flex justify-center mb-3">
             <span
-              className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+              className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
               style={{ color: "#01FDFE" }}
             >
               Lo que hacemos
             </span>
           </div>
-          <h2 className="text-center text-3xl font-extrabold tracking-tight uppercase sm:text-4xl lg:text-5xl font-[family-name:var(--font-montserrat)]">
+          <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
             <span className="text-white">CONOCE NUESTROS </span>
             <span
               className="bg-clip-text text-transparent"
@@ -341,7 +341,7 @@ export default function Servicios() {
             className="mx-auto mt-4 mb-6 h-[2px] w-12"
             style={{ background: "linear-gradient(90deg, #01FDFE, #5B2FB8)" }}
           />
-          <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mx-auto max-w-2xl text-center text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
             Te ofrecemos los servicios esenciales para hacer crecer tu negocio y
             alcanzar tus objetivos.
           </p>
@@ -565,7 +565,7 @@ export default function Servicios() {
               }}
             >
               <span
-                className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
                 style={{ color: "#01FDFE" }}
               >
                 Nuestros Servicios
@@ -612,7 +612,7 @@ export default function Servicios() {
               {/* Text side */}
               <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                 <span
-                  className="mb-2 text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)] animate-[slideRight_0.35s_ease-out]"
+                  className="mb-2 text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)] animate-[slideRight_0.35s_ease-out]"
                   style={{ color: "#01FDFE" }}
                 >
                   {SERVICES[selected].category}

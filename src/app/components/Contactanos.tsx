@@ -93,13 +93,13 @@ export default function Contactanos() {
         {/* Header */}
         <div className="flex justify-center mb-3">
           <span
-            className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+            className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
             style={{ color: "#01FDFE" }}
           >
             Hablemos
           </span>
         </div>
-        <h2 className="text-center text-2xl font-extrabold tracking-tight uppercase sm:text-3xl lg:text-4xl font-[family-name:var(--font-montserrat)]">
+        <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
           <span className="text-white">CONTÁCTA</span>
           <span
             className="bg-clip-text text-transparent"
@@ -221,7 +221,7 @@ export default function Contactanos() {
             </div>
 
             {/* Description */}
-            <p className="text-[13px] leading-6 text-white/65 mb-5 font-[family-name:var(--font-open-sans)]">
+            <p className="text-[15px] leading-7 text-white/75 mb-6 font-[family-name:var(--font-open-sans)]">
               ¿Buscas llevar tu presencia en línea al siguiente nivel? En{" "}
               <span className="font-semibold" style={{ color: "#01FDFE" }}>
                 Vintia Digital

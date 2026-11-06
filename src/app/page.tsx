@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Conocenos from "./components/Conocenos";
 import Servicios from "./components/Servicios";
 import Proyectos from "./components/Proyectos";
+import Proceso from "./components/Proceso";
 import Clientes from "./components/Clientes";
 import Contactanos from "./components/Contactanos";
 import Footer from "./components/Footer";
@@ -26,6 +27,9 @@ export default function Home() {
 
       {/* Servicios */}
       <Servicios />
+
+      {/* Cómo trabajamos */}
+      <Proceso />
 
       {/* Proyectos */}
       <Proyectos />

@@ -34,13 +34,13 @@ export default function Clientes() {
         {/* Header */}
         <div className="flex justify-center mb-3">
           <span
-            className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+            className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
             style={{ color: "#01FDFE" }}
           >
             Confían en nosotros
           </span>
         </div>
-        <h2 className="text-center text-3xl font-extrabold tracking-tight uppercase sm:text-4xl lg:text-5xl font-[family-name:var(--font-montserrat)]">
+        <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
           <span className="text-white">NUESTROS </span>
           <span
             className="bg-clip-text text-transparent"

@@ -737,14 +737,14 @@ export default function Proyectos() {
           <Reveal className="text-center mb-14">
             <div className="flex justify-center mb-3">
               <span
-                className="text-[10px] font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
+                className="text-xs font-semibold tracking-[0.3em] uppercase font-[family-name:var(--font-montserrat)]"
                 style={{ color: "#01FDFE" }}
               >
                 Portafolio
               </span>
             </div>
 
-            <h2 className="text-center text-3xl font-extrabold tracking-tight uppercase sm:text-4xl lg:text-5xl font-[family-name:var(--font-montserrat)]">
+            <h2 className="text-center text-4xl font-extrabold tracking-tight uppercase sm:text-5xl lg:text-6xl font-[family-name:var(--font-montserrat)]">
               <span className="text-white">NUESTROS </span>
               <span
                 className="bg-clip-text text-transparent"
@@ -761,7 +761,7 @@ export default function Proyectos() {
               style={{ background: "linear-gradient(90deg, #5B2FB8, #FD67EB)" }}
             />
 
-            <p className="mx-auto max-w-xl text-center text-sm leading-6 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
+            <p className="mx-auto max-w-2xl text-center text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
               Cada proyecto refleja nuestra pasión por el diseño estratégico y los
               resultados medibles.
             </p>

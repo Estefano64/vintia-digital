@@ -2,13 +2,20 @@
 
 import dynamic from "next/dynamic";
 import Typewriter from "./Typewriter";
+import CountUp from "./CountUp";
+
+const STATS = [
+  { end: 100, prefix: "+", label: "Clientes" },
+  { end: 250, prefix: "+", label: "Proyectos" },
+  { end: 7, prefix: "", label: "Servicios" },
+];
 
 const Hologram = dynamic(() => import("./Hologram"), { ssr: false });
 
 export default function HeroSection() {
   return (
     <section
-      className="relative flex h-[calc(100vh-64px)] items-center overflow-hidden"
+      className="relative flex min-h-[calc(100vh-64px)] items-center overflow-hidden py-16"
       style={{ background: "linear-gradient(160deg, #041020 0%, #0e0a26 55%, #041020 100%)" }}
     >
       {/* Hologram background */}
@@ -47,7 +54,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-[2] mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-2xl">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-3xl">
           {/* Badge */}
           <div
             className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
@@ -61,7 +68,7 @@ export default function HeroSection() {
               style={{ background: "#01FDFE" }}
             />
             <span
-              className="text-[11px] font-semibold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
+              className="text-xs font-semibold tracking-[0.2em] uppercase font-[family-name:var(--font-montserrat)]"
               style={{ color: "#01FDFE" }}
             >
               Agencia Digital en Arequipa
@@ -69,7 +76,7 @@ export default function HeroSection() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.5rem] font-[family-name:var(--font-montserrat)]">
+          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-[4.5rem] font-[family-name:var(--font-montserrat)]">
             Estrategias Digitales
             <br />
             <span
@@ -96,7 +103,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Description */}
-          <p className="mt-5 max-w-lg text-sm leading-7 text-white/65 sm:text-base font-[family-name:var(--font-open-sans)]">
+          <p className="mt-6 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
             Hacemos que tu negocio destaque en el ecosistema digital con diseño
             estratégico y resultados reales. Con la gestión de{" "}
             <span className="font-semibold" style={{ color: "#01FDFE" }}>
@@ -106,11 +113,11 @@ export default function HeroSection() {
           </p>
 
           {/* CTAs */}
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             {/* Primary CTA */}
             <a
               href="#contactanos"
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-bold tracking-wider text-white uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] overflow-hidden"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[13px] font-bold tracking-wider text-white uppercase transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] overflow-hidden"
               style={{
                 background: "linear-gradient(135deg, #013795, #5B2FB8)",
               }}
@@ -146,7 +153,7 @@ export default function HeroSection() {
             {/* Secondary CTA */}
             <a
               href="#proyectos"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white/75 border-[rgba(1,253,254,0.15)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.4)] hover:bg-[rgba(1,253,254,0.08)]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-[13px] font-bold tracking-wider uppercase backdrop-blur-sm transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)] text-white/75 border-[rgba(1,253,254,0.15)] bg-[rgba(1,253,254,0.04)] hover:text-[#01FDFE] hover:border-[rgba(1,253,254,0.4)] hover:bg-[rgba(1,253,254,0.08)]"
             >
               <span>Ver Portafolio</span>
               <svg
@@ -164,6 +171,23 @@ export default function HeroSection() {
               </svg>
             </a>
           </div>
+
+          {/* Stats */}
+          <dl className="mt-10 grid w-full max-w-md grid-cols-3 gap-4 border-t border-white/10 pt-6">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex flex-col items-center lg:items-start">
+                <dd
+                  className="order-1 text-3xl font-extrabold sm:text-4xl font-[family-name:var(--font-montserrat)] bg-clip-text text-transparent"
+                  style={{ backgroundImage: "linear-gradient(135deg, #01FDFE, #5B2FB8)" }}
+                >
+                  <CountUp end={s.end} prefix={s.prefix} />
+                </dd>
+                <dt className="order-2 mt-1 text-[11px] font-semibold tracking-[0.18em] text-white/55 uppercase font-[family-name:var(--font-montserrat)]">
+                  {s.label}
+                </dt>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
 
