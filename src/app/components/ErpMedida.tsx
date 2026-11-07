@@ -5,7 +5,7 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import AsistenciaDemo from "./AsistenciaDemo";
 
-const WHATSAPP = `https://wa.me/51915961315?text=${encodeURIComponent(
+const WHATSAPP = `https://wa.me/51932525682?text=${encodeURIComponent(
   "¡Hola Vintia Digital! Quiero cotizar un ERP a medida para mi empresa."
 )}`;
 

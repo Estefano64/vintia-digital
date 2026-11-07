@@ -17,6 +17,28 @@ interface Service {
 
 const SERVICES: Service[] = [
   {
+    id: "diseno-desarrollo-web",
+    title: "Desarrollo Web y Páginas Web",
+    short: "Páginas web",
+    category: "Tecnología y Desarrollo",
+    tagline: "La base digital donde vive tu negocio.",
+    description:
+      "Creamos sitios web que combinan alto rendimiento, seguridad y estética moderna. Ya sea una web corporativa, una landing page o un eCommerce complejo, desarrollamos plataformas rápidas y adaptables a cualquier dispositivo (responsive). No solo te entregamos una web bonita, sino una herramienta de ventas optimizada para la experiencia del usuario.",
+    image: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-480-x-670.webp",
+  },
+  {
+    id: "desarrollo-software-medida",
+    title: "Desarrollo de Software a Medida",
+    short: "Software",
+    category: "Tecnología y Desarrollo",
+    tagline: "La base digital donde vive tu negocio.",
+    description:
+      "Lleva la operatividad de tu empresa al siguiente nivel. Desarrollamos soluciones tecnológicas personalizadas para automatizar procesos, integrar sistemas y mejorar la eficiencia interna. Creamos herramientas escalables y seguras que se adaptan exactamente a las necesidades de tu flujo de trabajo, dándote control total sobre tu infraestructura digital. Desarrollamos sistemas ERP personalizados y módulos como el control de asistencia del personal con huellero.",
+    image: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-285-x-252.webp",
+    imageExpanded: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-480-x-670.webp",
+  },
+  {
     id: "branding-identidad-visual",
     title: "Branding e Identidad Visual",
     short: "Branding",
@@ -61,17 +83,6 @@ const SERVICES: Service[] = [
     imageExpanded: "/servicesimg/expandidos/Producción-Audiovisual-480-x-670.webp",
   },
   {
-    id: "diseno-desarrollo-web",
-    title: "Diseño y Desarrollo Web",
-    short: "Web",
-    category: "Tecnología y Desarrollo",
-    tagline: "La base digital donde vive tu negocio.",
-    description:
-      "Creamos sitios web que combinan alto rendimiento, seguridad y estética moderna. Ya sea una web corporativa, una landing page o un eCommerce complejo, desarrollamos plataformas rápidas y adaptables a cualquier dispositivo (responsive). No solo te entregamos una web bonita, sino una herramienta de ventas optimizada para la experiencia del usuario.",
-    image: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-285-x-252.webp",
-    imageExpanded: "/servicesimg/expandidos/Diseño-y-Desarrollo-Web-480-x-670.webp",
-  },
-  {
     id: "diseno-ux-ui",
     title: "Diseño UX/UI",
     short: "UX/UI",
@@ -82,20 +93,9 @@ const SERVICES: Service[] = [
     image: "/servicesimg/expandidos/Diseño-UX-UI-285-x-252.webp",
     imageExpanded: "/servicesimg/expandidos/Diseño-UX-UI-480-x-670.webp",
   },
-  {
-    id: "desarrollo-software-medida",
-    title: "Desarrollo de Software a Medida",
-    short: "Software",
-    category: "Tecnología y Desarrollo",
-    tagline: "La base digital donde vive tu negocio.",
-    description:
-      "Lleva la operatividad de tu empresa al siguiente nivel. Desarrollamos soluciones tecnológicas personalizadas para automatizar procesos, integrar sistemas y mejorar la eficiencia interna. Creamos herramientas escalables y seguras que se adaptan exactamente a las necesidades de tu flujo de trabajo, dándote control total sobre tu infraestructura digital. Desarrollamos sistemas ERP personalizados y módulos como el control de asistencia del personal con huellero.",
-    image: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-285-x-252.webp",
-    imageExpanded: "/servicesimg/expandidos/Desarrollo-de-Software-a-Medida-480-x-670.webp",
-  },
 ];
 
-const WHATSAPP_NUMBER = "51915961315";
+const WHATSAPP_NUMBER = "51932525682";
 
 /* Structured data so crawlers see every service + description,
    which otherwise only render inside the modal. */
@@ -257,21 +257,21 @@ export default function Servicios() {
             <Reveal
               key={service.id}
               delay={(i % 3) * 90}
-              className={i === 0 ? "sm:col-span-2 lg:row-span-2" : ""}
+              className={i < 2 ? "sm:col-span-2 lg:row-span-2" : ""}
             >
               <button
                 onClick={() => setSelected(i)}
                 onMouseEnter={() => preloadExpanded(service.imageExpanded)}
                 onTouchStart={() => preloadExpanded(service.imageExpanded)}
                 className={`group relative block h-full w-full overflow-hidden rounded-3xl text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#01FDFE] ${
-                  i === 0 ? "min-h-[320px]" : "min-h-[240px]"
+                  i < 2 ? "min-h-[320px]" : "min-h-[240px]"
                 }`}
               >
                 <Image
                   src={service.imageExpanded}
                   alt={service.title}
                   fill
-                  sizes={i === 0 ? "(max-width: 1024px) 100vw, 640px" : "(max-width: 640px) 100vw, 320px"}
+                  sizes={i < 2 ? "(max-width: 1024px) 100vw, 640px" : "(max-width: 640px) 100vw, 320px"}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   draggable={false}
                 />
@@ -292,12 +292,12 @@ export default function Servicios() {
                   <div>
                     <h3
                       className={`font-extrabold leading-tight text-white font-[family-name:var(--font-montserrat)] ${
-                        i === 0 ? "text-2xl sm:text-3xl" : "text-lg"
+                        i < 2 ? "text-2xl sm:text-3xl" : "text-lg"
                       }`}
                     >
                       {service.title}
                     </h3>
-                    {i === 0 && (
+                    {i < 2 && (
                       <p className="mt-1 text-sm text-white/75 font-[family-name:var(--font-open-sans)]">
                         {service.tagline}
                       </p>
@@ -318,7 +318,7 @@ export default function Servicios() {
           ))}
 
           {/* ── Cierre (degradado) ── */}
-          <Reveal delay={180} className="sm:col-span-2">
+          <Reveal delay={180} className="sm:col-span-2 lg:col-span-3">
             <a
               href="#contactanos"
               className="group flex h-full min-h-[200px] flex-col justify-between rounded-3xl p-7 transition-transform duration-500 hover:-translate-y-1"

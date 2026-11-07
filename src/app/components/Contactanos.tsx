@@ -77,7 +77,7 @@ export default function Contactanos() {
       .filter(Boolean)
       .join("\n");
     window.open(
-      `https://wa.me/51915961315?text=${encodeURIComponent(msg)}`,
+      `https://wa.me/51932525682?text=${encodeURIComponent(msg)}`,
       "_blank"
     );
   };

@@ -46,7 +46,7 @@ export default function HeroSection() {
           />
           <div className="relative z-[2] flex flex-col items-start p-7 sm:p-10 lg:p-12">
             <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl xl:text-6xl font-[family-name:var(--font-montserrat)]">
-              Estrategias Digitales
+              Desarrollamos tu
               <br />
               <span
                 className="bg-clip-text text-transparent"
@@ -56,26 +56,40 @@ export default function HeroSection() {
               >
                 <Typewriter
                   words={[
-                    "DE CLASE MUNDIAL",
-                    "QUE GENERAN RESULTADOS",
-                    "PARA TU CRECIMIENTO",
-                    "CON VISIÓN DE FUTURO",
+                    "PÁGINA WEB",
+                    "SOFTWARE A MEDIDA",
+                    "SISTEMA ERP",
+                    "TIENDA ONLINE",
                   ]}
                   typingSpeed={70}
                   deletingSpeed={35}
                   pauseTime={2500}
                 />
               </span>
+              <span className="mt-2 block text-2xl font-bold text-white/90 sm:text-3xl xl:text-4xl">
+                que hace crecer tu negocio
+              </span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8 font-[family-name:var(--font-open-sans)]">
-              Páginas web, sistemas ERP a medida, marca y publicidad digital.
-              Hacemos que tu negocio destaque y venda más con la gestión de{" "}
+              Somos{" "}
               <span className="font-semibold" style={{ color: "#01FDFE" }}>
                 Vintia Digital
               </span>
-              .
+              : diseñamos y programamos páginas web rápidas y software a medida
+              que automatiza tu empresa. Más de 250 proyectos entregados.
             </p>
+
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {["Desarrollo web", "Software a medida", "Páginas web"].map((t) => (
+                <li
+                  key={t}
+                  className="rounded-full border border-[#01FDFE]/40 bg-[#01FDFE]/10 px-4 py-1.5 text-xs font-bold tracking-wider uppercase text-[#01FDFE] font-[family-name:var(--font-montserrat)]"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <a
@@ -87,7 +101,7 @@ export default function HeroSection() {
                   boxShadow: "0 10px 40px rgba(1,253,254,0.35)",
                 }}
               >
-                Auditoría Gratuita
+                Cotiza tu proyecto
                 <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const WHATSAPP_URL = `https://wa.me/51915961315?text=${encodeURIComponent(
+const WHATSAPP_URL = `https://wa.me/51932525682?text=${encodeURIComponent(
   "¡Hola Vintia Digital! Quiero más información sobre sus servicios."
 )}`;
 
